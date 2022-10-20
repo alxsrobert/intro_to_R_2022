@@ -1,0 +1,501 @@
+---
+title: "Session 2 Introduction to R"
+output:
+  html_document:
+    df_print: paged
+---
+```{r, include = FALSE}
+knitr::opts_chunk$set(eval = FALSE)
+```
+
+Script and practical initially developed by Abigail Page, Claire Dooley, Anushé Hassan, and Shammi Luhar.
+
+### 2.1 Vectors
+
+#### 2.1.1 Basic vectors
+
+Vectors are the basic tools to examine and analyse your data in R. They are usually comprised of elements of the same format, for instance a numeric vector comprises of a list of numbers. In this section we will examine various ways to construct and subset a numeric vector. 
+
+```{r}
+vec1 <- c(1,2,3,4,5)
+vec2 <- c(6,7,8,9,10)
+```
+
+Two vectors can also be joined into the same vector using the c() command. The two smaller vectors will appear in the new one in the order you specify:
+
+```{r}
+vec3 <- c(vec1, vec2)
+vec3
+
+vec4 <- c(vec2, vec1)
+vec4
+```
+
+
+#### 2.1.2 The seq() function
+
+Another useful feature in the world of vectors is to create a sequenece of numbers. This can be easily obtained by:
+
+1. Using the : command
+2. Using the seq() command
+
+
+```{r}
+1:10
+
+seq(from=1, to=10, by=1)
+```
+
+It is not always important to write the commands "from", "to" and "by" explicitly so long as your instuctions are specified in the above order:
+
+```{r}
+seq(1, 10, 1)
+```
+
+Any feasible number can be specified in the "by" command section to create all sorts of vectors:
+
+```{r}
+seq(1, 10, 3)
+
+seq(10, 1, -2)
+```
+
+Although "by" is the default command, we can specify another command: "length". The "length" command enables you to outright specify how long you would like the vector to be between your specified upper and lower values. In the example below, as we do not specify the command in the default order, we will need to write the commands "by" and "length" out:
+
+
+```{r, eval=T}
+
+seq(1, 10, length = 2)
+
+seq(1, 10, length = 4)
+
+seq(1,by=2,length=5)
+
+```
+
+#### 2.1.3 The rep() function
+Another useful tool when creating vectors is the rep() function. The rep function requires one to firstly specify the object that they want to repeat, followed by the number of times the user would like it repeating:
+
+```{r}
+rep(1, 10)
+
+rep(1:10, 3)
+
+rep(seq(10,1,-3), 2)
+
+rep(1:5, 1:5)
+
+```
+
+The "each" and "length" commands can also be specified within the rep() function to do the following:
+
+```{r}
+
+rep(1:3,each=3)
+
+rep(1:3,length=10)
+
+```
+
+#### 2.1.4 Extracting values from a vector
+
+Finally, we can extract certain values from a numeric vector using square brackets. If we want to extract the nth element of a vector, specify n within the square brackets:
+
+```{r}
+
+my.vector <- c(12,16,1,9,0)
+
+vec1[2]
+
+```
+
+This feature can be extended to extract multiple elements from a vector. For instance if we wanted to select the first and second elements of the vector "my.vector", we would do so in the following way:
+
+```{r}
+
+my.vector[1:2]
+
+my.vector[my.vector>10]
+
+```
+
+We are also able to remove the nth element from a vector, we can do so using the '-' command within the square brackets.
+
+```{r}
+
+my.vector[-2]
+
+my.vector[-c(1:2)]
+
+```
+
+If we have a vector with NA values inside, we can remove them in the following way:
+
+```{r}
+
+my.vector2 <- c(1,2,3,NA,4,5)
+
+my.vector2 <- my.vector2[!is.na(my.vector2)]
+
+my.vector2
+```
+
+
+## 2.2. Matrices
+
+Whereas vectors are one dimensional structures, matrices are two-dimensional, and contain both rows and columns. Matrices are essentially groups of vectors (all of the same length and data type). We can construct a matrix by either using the matrix(data, nrow, ncol) function or combining multiple vectors using the cbind() or rbind() functions. 
+
+
+#### 2.2.1 The matrix() function
+
+The matrix(data, nrow, ncol) function populates a matrix with nrow number of rows and ncol number of columns. The data length should be equal to the product of the specified number of rows and columns: 
+
+```{r}
+my.matrix1 <- matrix(1:30 ,6,5)
+my.matrix1
+
+my.matrix2 <- matrix(1:30 ,5,6)
+my.matrix2
+```
+
+If we have two vectors, both of length 10, and want to combine them into a 10 x 2 matrix, we can do so by combining them in the "data" command section of the matrix() function, and subsequently specifying the number of rows or columns needed.
+
+```{r}
+numbers <- seq(1,10,1)
+letters <- letters[seq( from = 1, to = 10 )]
+
+matrix(c(numbers, letters), 10)
+
+matrix(c(numbers, letters), 2)
+
+```
+
+
+If the data length is not a multiple of the number of rows or columns you specify, a warning message will appear. In the case below, as there are 20 elements with which we would like to populate a matrix, however, would like 3 rows, when the elements of the two vectors are exhausted, it will populate the remaining cells with elements of the vector (starting from the beginning):
+
+```{r}
+
+matrix(c(numbers, letters), 3)
+
+```
+
+#### 2.2.2 The cbind() and rbind() functions
+
+The cbind() and rbind() functions are another simple way to combine vectors into a matrix, add a vector to an existing matrix, or even combine multiple matrices. Our "letters" and "numbers" vectors (defined above) are both of the same length. Therefore we can combine them into a matrix of 10 columns and 2 rows in the following way:
+
+```{r}
+rbind(numbers, letters)
+
+
+```
+ And into a matrix of 10 rows and 2 columns using the cbind() function:
+ 
+```{r}
+
+Col.comb <- cbind(numbers, letters)
+Col.comb
+
+```
+
+As with vectors, we can extract desired elements from a matrix using square brackets. However, as unlike vectors, matrices are two-dimensional, we need to specify the row and column position of the element we would like to extract. This can be done using a comma separator. For example, to extract the element of the 5th row and 2nd column of the Col.comb matrix defined above:
+
+```{r}
+
+Col.comb[5,2] # Extracts the fifth row and 2nd column element 
+
+```
+
+If we want to extract the entire the row or column, we can leave the opposing argument blank: 
+
+```{r}
+
+Col.comb[5,] # Extracts the fifth row
+
+Col.comb[,2] # Extracts the 2nd column 
+
+```
+
+
+Finally, by including a minus sign, we can delete rows or columns. For example, excluding the 4th row of Col.comb is done in the following way:
+
+```{r}
+
+Col.comb[-4,] # Return Col.comb excluding the fourth row
+
+```
+
+### 2.3: Dataframes
+
+In addition to vectors and matrices, there are dataframes which are in a table format. The Iris dataset we used yesterday is an example of a dataframe.
+
+```{r}
+class(iris)
+
+```
+
+Before working with any data, it is helpful to check its contents.
+
+```{r}
+head(iris)
+nrow(iris)
+
+```
+
+### 2.4: Subsetting Dataframes
+ 
+Subsetting datasets can be really helpful when you want to work with certain variables, especially when you have a large number of variables. To subset dataframes in R, we use square brackets. Inside the square brackets, we need to specify what subset we want to extract. For dataframes, these will be specific rows or columns or both. Rows are specified first followed by a comma then columns are specified. If you want to subset columns only, i.e. keep all rows, you can simply not specify anything before the comma (and vice versa). We subset the Iris data to include the first column only.
+
+```{r}
+names(iris) # to see the column names
+iris[,"Sepal.Length"] # specify the column name
+iris[,1] # or specify the position of the column
+
+```
+
+As you can see you can specify the subset you want to extract using either the column name or the column's position.
+
+Note, for a single variable you can also do:
+
+```{r}
+iris$Sepal.Length
+
+```
+
+To subset the Iris data to contain the columns "Sepal.Length" and "Petal.Length", you need to use the c() function.
+
+```{r}
+iris[,c("Sepal.Length","Petal.Length")]
+iris[,c(1,3)]
+
+```
+
+Note that you can use head if you do not want all of the subsetted data to be displayed in the console.
+
+```{r}
+head(iris[,c("Sepal.Length","Petal.Length")])
+head(iris[,c(1,3)])
+
+```
+
+To subset the Iris data to contain specific rows, you need to include the row numbers.
+
+```{r}
+iris[c(4,7,17),]
+
+```
+
+Similarly, you can subset by both rows and columns by including information before (rows) and after (columns) the comma inside the square brackets.
+
+```{r}
+iris[c(1,2,3,4),c(1,2)]
+# note, if you have sequential row and/or column numbers you can use a colon instead of c()
+iris[1:4,1:2] # this returns exactly the same as the previous line
+
+```
+
+You can also subset data based on conditions such as less than, greater than or equal to.
+
+```{r}
+iris[iris$Sepal.Width < 2.5,]
+iris[iris$Sepal.Width > 4.0,]
+iris[iris$Sepal.Width == 4.0,]
+iris[iris$Species == "setosa",]
+
+```
+
+
+The above subsetting code just prints the subset in the console. To work with the subsetted data, e.g. analysis the subset, it is often useful to create a new object for the subset. For example, the object 'iris_sub' contains only data for plants with sepal width of less than 2.5.
+
+```{r}
+iris_sub <- iris[iris$Sepal.Width < 2.5,]
+iris_sub
+nrow(iris_sub)
+
+```
+
+
+### 2.5: Deleting from and adding to a dataframe  
+
+Code for deleting rows and columns is similar to code for subsetting but instead of specifying the subset you want to keep, you specify the subset you want to delete, and insert a minus sign. 
+
+```{r}
+# For example, if you want to delete the first 100 rows:
+iris_min100row <- iris[-(1:100),] 
+# or the 2nd column:
+iris_min2col <- iris[,-2]
+
+```
+
+
+Adding new data to an existing dataset can be really useful if you have found a new source of data or if you have collected new data.
+
+To add rows to the bottom of a dataframe, we use the 'row bind' function, rbind().
+
+```{r}
+# print the tail end of the dataframe to see the bottom of the table
+tail(iris)
+# create a new object containing the new data
+new_data <- c(6.0,3.0,5.0,1.0,'versicolor')
+# create a new object containing the original iris data plus the new plant measurements
+iris_updated <- rbind(iris, new_data)
+# print the tail end of the new dataframe to check that the new data appears at the bottom of the table
+tail(iris_updated)
+
+# or you skip the step of creating the new_data object
+iris_updated <- rbind(iris,c(6.0,3.0,5.0,1.0,'versicolor'))
+tail(iris_updated)
+
+```
+
+In the above example, one row is added. Now we can add two rows:
+
+```{r}
+new_data <- data.frame(rbind(c(6.0,3.0,5.0,1.0,'versicolor'),c(4.1,3.2,5.4,1.1,'versicolor')))
+names(new_data) <- names(iris)
+iris_updated <- rbind(iris, new_data)
+tail(iris_updated)
+
+```
+
+
+### 2.6: Optional
+
+A) The aggregate function splits data into subsets and computes summary statistics for each. Test it out.
+
+```{r}
+?aggregate # read what the function does and see example code at the bottom of the help page
+aggregate(Sepal.Length~Species, data=iris, mean)
+
+```
+
+B) Try out other subsets and summary statistics such as median, minimum or maximum.
+
+
+These following examples are taken from https://r4ds.had.co.nz/data-visualisation.html which goes into more detail should you wish! 
+
+### 2.7 packages
+
+R packages are basically add-ons to base R. Base R does a number of simple functions, but thanks to the open source ethos behind R the R community has built a large number of packages (over 14,000 on the CRAN where you downloaded R from) to solve common problems or offer new analysis techniques. This is the reason why R is so great. A package brings new functionality in the form of data, code, documentation and tests. You can download/install packages from the package tab in the files panel, or you can do it using the *install.packages* function. Once you have downloaded the package from CRAN (you only need to do this once), you need to make sure the package is installed on R using the *library* function.
+
+We can import the package ggplot2 which we will need for graphics. There are a number of packages to make graphs but ggplot2 is the most versatile and widely used. 
+
+```{r}
+install.packages("ggplot2")
+library(ggplot2)
+```
+
+Most scripts you will see start with the required packages at the top, in addition to any required data. It is good practice to specify which packages your analysis requires as they are uninstalled when you re-start R and chunks of code will not work if until you re-install them (and it is easy to forget which chunk uses which package).
+
+### 2.8 Iris flower data frame 
+
+To start learning the grammar of graphics we are going to use a simple dataframe (df for short) - Fisher's Iris flower dataset. The data set consists of 50 samples from each of three species of Iris (*Iris setosa, Iris virginica and Iris versicolor*). Four features were measured from each sample: the length and the width of the sepals and petals, in centimeters.
+
+```{r}
+iris # run this line to view the df - as it is installed in base R nothing else is required  
+```
+
+```{r}
+?iris # help and more information about the dataset
+```
+
+### 2.9 Exploration of iris
+
+We are interested in understanding the relationship between Sepal length and Petal length - are they correlated? Is this a negative or positive correlation. 
+
+The best way to look at this is in a scatterplot with all the data points ploted by septal length (on the x axis, bottom) and by petal legnth (on the y axis, left)
+
+```{r}
+# Scatterplot using ggplot 
+
+ggplot(data = iris) + # here you tell R to use the function 'ggplot' to use the the iris df 
+  geom_point(mapping = aes(x = Sepal.Length, y = Petal.Length)) # here you are saying you want points with another function which adds a layer to your plot
+```
+
+So the commands to make this plot are based on *functions* - ggplot() which creates a coordinate system that you add layers to and geom_point() which adds those layers creating the scatterplot. There are many geom_ functions dependent on the type of plot you want to make. As were are interested in the relationship between two continuous variables a scatter plot makes sense. 
+
+After the functions come the *arguments* - the content of the brackets. The first argument of ggplot() is the dataset to use in the graph. So ggplot(data = iris) creates an empty graph (if you did not add the layer you would have blank panel). 
+
+The geom_point(mapping = aes()) argument defines how variables in your dataset are mapped to the visual properties. The mapping argument is always paired with aes(), and the x and y arguments of aes() specify which variables to map to the x and y axes. This is what is required to see something in your plot. You are basically saying: I want a plot based on the iris data, I want this plot to be a scatterplot with points, and I want this plot to be of sepal length (X) and petal length (y)
+
+You can change this template by change the *data, geom_function or mapping variables* to create a wide range of graphics using different data. 
+
+You can see that ggplot2 is a lot about layering. You make a basic plot and then you add features to help you better understand it. It looks like there is a positive relationship between sepal and petal length, however there is a bunch of data points in the far left corner which this does hold for - why is this? how can we explore this further? 
+
+### 2.10 Adding aesthetics 
+
+To better visualise our data we can use aesthetics by adding a third variable to the mapping arugment (the bit in the aes()). An aestheic is a visual property of the objects in your plot, which includes colour, size and shape of the data points. You are able in the syntax to alter these elements, both globally (i.e. for all points on the graph) and per group (i.e. different values are attributed to different species). 
+
+Here we can use colour to map aesthetics in your plot to the variables in the iris dataset. For instance, we can colour the dots according to the species to see if that helps us understand the data better. 
+
+```{r}
+ggplot(data = iris) + 
+  geom_point(mapping = aes(x = Sepal.Length, y = Petal.Length, colour = Species)) # note that the text has remained the same but I have just added in the colour argument - note this can be spelt both in UK and US English! 
+```
+
+Now we can see that the linear relationship between sepal and petal legnth holds true for versicolor and viriginica but not for setosa! 
+
+ggplot2 has automatically assigned a unique colour to each unique value of the species variable (called scaling) and provides you with a legend so you know what colour refers to what species. 
+
+We can now try other aesthetics 
+
+```{r}
+ggplot(data = iris) + 
+  geom_point(mapping = aes(x = Sepal.Length, y = Petal.Length, color = Species, shape = Species, size = Species))
+```
+
+So now we have added in size and shape agruments. Each of the different species are associated with different sizes of points and different shapes. R is giving us a warning that size is not advised for a discrete variable because it is an unordered variable (basically, it would make sense if larger species had larger points but R does not have this information to work from)
+
+Also note that all three of these aesthetics have been included in the legend.  
+
+So instead we could try changing the transparency of the points using the alpha argument. 
+
+
+```{r}
+ggplot(data = iris) + 
+  geom_point(mapping = aes(x = Sepal.Length, y = Petal.Length, color = Species, shape = Species, alpha = Species))
+```
+
+Now setosa points are hardly visible - not really useful. This is just to show you can change all these elements, but much is not necessaryily better and plots should be easy to understand! 
+
+You can also set the aesthetic properties of your geom manually. For example, we can make all of the points in our plot pink, all the shapes circles or all the points larger. When you do this the global aesthetic change will overright anything in the mapping agrument 
+
+```{r}
+# colour
+  ggplot(data = iris) + 
+  geom_point(mapping = aes(x = Sepal.Length, y = Petal.Length, shape = Species), colour = "salmon") 
+
+# shape
+ ggplot(data = iris) + 
+  geom_point(mapping = aes(x = Sepal.Length, y = Petal.Length, shape = Species), shape = 16)  # 16 = small circles. Note that this has overrode the shape = species in the mapping agrument. 
+ 
+# size  
+  ggplot(data = iris) + 
+  geom_point(mapping = aes(x = Sepal.Length, y = Petal.Length, shape = Species), size = 3)  # bigger nunmber = bigger points
+```
+  
+There is a wide range of colours you can use in r: see this file http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf 
+for names (replace the "salmon" above) and more info from http://www.cookbook-r.com/Graphs/Colors_(ggplot2)/ 
+
+R has 25 build in shapes which are identified by numbers. Shapes change, as do their colour and fill. See: http://www.cookbook-r.com/Graphs/Shapes_and_line_types/ 
+
+### 2.11 Problem shooting 
+
+It is really common to run a line of code and it does not work. Normally it is a misplaced character, or an unclosed bracket. Check that every ( has a ) and every " has a ".  
+
+Capitals also matter in R - note that Sepal.Length will work but sepal.length will not! 
+
+Sometimes you will run the code and nothing happens. Check the left-hand of your console: if its a +, it means that R does not think you have typed a complete expression and its waiting for you to finish it. In this case, its usually easy to start from scratch again by pressing ESCAPE to abort processing the current command.
+
+One common problem when creating ggplot2 graphics is to put the + in the wrong place: it has to come at the end of the line, not the start. 
+
+If you are still stuck, try the help. You can get help about any R function by running ?function_name in the console, or selecting the function name and pressing F1 in RStudio. If the help does not seem that helpful, skip down to the examples and look for code that matches what you are trying to do.
+
+If that does not help, carefully read the error message. Sometimes the answer will be buried there! But when you are new to R, the answer might be in the error message but you do not yet know how to understand it. Another great tool is Google: try googling the error message, as it is likely someone else has had the same problem, and has gotten help online.
+
+### 2.12 Resources 
+
+https://www.rstudio.com/resources/cheatsheets/ - cheatsheet for ggplot2 
+
+https://r4ds.had.co.nz/data-visualisation.html - R for Data Science 
+
+http://www.cookbook-r.com/Graphs/ - Cookbook for R Graphics 

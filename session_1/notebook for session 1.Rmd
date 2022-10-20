@@ -1,0 +1,391 @@
+---
+title: "Session 1.1 Introduction to R"
+output:
+  html_document:
+    df_print: paged
+---
+```{r, include = FALSE}
+knitr::opts_chunk$set(eval = FALSE)
+```
+
+Script and practical developed by Abigail Page, Claire Dooley, Anushé Hassan, and Shammi Luhar.
+
+### 1.0: R as  a calculator
+
+As you expect the operations are the same as they would be anywhere else so + stands for sum, * for multiplications, ^ for power and / for divide. You can also do some more complicated calculations using exp() and sqrt() which shows how brackets are used similar to when you work in excel for instance. 
+
+```{r}
+51 + 6 
+
+57*6 
+
+6^4
+
+12/2 
+
+exp(6) 
+
+sqrt(405)
+
+```
+
+### 1.1 Basic R expressions 
+
+<- is the assignment operator in R (not =) 
+
+```{r}
+x <- 10 # telling R that x now equals 10  
+print (x) # printing this in the console
+
+y <- 10 + 20 # telling R that y now equals 10 + 20
+print (y)  # printing this in the console
+
+z <- "hello" # telling R that z now equals "hello"
+print(z) # printing this in the console
+
+```
+you can also get R to print by highlighting the text and press enter/run (called auto-printing) which is often easier to do!
+
+```{r}
+
+x <- 1:50 # making a vector (one-dimensional array data structure)
+x # auto-print by press enter/run 
+```
+
+note that in the console you can see the printed output with numbers in square brackets - this is not part of the vector but something to make the output more friendly. It means that number 1 is the first number of the first line, and the second number in brackets [40] is the first number of the second line. This is just a feature of printed output. 
+
+It is important to note that you can't use number or operations as names (e.g. 1z) as R treats numbers as numeric objectives (e.g. 1.00 and 2.00). 
+
+One of the most important uses of any statistical software, including R, is to analyse data that you may have collected yourself or that have been given to you. You will learn a lot more about data analysis during your MSc. In this section, I will introduce how to use R to access data that you already have on your computer, and how to store the results of your analysis or save an updated version of the data, on your computer.
+
+### 1.2 Setting a working directory
+
+The first step in accessing or saving data is to set a working directory in R. The 'working directory' is simply the folder on your computer that you want R to access. You can save your dataset in this folder and then set your working directory to this folder so R knows where the dataset is.
+
+It is useful to first check which directory is already open in R before you change it. You can also look at the current list of files in that directory. The commands to know the current working directory and the associated list of files and/or sub-directories are given by
+
+```{r}
+
+getwd()
+dir()
+
+```
+
+We can then change the working directory to a specific one, and the code for this will vary depending on what type of computer you are using (i.e., Windows versus MacBook)
+
+```{r, eval = FALSE}
+
+# For Mac
+setwd("/Users/alexis/Dropbox/Intro to R course")
+
+# For Windows
+setwd("C:/Users/alexis/Dropbox/Intro to R course")
+
+```
+
+### 1.3 Reading and writing data
+
+#### Reading data
+
+In R, we can 'read in' data that are saved in different formats. For example, data can be saved as pure text (.txt) or as a csv file in Excel (.csv). Different commands (called 'functions' in R) can be used to read in different formats of data.
+
+To read a text file, we use the function read.table(), and to read a file from Excel, or a '.csv' file, we use the function read.csv(). These functions read the specified file and transform it into a specific data format called a 'data frame' in R. 
+
+Let's work with a dataset (or data file) called 'child_mortality'. This is a public data file which was downloaded from the GapMinder website (https://www.gapminder.org/data/), and automatically downloads as a .csv file. It describes the number of deaths of children under the age of 5 years per 1000 live births, by country (rows) and year (column).  
+
+To read this into R, we use the command:
+
+```{r, eval = FALSE}
+# read a CSV file 
+childmort <- read.csv(file="0. Data/child_mortality.csv")
+
+# If this were a text file, we would have used the command:
+childmorttxt <- read.table(file="0. Data/child_mortality.txt")
+
+```
+
+We have already learnt that the symbol '<-' assigns a name to something. Here I am asking R to read the data file 'child_mortality' and, within R, I am calling this data 'childmort'. 
+
+Note that in the command above, I wrote 'Data/child_mortality.csv' because we have set the working directory to the folder 'Intro to R course', however my data file is actually in the folder 'Data', so I am asking R to go into the sub-folder 'Data' in the working directory and access the file 'child_mortality.csv'.
+
+We can also ask R for some specifics when we are reading in our data. These specific requests are called 'arguments' in R terminology: 
+
+* The argument 'header' is a logical variable indicating whether variable names are included in the top of each column or not.
+*  The argument 'nrows' specifies the maximum number of rows to read in.
+
+```{r, eval = FALSE}
+
+childmort2 <- read.csv(file="Data/child_mortality.csv", header=TRUE, nrows=10)
+
+```
+
+#### Inspecting data once it has been read
+
+We inspect the data using the function head() which presents the first 6 rows of the dataset.
+
+```{r, eval = FALSE}
+
+head(childmort)
+
+```
+
+
+#### Writing data
+
+'Writing' data refers to when we want to export data from R on to our computer. The standard function in R to export data is write.table(). Let's try this with a new dataset. We will now use one of the built in data-sets that R has, called 'iris'. 
+
+Information about the dataset: iris dataset gives the measurements in centimeters of the variables sepal length, sepal width, petal length and petal width, respectively, for 50 flowers from each of 3 species of iris. The species are Iris setosa, versicolor, and virginica.
+
+Load the data:
+
+```{r}
+
+# Load a built-in dataset from R
+data("iris")
+
+# Print the first 6 rows as we have just learnt
+head(iris, 6)
+
+```
+
+
+Let's try writing this data as a text file, and then check the working directory to see if the file (or 'object'!) has been exported there:
+
+
+```{r}
+
+write.table(x=iris, file="MyData_Iris.txt", col.names=TRUE)
+
+dir()
+
+```
+
+Now let's try saving it as a .csv file
+
+```{r}
+
+write.table(x=iris, file="MyData_Iris.csv", col.names=TRUE)
+
+dir()
+
+```
+
+Go and explore this .csv file. Is there something wrong? 
+
+We now need to ask R to separate the columns appropriately. We can do this using the argument 'sep' and telling R that when there is a 'tab' space between numbers/words (denoted by "\t") it should be a separate column.
+
+Try this and go look at the data now:
+
+```{r}
+
+write.table(x=iris, file="MyData_Iris2.csv", sep="\t")
+
+dir()
+
+```
+
+### 1.4 Data types and 'objects'
+
+R has different data types, the 5 that you will come across most commonly are: character, numeric (real number or decimal), integer, logical and complex.
+
+* Character: "a", "hello" 
+* Numeric: 2, 2.1, pi
+* Integer: 2L, 9:100 (To explicitly create integers, add an L at the end, or it will take numeric form)
+* Logical: True, False
+* Complex: 1+0i, 1+4i
+
+Let's look at these different data types. First, we will create 'objects' that have different data types. For example, below, I am creating an 'object' called 'char' and assigning it the value "a", and so on. 
+
+```{r}
+
+char1 <- "a"
+char2 <- "LSHTM"
+
+num1  <- 2
+num2  <- 2.1
+
+int1  <- 2L
+int2  <- 9:100
+
+logi1 <- TRUE
+logi2 <- FALSE
+
+comp1 <- 1+0i
+comp2 <- 2+4i
+  
+```
+
+Now we can check what data type each of these objects are:
+
+```{r}
+  
+class(char1)
+class(char2)
+
+class(num1)
+class(num2)
+
+class(int1)
+class(int2)
+
+class(logi1)
+class(logi2)
+
+class(comp1)
+class(comp2)
+  
+```
+
+It is useful to remember that everything in R is an object.
+
+R offers several possibilities to store data in specific objects, in other words, R has many data structures. The most common and important ones are: vector, matrix, data frame, factor, list. You will learn more about some of these in the following sessions.
+
+### 1.5: Datasets
+
+R is really useful for handling and managing datasets which is often needed before carrying out analyses. In this section, we look at different datasets and carry out some data handling operations. 
+
+R allows you to read in your own datasets or create them from scratch. For example earlier you created the vector data object 'a': 
+
+```{r}
+a <- 1:50
+a
+
+```
+
+Summary statistics can be easily generated for vectors. Consider a study where you collected heights of children in a class and you want to calculate the mean. First, create a vector of the heights data using the function 'c' to combine the values. The object name here is 'heights' but you could call it any name you like. Next, use the mean() function to calculate the mean of the heights. 
+
+```{r}
+heights <- c(95,82,88,101,78,69,88,105,106,81)
+mean(heights)
+median(heights)
+
+```
+
+Use the median() function to calculate the median of the heights.
+
+```{r}
+median(heights)
+
+```
+
+In this heights dataset example there is just one variable. When datasets include many variables, it is best to work with the data in table format. We will look at the Iris dataset which is an internal R dataset.
+
+```{r}
+
+data(iris) # load the iris dataset
+?iris
+
+```
+
+
+
+### 1.6 Variables 
+
+Before any data analysis, it is good to know the details about the dataset you are using, e.g. number of variables, sample size, etc.
+
+```{r}
+
+ncol(iris) # this tells you how many columns the Iris data set has
+names(iris) # this tells you the names of the columns. In this case, the columns are the variables included in the Iris dataset
+nrow(iris) # this tells you how many rows there are. In this case this is the total sample size
+
+```
+
+There are a number of ways to get to know a dataset. Begin by looking at the first part of a dataset using the head() function. 
+
+```{r}
+
+head(iris) # head() displays the first 6 items of an object. For the iris data, this is the first 6 rows
+head(heights) # for the heights data, head() displays the first 6 values
+
+```
+
+
+By looking at the first few items of a dataset, you can begin to see what data has been collected, e.g. in the Iris data, lengths and widths are numbers with one decimal place, and species is a name (i.e. characters rather than numbers)
+
+To look at individual columns or variables you can use the $ sign.
+
+```{r}
+iris$Sepal.Length
+
+```
+
+
+To think about the operations you can carry out on different variables, it helpful to look at their 'class'.
+
+```{r}
+class(iris$Sepal.Length)
+class(iris$Species)
+
+```
+
+
+Because sepal lengths are numeric, you can do things like calculate the mean and median 
+
+```{r}
+mean(iris$Sepal.Length) 
+median(iris$Sepal.Length)
+
+```
+
+R has lots of other useful operations such minimum, maximum, range and sum.
+
+```{r}
+min(iris$Sepal.Length)
+max(iris$Sepal.Length)
+range(iris$Sepal.Length)
+sum(iris$Sepal.Length)
+
+```
+
+
+
+### 1.7 Plots
+
+Plots are an excellent way of visualising data. First, let's look at histograms of individual variables. Histograms show the frequency of different values in a variable, and help us understand the spread of data across a range of values.
+
+```{r}
+hist(iris$Sepal.Length) 
+hist(iris$Petal.Length)
+
+```
+
+R automatically assigns the number of breaks for displaying the frequencies. For Sepal.Length it's 4.0-4.4, 4.5-4.9, 5.0-5.4, etc. You can also provide the numbers of breaks manually.
+
+```{r}
+hist(iris$Sepal.Length, breaks=20) 
+```
+
+You can change other aspects of the plot so that they are more suitable for including in reports, essays, etc.
+
+```{r}
+hist(iris$Sepal.Length, breaks=20, main='Sepal Length',xlab='sepal length') 
+```
+
+Plots can help visualise the relationships between variables.
+
+```{r}
+plot(iris$Sepal.Length~iris$Petal.Length)
+
+```
+
+Again, you can change how the plot looks.
+
+```{r}
+plot(iris$Sepal.Length~iris$Petal.Length, pch=16, xlab='petal length', ylab='sepal length')
+
+```
+
+In the last example the plots show two numerical variables plotted against each other. You can also plot a numerical variable by the categories of a categorical variable using boxplot().
+
+```{r}
+boxplot(iris$Sepal.Length~iris$Species)
+boxplot(iris$Sepal.Length~iris$Species, xlab='plant species', ylab='sepal length') # same as previous but with specified axes labels
+
+```
+
+### Optional - if you have time
+
+Using the Iris dataset, obtain the mean, median, minimum, maximum, range and sum for sepal widths, petal lengths and petal widths.
+
+Using the Iris dataset, generate boxplots for sepal widths, petal lengths and petal widths, categorised by species.
