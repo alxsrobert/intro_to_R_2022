@@ -1,0 +1,328 @@
+---
+title: "Introduction to R: Session 1"
+date: "`r format.Date(Sys.Date(), format = '%d %B %Y')`"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    toc_depth: 2
+    number_sections: true
+    df_print: paged
+---
+
+```{r, include = FALSE}
+
+knitr::opts_chunk$set(eval = TRUE)
+
+library(rio)
+library(here)
+
+```
+
+**Original material developed by Abigail Page, Claire Dooley, Anushé Hassan, and Shammi Luhar.**
+
+**Updated (2022) by Alexis Robert and Sophie Meakin.**
+
+# Introduction
+
+Welcome to *Introduction to R* for MSc Epidemiology 2022-23!
+
+## Contents
+
+This session introduces the basics of R and how to import, work with, and export data.
+
+## Notation
+
+This exercise will contain examples of code and its output, as well as instructions to edit or write code yourself. We've used the following symbols to highlight certain instructions:
+
+-   `r emoji::emoji("star")` A key piece of information e.g. a useful R function.
+-   `r emoji::emoji("computer")` An instruction to copy-and-run code from the exercise, or write your own code, in your R Studio session.
+-   `r emoji::emoji("question")` A question, related to the material or code output.
+
+# R basics
+
+One of the most important uses of any statistical software, including R, is to analyse data that you may have collected yourself or that have been given to you. You will learn a lot more about data analysis during your MSc. In this section, I will introduce how to use R to access data that you already have on your computer, and how to store the results of your analysis or save an updated version of the data, on your computer.
+
+## R Studio
+
+Your R studio session will have four main panels:
+
+1.  **Script** (top-left)
+2.  **Environment** (top-right)
+3.  **Console** (bottom-left)
+4.  **Files, plots, etc** (bottom-right)
+
+## Basic R expressions
+
+This section introduces the commands to do simple operations in R, such as arithmetic, or how to make objects.
+
+### Arithmetic operators
+
+These operators are used to carry out mathematical operations, like addition or multiplication:
+
+-   `+`: addition
+-   `-`: subtraction
+-   `*`: multiplication
+-   `/`: division
+-   `^`: exponent
+
+`r emoji::emoji("computer")` Try using some of these operators in your R Studio console (the bottom-left panel).
+
+### The assignment operator
+
+`r emoji::emoji("star")` The assignment operator in R is `<-` and is used to assign values to named objects.
+
+```{r}
+
+x <- 10       # The object called x is assigned the value 10
+x             # Print the object x
+
+y <- 10 + 20  # The object called y is assigned the value 10 + 20
+y             # Print the object y
+
+z <- "hello"  # The object called z is assigned the text "hello"
+z             # Print the object z
+
+```
+
+Note that the names of objects are case sensitive (i.e. `Y` and `y` are distinct names) and must not start with numbers or contain spaces. The best approach is to use meaningful object names and stick to using all lower case; if you need to use spaces, then you can use an underscore (`_`).
+
+-   Examples of good object names: `raw_data`, `clean_data`, `country_names`.
+-   Examples of bad object names: `raw data`, `CLEAN_data`, `dasyg`, `1x`.
+
+`r emoji::emoji("question")` Discuss *why* each of the examples of bad object names are bad.
+
+### Relational operators
+
+Relational operators are used to compare different values:
+
+-   `<`: less than
+-   `>`: greater than
+-   `<=`: less than or equal to
+-   `>=`: greater than or equal to
+-   `==`: equal to
+-   `!=`: not equal to
+
+Expressions using relational operators will return `TRUE` or `FALSE`:
+
+```{r}
+x <- 3      # Assign the value 3 to the object called x
+y <- 11     # Assign the value 11 to the object called y
+```
+
+```{r}
+
+# Test: is x less than 4?
+x < 4
+
+# Test: is y greater than or equal to x
+y >= x
+
+# Test: is x equal to 5?
+x == 5
+
+# Test: is y not equal to 22
+y != 22
+
+```
+
+### The c() function
+
+## Working directory
+
+The working directory is the root folder used by R, and will be the default location where R will start to look for data or saves files. You can find out your current working directory with the function `getwd()`:
+
+```{r}
+
+getwd()
+
+```
+
+`r emoji::emoji("question")` What is your working directory? How is it different to the one above?
+
+
+
+A common and easy way to manage your working directory is with R projects and the **here** package. Let's go through the steps to set up an R project in R studio.
+
+### R projects
+
+TO DO: steps to set up an R project.
+
+# Working with data
+
+We can import (i.e. 'read in') and export (i.e. save) data in common formats (e.g. .csv, .xlsx, .txt) with the `rio` package. We are going to load some data on the life expectancy for countries in 2015.
+
+## Importing data
+
+`r emoji::emoji("star")` We import a data file (e.g. .csv) using the `import()` function from the `rio` library, and tell R where to look for the file using the `here()` function from the `here` library.
+
+`r emoji::emoji("computer")` The line of code below imports the data `life_expectancy.csv` from the folder `data`, and assigns it to an object called `life_expectancy`:
+
+```{r}
+
+life_expectancy <- import(file = here("data",
+                                      "life_expectancy_vs_health_expenditure.csv"))
+
+```
+
+Let's look more closely at how `import()` and `here()` work.
+
+### The `here()` function
+
+To import data, we have to tell R where to look for it! An easy way to do this is using the `here()` function in the `here` library.
+
+When using the `here()` function, R will always start its search in the root folder i.e. where the Rproj file is. You then specify the folder(s) and/or file name, and `here()` will build the full file path.
+
+For example, if my copy of a file called `my_data.csv` is inside a folder `data` and then a sub-folder `raw`, then the command `here("data", "raw", "my_data.csv")` will construct the full file path on my computer:
+
+```{r}
+here("data", "raw", "my_data.csv")
+```
+
+`r emoji::emoji("question")` Run this command in your R Studio console. How is the output different to above, or to your neighbours output?
+
+### The `import()` function
+
+The `import()` function has one main argument: `file`. This argument is where we tell R where to find the file we want to import using the `here()` function.
+
+If you use R a lot, you might see people using other functions or libraries, such as the function `read.csv()` for .csv files only, or the library [`readxl`](https://readxl.tidyverse.org/) for .xls or .xlsx files only. But one of the great things about `import()` is that you can use it for all common data formats e.g. `.csv`, `.txt`, `.xlsx`, so you only have to remember that!
+
+## Inspecting data
+
+Now we have imported some data, we can look at it in one of two ways:
+
+1.  Click on the `life_expectancy` object in the 'Environment' pane (top-right). A new window will open in front of your script pane showing the data.
+2.  Run the command `life_expectancy`. The data will print in the console. Alternatively, the command `head(life_expectancy)` will print the top 6 lines only.
+
+```{r}
+head(life_expectancy)
+```
+
+Notice that there are lots of `NA` values in the `health_expenditure_usd` column. These indicate missing values, where no data is available.
+
+You can also get the number of columns and number of rows in the data set with `ncol()` and `nrow()`, respectively:
+
+```{r}
+ncol(life_expectancy)
+nrow(life_expectancy)
+```
+
+Sometimes we might just be interested in the values of a single column. You can check the column names either by looking at the full data frame using one of the two methods we just saw, or by using the function `colnames()`:
+
+```{r}
+colnames(life_expectancy)
+```
+
+To extract the values in a single column, we use the `$` operator, e.g. `life_expectancy$country` will return all the values in the column called `country`.
+
+`r emoji::emoji("computer")` Run the commands `life_expectancy$country` and `life_expectancy$life_expectancy_years` in your R console to see what outputs you get.
+
+### Data types
+
+Objects in R are assigned a data type, which tells R how to handle the object.
+
+The simplest data types that you will commonly come across are:
+
+-   *character* i.e. text, e.g. `"f"` or `"London"`
+-   *numeric* and *integer*, e.g. `2L`, `1:10`, `2.1`, `pi`
+-   *date* e.g. `Sys.Date()`
+-   *logical* i.e. `TRUE` or `FALSE`
+
+To check what data type an object is, use the function `class()`.
+
+```{r}
+# What is the data type of the "country" column in the life_expectancy data?
+class(life_expectancy$country)
+
+# What is the data type of the "year" column in the life_expectancy data?
+class(life_expectancy$year)
+```
+
+`r emoji::emoji("question")` What data type is the column "life_expectancy_years" in the `life_expectancy` data?
+
+There are other, more complex, data types that can be used to combine multiple bits of data, such as *matrix*, *data.frame*, *factor*, *list*. When importing data into R with the `import()` function, the data type will be a *data.frame* by default:
+
+```{r}
+class(life_expectancy)
+```
+
+## Basic operations with numeric data
+
+With numeric data, we can calculate different summary statistics, such as the maximum and minimum values, the mean value,and the median value.
+
+We can calculate the mean value with the function `mean()`.
+
+`r emoji::emoji("computer")` Try running the below command to calculate the mean life expectancy:
+
+```{r, eval = FALSE}
+# Calculate the mean life expectancy
+mean(life_expectancy$life_expectancy_years)
+```
+
+This will return `NA` - not very helpful! This happens because there are missing values (`NA` values) in `life_expectancy_years` - you can see these by inspecting your data again. If there are any missing values in your data, `mean()` (and many other functions) will simply return `NA`.
+
+To remove these missing (`NA`) values before calculating the mean, we include the argument `na.rm = TRUE`:
+
+```{r, eval = FALSE}
+# Calculate the mean life expectancy
+mean(life_expectancy$life_expectancy_years, na.rm = TRUE)
+```
+
+`r emoji::emoji("computer")` What happens if you change this so that `na.rm = FALSE`?
+
+We can calculate other statistics, too. We can calculate the median value with the function `median()`:
+
+```{r}
+# Calculate the median life expectancy
+median(life_expectancy$life_expectancy_years, na.rm = TRUE)
+```
+
+Note that we also have to include the `na.rm = TRUE` argument so that missing (`NA`) values are removed before the median is calculated.
+
+We can calculate the minimum and maximum values with the functions `min()` and `max()`, respectively:
+
+```{r}
+# Calculate the minimum life expectancy
+min(life_expectancy$life_expectancy_years, na.rm = TRUE)
+
+# Calculate the maximum life expectancy
+max(life_expectancy$life_expectancy_years, na.rm = TRUE)
+```
+
+We can calculate the standard deviation with `sd()` and the inter-quartile range (IQR) with `IQR()`:
+
+```{r}
+# Calculate the standard deviation of life expectancy
+sd(life_expectancy$life_expectancy_years, na.rm = TRUE)
+
+# Calculate the IQR of life expectancy
+IQR(life_expectancy$life_expectancy_years, na.rm = TRUE)
+```
+
+`r emoji::emoji("computer")` Calculate the above summary statistics for health expenditure per capita USD in the `life_expectancy` data.
+
+```{r, include = FALSE}
+
+mean(life_expectancy$health_expenditure_usd, na.rm = TRUE)
+median(life_expectancy$health_expenditure_usd, na.rm = TRUE)
+
+min(life_expectancy$health_expenditure_usd, na.rm = TRUE)
+max(life_expectancy$health_expenditure_usd, na.rm = TRUE)
+
+sd(life_expectancy$health_expenditure_usd, na.rm = TRUE)
+IQR(life_expectancy$health_expenditure_usd, na.rm = TRUE)
+
+```
+
+## Exporting data
+
+`r emoji::emoji("star")` We export data using the `export()` function from the `rio` library.
+
+The argument `x` specified the name of the data (e.g. the data frame) that we want to export. The argument `file` tells R where to save the data and what to call it. Again, we use the `here()` function to define the file path and name.
+
+The code below exports the data frame `life_expectancy` and saves it as a .csv file called "test_data_export.csv" in the data folder:
+
+```{r, eval = FALSE}
+export(x = life_expectancy,
+       file = here("data", "test_data_export.csv"))
+```

@@ -1,0 +1,207 @@
+---
+title: "Introduction to R: Session 2"
+date: "`r format.Date(Sys.Date(), format = '%d %B %Y')`"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    toc_depth: 2
+    number_sections: true
+    df_print: paged
+---
+
+```{r, include = FALSE}
+
+knitr::opts_chunk$set(eval = TRUE,
+                      warning = FALSE,
+                      message = FALSE)
+
+library(rio)
+library(here)
+library(tidyverse)
+
+```
+
+**Original material developed by Abigail Page, Claire Dooley, Anushé Hassan, and Shammi Luhar.**
+
+**Updated (2022) by Alexis Robert and Sophie Meakin.**
+
+# Introduction
+
+## Contents
+
+This session introduces the basics of R, such as basic operators and the working directory, and how to import, work with, and export data sets in R.
+
+## Notation
+
+This exercise will contain examples of code and its output, as well as instructions to edit or write code yourself. We've used the following symbols to highlight certain instructions:
+
+* `r emoji::emoji("star")` A key piece of information e.g. a useful R function.
+* `r emoji::emoji("computer")` An instruction to copy-and-run from the exercise, or write code, in own your R Studio session.
+* `r emoji::emoji("question")` A question.
+
+
+# Data manipulation
+
+```{r}
+
+life_expectancy <- import(file = here("data",
+                                      "life_expectancy_vs_health_expenditure.csv"))
+head(life_expectancy)
+
+```
+
+## Filtering rows
+
+```{r}
+
+filter(life_expectancy,
+       region == "North America")
+
+filter(life_expectancy,
+       life_expectancy_years < 55)
+
+```
+
+## Renaming columns
+
+```{r}
+
+rename(life_expectancy,
+       le_years = life_expectancy_years,
+       he_usd = health_expenditure_usd)
+
+```
+
+## Selecting columns
+
+```{r}
+
+select(life_expectancy,
+       country, life_expectancy_years)
+
+```
+
+## Mutating columns
+
+```{r}
+
+mutate(life_expectancy,
+       health_expenditure_usd = round(health_expenditure_usd, 1))
+
+```
+
+## Grouping and summarising data
+
+```{r}
+
+life_expectancy %>%
+  group_by(region) %>%
+  summarise(n = n())
+
+life_expectancy %>%
+  group_by(region) %>%
+  summarise(n = n(),
+            mean_le = mean(life_expectancy_years, na.rm = TRUE))
+
+```
+
+
+# Data visualisation with {ggplot2}
+
+## Example 1: histogram
+
+```{r}
+
+ggplot(data = life_expectancy,
+         mapping = aes(x = life_expectancy_years,
+                       fill = region)) +
+  geom_histogram(binwidth = 1) +
+  scale_y_continuous(breaks = seq(from = 0, to = 16, by = 4)) +
+  scale_fill_brewer(type = "qual") +
+  labs(x = "Life expectancy (years)",
+       y = "Number of countries",
+       fill = "Region",
+       title = "Life expectancy at birth, 2015") +
+  theme_minimal()
+
+```
+
+```{r}
+
+ggplot(data = life_expectancy,
+         mapping = aes(x = life_expectancy_years)) +
+  geom_histogram(binwidth = 1)
+
+```
+
+```{r}
+
+ggplot(data = life_expectancy,
+         mapping = aes(x = life_expectancy_years,
+                       fill = region)) +
+  geom_histogram(binwidth = 1) +
+  
+  # Update the y-axis limits and breaks
+  scale_y_continuous(limits = c(0, 20), breaks = seq(from = 0, to = 20, by = 2)) +
+  
+  # Update the colours
+  scale_fill_brewer(type = "qual") +
+  
+  # Add axis labels, legend title (fill) and plot title
+  labs(x = "life_expectancy_years",
+       y = "count",
+       fill = "region",
+       title = "Plot title") +
+  
+  # Update the theme
+  theme_minimal()
+
+```
+
+
+## Example 2: scatter plot
+
+```{r}
+
+ggplot(data = life_expectancy,
+       mapping = aes(x = health_expenditure_usd,
+                     y = life_expectancy_years,
+                     col = region)) +
+  geom_point(size = 4, shape = 16) +
+  scale_y_continuous(limits = c(72, 85),
+                     breaks = seq(from = 70, to = 85, by = 4)) +
+  scale_color_brewer(type = "qual") +
+  labs(x = "Health expenditure (USD per capita)",
+       y = "Life expectancy (years)",
+       col = "Region",
+       title = "Life expectancy at birth vs. health expenditure, 2015") +
+  theme_minimal() +
+  theme(legend.position = "top")
+
+```
+
+
+# Extras
+
+### 2.11 Problem shooting 
+
+It is really common to run a line of code and it does not work. Normally it is a misplaced character, or an unclosed bracket. Check that every ( has a ) and every " has a ".  
+
+Capitals also matter in R - note that Sepal.Length will work but sepal.length will not! 
+
+Sometimes you will run the code and nothing happens. Check the left-hand of your console: if its a +, it means that R does not think you have typed a complete expression and its waiting for you to finish it. In this case, its usually easy to start from scratch again by pressing ESCAPE to abort processing the current command.
+
+One common problem when creating ggplot2 graphics is to put the + in the wrong place: it has to come at the end of the line, not the start. 
+
+If you are still stuck, try the help. You can get help about any R function by running ?function_name in the console, or selecting the function name and pressing F1 in RStudio. If the help does not seem that helpful, skip down to the examples and look for code that matches what you are trying to do.
+
+If that does not help, carefully read the error message. Sometimes the answer will be buried there! But when you are new to R, the answer might be in the error message but you do not yet know how to understand it. Another great tool is Google: try googling the error message, as it is likely someone else has had the same problem, and has gotten help online.
+
+### 2.12 Resources 
+
+https://www.rstudio.com/resources/cheatsheets/ - cheatsheet for ggplot2 
+
+https://r4ds.had.co.nz/data-visualisation.html - R for Data Science 
+
+http://www.cookbook-r.com/Graphs/ - Cookbook for R Graphics 
