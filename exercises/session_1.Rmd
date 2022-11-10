@@ -39,9 +39,17 @@ This exercise will contain examples of code and its output, as well as instructi
 -   `r emoji::emoji("computer")` An instruction to copy-and-run code from the exercise, or write your own code, in your R Studio session.
 -   `r emoji::emoji("question")` A question, related to the material or code output.
 
+
+## Resources
+
+Coming soon!
+
+
+
 # R basics
 
 One of the most important uses of any statistical software, including R, is to analyse data that you may have collected yourself or that have been given to you. You will learn a lot more about data analysis during your MSc. In this section, I will introduce how to use R to access data that you already have on your computer, and how to store the results of your analysis or save an updated version of the data, on your computer.
+
 
 ## R Studio
 
@@ -51,6 +59,7 @@ Your R studio session will have four main panels:
 2.  **Environment** (top-right)
 3.  **Console** (bottom-left)
 4.  **Files, plots, etc** (bottom-right)
+
 
 ## Basic R expressions
 
@@ -65,6 +74,16 @@ These operators are used to carry out mathematical operations, like addition or 
 -   `*`: multiplication
 -   `/`: division
 -   `^`: exponent
+
+Examples:
+
+```{r}
+
+46 + 3
+13 / 8
+2^5
+
+```
 
 `r emoji::emoji("computer")` Try using some of these operators in your R Studio console (the bottom-left panel).
 
@@ -92,6 +111,8 @@ Note that the names of objects are case sensitive (i.e. `Y` and `y` are distinct
 
 `r emoji::emoji("question")` Discuss *why* each of the examples of bad object names are bad.
 
+`r emoji::emoji("computer")` Try making some of your own objects, e.g. assign the value `"2022"` to the object `year`.
+
 ### Relational operators
 
 Relational operators are used to compare different values:
@@ -103,12 +124,16 @@ Relational operators are used to compare different values:
 -   `==`: equal to
 -   `!=`: not equal to
 
-Expressions using relational operators will return `TRUE` or `FALSE`:
+Expressions using relational operators will return `TRUE` or `FALSE`.
+
+`r emoji::emoji("computer")` Copy the below code into the console of your R Studio terminal.
 
 ```{r}
 x <- 3      # Assign the value 3 to the object called x
 y <- 11     # Assign the value 11 to the object called y
 ```
+
+Examples of using relational operators:
 
 ```{r}
 
@@ -126,7 +151,39 @@ y != 22
 
 ```
 
-### The c() function
+`r emoji::emoji("computer")` Try using some of these operators in your R Studio console, e.g. to test if `2^11` is bigger than `3*729`.
+
+### The `c()` function
+
+The `c()` function is used to combine multiple values into a *vector* or a *list*. For example, multiple numeric values can be combined into a vector:
+
+```{r}
+
+c(3, 1, 10.5)
+
+```
+
+Multiple text strings can also be combined:
+
+```{r}
+
+c("Welcome", "to", "R", "!")
+
+```
+
+If both numbers and text are combined with the `c()` function, then all the numeric values are transformed into text:
+
+```{r}
+
+c("LSHTM", 20.22)
+
+```
+
+
+## R packages
+
+Coming soon!
+
 
 ## Working directory
 
@@ -138,30 +195,40 @@ getwd()
 
 ```
 
-`r emoji::emoji("question")` What is your working directory? How is it different to the one above?
-
-
-
-A common and easy way to manage your working directory is with R projects and the **here** package. Let's go through the steps to set up an R project in R studio.
+`r emoji::emoji("question")` Use `getwd()` to find out your working directory. How is it different to the one above?
 
 ### R projects
 
+`r emoji::emoji("star")` A common and easy way to manage your working directory is with **R projects** and the **here** package (which we will introduce shortly). Let's go through the steps to set up an R project in R studio.
+
 TO DO: steps to set up an R project.
+
+
 
 # Working with data
 
-We can import (i.e. 'read in') and export (i.e. save) data in common formats (e.g. .csv, .xlsx, .txt) with the `rio` package. We are going to load some data on the life expectancy for countries in 2015.
+We can import (i.e. 'read in') and export (i.e. save) data in common formats (e.g. .csv, .xlsx, .txt) with the **rio** package. In this section, we are going to import some data on life expectancy at birth and health expenditure per capita in USD for countries in 2015. This data is from Our World in Data: [ourworldindata.org/life-expectancy-vs-health-expenditure](https://ourworldindata.org/grapher/life-expectancy-vs-health-expenditure).
+
 
 ## Importing data
 
-`r emoji::emoji("star")` We import a data file (e.g. .csv) using the `import()` function from the `rio` library, and tell R where to look for the file using the `here()` function from the `here` library.
+`r emoji::emoji("star")` We import a data file (e.g. .csv) using the `import()` function from the **rio** library, and tell R where to look for the file using the `here()` function from the **here** library.
 
-`r emoji::emoji("computer")` The line of code below imports the data `life_expectancy.csv` from the folder `data`, and assigns it to an object called `life_expectancy`:
+First we need to load these two libraries in our current R Studio session.
+
+`r emoji::emoji("computer")` Copy and paste the code below.
+
+```{r}
+library(rio)
+library(here)
+```
+
+`r emoji::emoji("computer")` Copy and paste the code below. This code imports the data `life_expectancy.csv` from the folder `data`, and assigns it to an object called `life_expectancy`:
 
 ```{r}
 
 life_expectancy <- import(file = here("data",
-                                      "life_expectancy_vs_health_expenditure.csv"))
+                                      "life_expectancy.csv"))
 
 ```
 
@@ -169,7 +236,7 @@ Let's look more closely at how `import()` and `here()` work.
 
 ### The `here()` function
 
-To import data, we have to tell R where to look for it! An easy way to do this is using the `here()` function in the `here` library.
+To import data, we have to tell R where to look for it! An easy way to do this is using the `here()` function in the **here** library.
 
 When using the `here()` function, R will always start its search in the root folder i.e. where the Rproj file is. You then specify the folder(s) and/or file name, and `here()` will build the full file path.
 
@@ -179,7 +246,7 @@ For example, if my copy of a file called `my_data.csv` is inside a folder `data`
 here("data", "raw", "my_data.csv")
 ```
 
-`r emoji::emoji("question")` Run this command in your R Studio console. How is the output different to above, or to your neighbours output?
+`r emoji::emoji("question")` Run this above command in your R Studio console. How is the output different to above, or to your neighbours output?
 
 ### The `import()` function
 
@@ -187,12 +254,13 @@ The `import()` function has one main argument: `file`. This argument is where we
 
 If you use R a lot, you might see people using other functions or libraries, such as the function `read.csv()` for .csv files only, or the library [`readxl`](https://readxl.tidyverse.org/) for .xls or .xlsx files only. But one of the great things about `import()` is that you can use it for all common data formats e.g. `.csv`, `.txt`, `.xlsx`, so you only have to remember that!
 
+
 ## Inspecting data
 
 Now we have imported some data, we can look at it in one of two ways:
 
-1.  Click on the `life_expectancy` object in the 'Environment' pane (top-right). A new window will open in front of your script pane showing the data.
-2.  Run the command `life_expectancy`. The data will print in the console. Alternatively, the command `head(life_expectancy)` will print the top 6 lines only.
+1.  `r emoji::emoji("computer")` Click on the `life_expectancy` object in the 'Environment' pane (top-right). A new window will open in front of your script pane showing the data. Have a look!
+2.  `r emoji::emoji("computer")` Run the command `life_expectancy` in your Rstudio console. The data will print in the console. Alternatively, the command `head(life_expectancy)` will print the top 6 lines only:
 
 ```{r}
 head(life_expectancy)
@@ -204,16 +272,17 @@ You can also get the number of columns and number of rows in the data set with `
 
 ```{r}
 ncol(life_expectancy)
-nrow(life_expectancy)
 ```
 
-Sometimes we might just be interested in the values of a single column. You can check the column names either by looking at the full data frame using one of the two methods we just saw, or by using the function `colnames()`:
+`r emoji::emoji("computer")` Use `nrow()` to find the number of the rows in the data `life_expectancy`.
+
+You can check the column names either by looking at the full data frame using one of the two methods we just saw, or by using the function `colnames()`:
 
 ```{r}
 colnames(life_expectancy)
 ```
 
-To extract the values in a single column, we use the `$` operator, e.g. `life_expectancy$country` will return all the values in the column called `country`.
+Sometimes we might just be interested in the values of a single column. To extract the values in a single column, we use the `$` operator, e.g. `life_expectancy$country` will return all the values in the column called `country`.
 
 `r emoji::emoji("computer")` Run the commands `life_expectancy$country` and `life_expectancy$life_expectancy_years` in your R console to see what outputs you get.
 
@@ -234,8 +303,8 @@ To check what data type an object is, use the function `class()`.
 # What is the data type of the "country" column in the life_expectancy data?
 class(life_expectancy$country)
 
-# What is the data type of the "year" column in the life_expectancy data?
-class(life_expectancy$year)
+# What is the data type of the "pop_100k" column in the life_expectancy data?
+class(life_expectancy$pop_100k)
 ```
 
 `r emoji::emoji("question")` What data type is the column "life_expectancy_years" in the `life_expectancy` data?
@@ -246,9 +315,12 @@ There are other, more complex, data types that can be used to combine multiple b
 class(life_expectancy)
 ```
 
+
 ## Basic operations with numeric data
 
 With numeric data, we can calculate different summary statistics, such as the maximum and minimum values, the mean value,and the median value.
+
+### Mean and median
 
 We can calculate the mean value with the function `mean()`.
 
@@ -268,7 +340,7 @@ To remove these missing (`NA`) values before calculating the mean, we include th
 mean(life_expectancy$life_expectancy_years, na.rm = TRUE)
 ```
 
-`r emoji::emoji("computer")` What happens if you change this so that `na.rm = FALSE`?
+`r emoji::emoji("question")` What happens if you change this so that `na.rm = FALSE`?
 
 We can calculate other statistics, too. We can calculate the median value with the function `median()`:
 
@@ -278,6 +350,10 @@ median(life_expectancy$life_expectancy_years, na.rm = TRUE)
 ```
 
 Note that we also have to include the `na.rm = TRUE` argument so that missing (`NA`) values are removed before the median is calculated.
+
+`r emoji::emoji("computer")` Calculate the mean and median health expenditure per capita in USD for the countries in `life_expectancy`. You can remind yourself of the other column names by looking at the data, or checking with the function we introduced earlier.
+
+### Minimum and maximum
 
 We can calculate the minimum and maximum values with the functions `min()` and `max()`, respectively:
 
@@ -289,6 +365,10 @@ min(life_expectancy$life_expectancy_years, na.rm = TRUE)
 max(life_expectancy$life_expectancy_years, na.rm = TRUE)
 ```
 
+`r emoji::emoji("computer")` Calculate the minimum and maximum population size for the countries in `life_expectancy`.
+
+### Standard deviation and inter-quartile range
+
 We can calculate the standard deviation with `sd()` and the inter-quartile range (IQR) with `IQR()`:
 
 ```{r}
@@ -299,24 +379,12 @@ sd(life_expectancy$life_expectancy_years, na.rm = TRUE)
 IQR(life_expectancy$life_expectancy_years, na.rm = TRUE)
 ```
 
-`r emoji::emoji("computer")` Calculate the above summary statistics for health expenditure per capita USD in the `life_expectancy` data.
+`r emoji::emoji("computer")` Calculate the standard deviation and inter-quartile range for one of the other numeric columns in the `life_expectancy` data.
 
-```{r, include = FALSE}
-
-mean(life_expectancy$health_expenditure_usd, na.rm = TRUE)
-median(life_expectancy$health_expenditure_usd, na.rm = TRUE)
-
-min(life_expectancy$health_expenditure_usd, na.rm = TRUE)
-max(life_expectancy$health_expenditure_usd, na.rm = TRUE)
-
-sd(life_expectancy$health_expenditure_usd, na.rm = TRUE)
-IQR(life_expectancy$health_expenditure_usd, na.rm = TRUE)
-
-```
 
 ## Exporting data
 
-`r emoji::emoji("star")` We export data using the `export()` function from the `rio` library.
+`r emoji::emoji("star")` We export data using the `export()` function from the **rio** library.
 
 The argument `x` specified the name of the data (e.g. the data frame) that we want to export. The argument `file` tells R where to save the data and what to call it. Again, we use the `here()` function to define the file path and name.
 
@@ -326,3 +394,68 @@ The code below exports the data frame `life_expectancy` and saves it as a .csv f
 export(x = life_expectancy,
        file = here("data", "test_data_export.csv"))
 ```
+
+
+
+# Bonus: The dplyr package
+
+```{r}
+library(dplyr)
+```
+
+## Filtering rows
+
+```{r}
+
+filter(life_expectancy,
+       region == "North America")
+
+filter(life_expectancy,
+       life_expectancy_years < 55)
+
+```
+
+## Renaming columns
+
+```{r}
+
+rename(life_expectancy,
+       le_years = life_expectancy_years,
+       he_usd = health_expenditure_usd)
+
+```
+
+## Selecting columns
+
+```{r}
+
+select(life_expectancy,
+       country, life_expectancy_years)
+
+```
+
+## Mutating columns
+
+```{r}
+
+mutate(life_expectancy,
+       health_expenditure_usd = round(health_expenditure_usd, 1))
+
+```
+
+## Grouping and summarising data
+
+```{r}
+
+life_expectancy %>%
+  group_by(region) %>%
+  summarise(n = n())
+
+life_expectancy %>%
+  group_by(region) %>%
+  summarise(n = n(),
+            mean_le = mean(life_expectancy_years, na.rm = TRUE))
+
+```
+
+

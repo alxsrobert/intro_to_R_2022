@@ -1,5 +1,5 @@
 ---
-title: "Introduction to R: Session 2"
+title: "Introduction to R: Session 1"
 date: "`r format.Date(Sys.Date(), format = '%d %B %Y')`"
 output:
   html_document:
@@ -13,12 +13,8 @@ output:
 ```{r, include = FALSE}
 
 knitr::opts_chunk$set(eval = TRUE,
-                      warning = FALSE,
-                      message = FALSE)
-
-library(rio)
-library(here)
-library(tidyverse)
+                      message = FALSE,
+                      warning = FALSE)
 
 ```
 
@@ -28,149 +24,109 @@ library(tidyverse)
 
 # Introduction
 
+Welcome to *Introduction to R* for MSc Epidemiology 2022-23!
+
 ## Contents
 
-This session introduces the basics of R, such as basic operators and the working directory, and how to import, work with, and export data sets in R.
+This session introduces the basics of R and how to import, work with, and export data.
 
 ## Notation
 
 This exercise will contain examples of code and its output, as well as instructions to edit or write code yourself. We've used the following symbols to highlight certain instructions:
 
-* `r emoji::emoji("star")` A key piece of information e.g. a useful R function.
-* `r emoji::emoji("computer")` An instruction to copy-and-run from the exercise, or write code, in own your R Studio session.
-* `r emoji::emoji("question")` A question.
+-   `r emoji::emoji("star")` A key piece of information e.g. a useful R function.
+-   `r emoji::emoji("computer")` An instruction to copy-and-run code from the exercise, or write your own code, in your R Studio session.
+-   `r emoji::emoji("question")` A question, related to the material or code output.
 
+## Resources
 
-# Data manipulation
+Coming soon!
+
+# Recap: importing data
+
+```{r}
+library(rio)
+library(here)
+```
 
 ```{r}
 
 life_expectancy <- import(file = here("data",
-                                      "life_expectancy_vs_health_expenditure.csv"))
-head(life_expectancy)
+                                      "life_expectancy.csv"))
 
 ```
 
-## Filtering rows
+# Data visualisation with ggplot2
 
 ```{r}
-
-filter(life_expectancy,
-       region == "North America")
-
-filter(life_expectancy,
-       life_expectancy_years < 55)
-
+library(ggplot2)
 ```
 
-## Renaming columns
+## The basics of ggplot2
+
+`r emoji::emoji("star")` There are three essential steps:
+
+1.  Open the canvas with `ggplot()` and define which data set to use.
+2.  Map variable (column) names to the aesthetics (features) of the plot, such as the x and y axes, the fill of a bar, or the colour of a point.
+3.  Define the type of plot to use - a histogram, a scatter plot, a boxplot.
+
+### Open the canvas
+
+Open the canvas with `ggplot()` and define which data set to use with the `data` argument:
 
 ```{r}
-
-rename(life_expectancy,
-       le_years = life_expectancy_years,
-       he_usd = health_expenditure_usd)
-
+ggplot(data = life_expectancy)
 ```
 
-## Selecting columns
+`r emoji::emoji("computer")` Copy and paste the code above into your R Studio console and run it.
+
+An empty plot opens in the Plots tab of the bottom-right panel! The above command tells R we are starting a plot - but we will need to tell R *which variables* to plot (step 2) and *how* to plot them (step 3).
+
+### Choose what to plot
+
+Define the variables to plot on the x and y axes with the `mapping` argument using the `aes()` function. Below, we tell R to plot "health_expenditure_usd" on the x-axis and "life_expectancy_years" on the y-axis:
 
 ```{r}
-
-select(life_expectancy,
-       country, life_expectancy_years)
-
-```
-
-## Mutating columns
-
-```{r}
-
-mutate(life_expectancy,
-       health_expenditure_usd = round(health_expenditure_usd, 1))
-
-```
-
-## Grouping and summarising data
-
-```{r}
-
-life_expectancy %>%
-  group_by(region) %>%
-  summarise(n = n())
-
-life_expectancy %>%
-  group_by(region) %>%
-  summarise(n = n(),
-            mean_le = mean(life_expectancy_years, na.rm = TRUE))
-
-```
-
-
-# Data visualisation with {ggplot2}
-
-## Example 1: histogram
-
-```{r}
-
 ggplot(data = life_expectancy,
-         mapping = aes(x = life_expectancy_years,
-                       fill = region)) +
-  geom_histogram(binwidth = 1) +
-  scale_y_continuous(breaks = seq(from = 0, to = 16, by = 4)) +
-  scale_fill_brewer(type = "qual") +
-  labs(x = "Life expectancy (years)",
-       y = "Number of countries",
-       fill = "Region",
-       title = "Life expectancy at birth, 2015") +
-  theme_minimal()
-
+       mapping = aes(x = health_expenditure_usd, y = life_expectancy_years))
 ```
 
-```{r}
+`r emoji::emoji("computer")` Copy and paste the code above into your R Studio console and run it.
 
+The variables have now appeared on their respective axes, and there are numbers indicating the range of the values. There is no data yet because we still need to tell R *how* to plot the data (step 3).
+
+### Choose how to plot it
+
+We tell R how to plot the data with a `geom_` function. For example, for a scatter plot, we use the `geom_point()` function:
+
+```{r}
 ggplot(data = life_expectancy,
-         mapping = aes(x = life_expectancy_years)) +
-  geom_histogram(binwidth = 1)
-
+       mapping = aes(x = health_expenditure_usd,
+                     y = life_expectancy_years)) +
+  geom_point()
 ```
 
-```{r}
+`r emoji::emoji("computer")` Copy and paste the code above into your R Studio console and run it.
 
-ggplot(data = life_expectancy,
-         mapping = aes(x = life_expectancy_years,
-                       fill = region)) +
-  geom_histogram(binwidth = 1) +
-  
-  # Update the y-axis limits and breaks
-  scale_y_continuous(limits = c(0, 20), breaks = seq(from = 0, to = 20, by = 2)) +
-  
-  # Update the colours
-  scale_fill_brewer(type = "qual") +
-  
-  # Add axis labels, legend title (fill) and plot title
-  labs(x = "life_expectancy_years",
-       y = "count",
-       fill = "region",
-       title = "Plot title") +
-  
-  # Update the theme
-  theme_minimal()
+The `geom_point()` function adds the points to our empty canvas! Congratulations, you've made your first plot in R!
 
-```
+`r emoji::emoji("star")` Notice the plus symbol (`+`) at the end of the third line. We literally add the `geom_point()` function to the `ggplot()` function. We can add or edit other elements of the plot (e.g. the colours, axis labels, or the title) by adding other functions. We will look at some examples of this soon.
 
+There are lots of different ways to visualise data.
 
-## Example 2: scatter plot
+## Example 1: scatter plot
 
-```{r}
+We are going to walk you through the steps to make this scatter plot of life expectancy at birth vs. health expenditure per capita, using the data in `life_expectancy`:
+
+```{r, echo = FALSE, fig.width = 9, fig.height = 7}
 
 ggplot(data = life_expectancy,
        mapping = aes(x = health_expenditure_usd,
                      y = life_expectancy_years,
                      col = region)) +
   geom_point(size = 4, shape = 16) +
-  scale_y_continuous(limits = c(72, 85),
-                     breaks = seq(from = 70, to = 85, by = 4)) +
+  scale_y_continuous(limits = c(73, 85),
+                     breaks = seq(from = 73, to = 85, by = 4)) +
   scale_color_brewer(type = "qual") +
   labs(x = "Health expenditure (USD per capita)",
        y = "Life expectancy (years)",
@@ -181,27 +137,228 @@ ggplot(data = life_expectancy,
 
 ```
 
+### Change the size, shape and colour of points
+
+#### Static size, shape and colour {-}
+
+`r emoji::emoji("star")`
+
+```{r}
+ggplot(data = life_expectancy,
+       mapping = aes(x = health_expenditure_usd,
+                     y = life_expectancy_years)) +
+  geom_point(size = 4, shape = 18, col = "hotpink")
+```
+
+`r emoji::emoji("computer")`
+
+#### Dynamic colours {-}
+
+`r emoji::emoji("star")`
+
+```{r}
+ggplot(data = life_expectancy,
+       mapping = aes(x = health_expenditure_usd,
+                     y = life_expectancy_years,
+                     col = region)) +
+  geom_point()
+```
+
+### Other optional plot changes
+
+We are going to cover how to:
+
+-   Change the limits and breaks on a numeric axis
+-   Change the colour palette
+-   Add axis labels and a title
+-   Move the legend
+
+`r emoji::emoji("computer")` Copy and paste the code below into a script in your R Studio session.
+
+```{r, eval = FALSE}
+
+ggplot(data = life_expectancy,
+       mapping = aes(x = health_expenditure_usd,
+                     y = life_expectancy_years,
+                     col = region)) +
+  geom_point(size = 4, shape = 18) +
+  
+  # Update the y-axis limits and breaks
+  scale_y_continuous(limits = c(60, 90),
+                     breaks = seq(from = 60, to = 90, by = 10)) +
+  
+  # Update the colour palette
+  scale_color_brewer(type = "qual") +
+  
+  # Add axis labels, legend title (fill) and plot title
+  labs(x = "health_expenditure_usd",
+       y = "life_expectancy_years",
+       fill = "Region",
+       title = "Plot title") +
+  
+  # Update the theme
+  theme_minimal() +
+  
+  # Move the legend
+  theme(legend.position = "right")
+
+```
+
+#### Change the limits and breaks on a numeric axis {-}
+
+`r emoji::emoji("star")` Use the `scale_y_continuous()` function to update the limits and breaks of the y-axis.
+
+In the code above, the y-axis lower and upper limits are 60 and 90, respectively (`limits = c(60, 90)`), and the axis breaks start at 60, end at 90 and increase by 10 (`breaks = seq(from = 60, to = 90, by = 10)`).
+
+`r emoji::emoji("computer")` Edit your code to make the following changes to the y-axis limits and breaks: change the y-axis lower limit to 73 and the upper limit to 85, and change the y-axis breaks to start at 73, end at 85 and increase by 4.
+
+#### Change the colour palette {-}
+
+`r emoji::emoji("star")`
+
+`r emoji::emoji("question")`
+
+#### Change axis labels and add a plot title {-}
+
+`r emoji::emoji("star")` Use the `labs()` function to define axis labels, the plot title, and more.
+
+In the code above, the x-axis title is `"health_expenditure_usd"`, the y-axis title is `"life_expectancy_years"`, and the title of the plot is `"Plot title"`.
+
+`r emoji::emoji("computer")` Edit your code to give the x-axis and y-axis titles and the plot title more useful text - you can copy the text from the plot at the start of the section if you want to, or you can choose your own axis and plot titles.
+
+`r emoji::emoji("question")` Run `?labs()` in your R Studio console and read the documentation. What other text can you add or edit with the `labs()` function?
+
+#### Change the plot theme {-}
+
+`r emoji::emoji("star")`
+
+`r emoji::emoji("question")`
+
+#### Change the legend position {-}
+
+`r emoji::emoji("star")` Move the legend position with the `theme()` function and `legend.position` argument.
+
+In the code above, the legend is on the `"right"`.
+
+`r emoji::emoji("computer")` Move the legend to the `"top"` or `"bottom"` of the plot.
+
+
+
+## Example 2: histogram
+
+We are going to walk you through the steps to make this histogram of life expectancy at birth, using the data in `life_expectancy`:
+
+```{r, echo = FALSE, fig.width = 9, fig.height = 7}
+
+ggplot(data = life_expectancy,
+         mapping = aes(x = life_expectancy_years,
+                       fill = region)) +
+  geom_histogram(binwidth = 1) +
+  facet_wrap(~ region) +
+  scale_y_continuous(breaks = seq(from = 0, to = 16, by = 4)) +
+  scale_fill_brewer(type = "qual") +
+  labs(x = "Life expectancy (years)",
+       y = "Number of countries",
+       fill = "Region",
+       title = "Life expectancy at birth, 2015") +
+  theme_minimal() +
+  theme(legend.position = "none")
+
+```
+
+### Change the bin width
+
+```{r}
+
+ggplot(data = life_expectancy,
+       mapping = aes(x = life_expectancy_years)) +
+  geom_histogram(binwidth = 1)
+
+```
+
+### Change the color and fill of bars
+
+#### Static color and fill {-}
+
+```{r}
+ggplot(data = life_expectancy,
+       mapping = aes(x = life_expectancy_years)) +
+  geom_histogram(binwidth = 1, col = "seagreen", fill = "tomato")
+```
+
+### Dynamic fill {-}
+
+```{r}
+ggplot(data = life_expectancy,
+       mapping = aes(x = life_expectancy_years,
+                     fill = region)) +
+  geom_histogram(binwidth = 1)
+```
+
+
+### Other optional plot changes
+
+We are going to cover how to:
+
+-   Break a plot into subplots (facets)
+-   Change the fill palette
+-   Remove the legend
+
+You will also see the same commands used to change the y-axis limits and breaks, and to add axis labels and a plot title.
+
+`r emoji::emoji("computer")` Copy and paste the code below into a script in your R Studio session.
+
+```{r, eval = FALSE}
+
+ggplot(data = life_expectancy,
+         mapping = aes(x = life_expectancy_years,
+                       fill = region)) +
+  geom_histogram(binwidth = 1) +
+  
+  facet_wrap(~ region) +
+  
+  # Update the y-axis limits and breaks
+  scale_y_continuous(limits = c(0, 20), breaks = seq(from = 0, to = 20, by = 2)) +
+  
+  # Update the colour palette
+  scale_fill_brewer(type = "qual") +
+  
+  # Add axis labels, legend title (fill), and plot title
+  labs(x = "life_expectancy_years",
+       y = "count",
+       fill = "Region",
+       title = "Plot title") +
+  
+  # Update the theme
+  theme_minimal() +
+  
+  # Remove the legend
+  theme(legend.position = "none")
+
+```
+
+## Other plot types
 
 # Extras
 
-### 2.11 Problem shooting 
+### 2.11 Problem shooting
 
-It is really common to run a line of code and it does not work. Normally it is a misplaced character, or an unclosed bracket. Check that every ( has a ) and every " has a ".  
+It is really common to run a line of code and it does not work. Normally it is a misplaced character, or an unclosed bracket. Check that every ( has a ) and every " has a ".
 
-Capitals also matter in R - note that Sepal.Length will work but sepal.length will not! 
+Capitals also matter in R - note that Sepal.Length will work but sepal.length will not!
 
 Sometimes you will run the code and nothing happens. Check the left-hand of your console: if its a +, it means that R does not think you have typed a complete expression and its waiting for you to finish it. In this case, its usually easy to start from scratch again by pressing ESCAPE to abort processing the current command.
 
-One common problem when creating ggplot2 graphics is to put the + in the wrong place: it has to come at the end of the line, not the start. 
+One common problem when creating ggplot2 graphics is to put the + in the wrong place: it has to come at the end of the line, not the start.
 
 If you are still stuck, try the help. You can get help about any R function by running ?function_name in the console, or selecting the function name and pressing F1 in RStudio. If the help does not seem that helpful, skip down to the examples and look for code that matches what you are trying to do.
 
 If that does not help, carefully read the error message. Sometimes the answer will be buried there! But when you are new to R, the answer might be in the error message but you do not yet know how to understand it. Another great tool is Google: try googling the error message, as it is likely someone else has had the same problem, and has gotten help online.
 
-### 2.12 Resources 
+### 2.12 Resources
 
-https://www.rstudio.com/resources/cheatsheets/ - cheatsheet for ggplot2 
+<https://www.rstudio.com/resources/cheatsheets/> - cheatsheet for ggplot2
 
-https://r4ds.had.co.nz/data-visualisation.html - R for Data Science 
+<https://r4ds.had.co.nz/data-visualisation.html> - R for Data Science
 
-http://www.cookbook-r.com/Graphs/ - Cookbook for R Graphics 
+<http://www.cookbook-r.com/Graphs/> - Cookbook for R Graphics

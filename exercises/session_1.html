@@ -10,7 +10,7 @@
 
 
 
-<meta name="date" content="2022-11-09" />
+<meta name="date" content="2022-11-10" />
 
 <title>Introduction to R: Session 1</title>
 
@@ -2781,7 +2781,7 @@ div.tocify {
 
 
 <h1 class="title toc-ignore">Introduction to R: Session 1</h1>
-<h4 class="date">09 November 2022</h4>
+<h4 class="date">10 November 2022</h4>
 
 </div>
 
@@ -2810,6 +2810,10 @@ symbols to highlight certain instructions:</p>
 your own code, in your R Studio session.</li>
 <li>❓ A question, related to the material or code output.</li>
 </ul>
+</div>
+<div id="resources" class="section level2" number="1.3">
+<h2><span class="header-section-number">1.3</span> Resources</h2>
+<p>Coming soon!</p>
 </div>
 </div>
 <div id="r-basics" class="section level1" number="2">
@@ -2848,6 +2852,13 @@ addition or multiplication:</p>
 <li><code>/</code>: division</li>
 <li><code>^</code>: exponent</li>
 </ul>
+<p>Examples:</p>
+<pre class="r"><code>46 + 3</code></pre>
+<pre><code>## [1] 49</code></pre>
+<pre class="r"><code>13 / 8</code></pre>
+<pre><code>## [1] 1.625</code></pre>
+<pre class="r"><code>2^5</code></pre>
+<pre><code>## [1] 32</code></pre>
 <p>💻 Try using some of these operators in your R Studio console (the
 bottom-left panel).</p>
 </div>
@@ -2878,6 +2889,8 @@ to use spaces, then you can use an underscore (<code>_</code>).</p>
 </ul>
 <p>❓ Discuss <em>why</em> each of the examples of bad object names are
 bad.</p>
+<p>💻 Try making some of your own objects, e.g. assign the value
+<code>&quot;2022&quot;</code> to the object <code>year</code>.</p>
 </div>
 <div id="relational-operators" class="section level3" number="2.2.3">
 <h3><span class="header-section-number">2.2.3</span> Relational
@@ -2892,9 +2905,12 @@ operators</h3>
 <li><code>!=</code>: not equal to</li>
 </ul>
 <p>Expressions using relational operators will return <code>TRUE</code>
-or <code>FALSE</code>:</p>
+or <code>FALSE</code>.</p>
+<p>💻 Copy the below code into the console of your R Studio
+terminal.</p>
 <pre class="r"><code>x &lt;- 3      # Assign the value 3 to the object called x
 y &lt;- 11     # Assign the value 11 to the object called y</code></pre>
+<p>Examples of using relational operators:</p>
 <pre class="r"><code># Test: is x less than 4?
 x &lt; 4</code></pre>
 <pre><code>## [1] TRUE</code></pre>
@@ -2907,14 +2923,32 @@ x == 5</code></pre>
 <pre class="r"><code># Test: is y not equal to 22
 y != 22</code></pre>
 <pre><code>## [1] TRUE</code></pre>
+<p>💻 Try using some of these operators in your R Studio console,
+e.g. to test if <code>2^11</code> is bigger than <code>3*729</code>.</p>
 </div>
 <div id="the-c-function" class="section level3" number="2.2.4">
-<h3><span class="header-section-number">2.2.4</span> The c()
-function</h3>
+<h3><span class="header-section-number">2.2.4</span> The
+<code>c()</code> function</h3>
+<p>The <code>c()</code> function is used to combine multiple values into
+a <em>vector</em> or a <em>list</em>. For example, multiple numeric
+values can be combined into a vector:</p>
+<pre class="r"><code>c(3, 1, 10.5)</code></pre>
+<pre><code>## [1]  3.0  1.0 10.5</code></pre>
+<p>Multiple text strings can also be combined:</p>
+<pre class="r"><code>c(&quot;Welcome&quot;, &quot;to&quot;, &quot;R&quot;, &quot;!&quot;)</code></pre>
+<pre><code>## [1] &quot;Welcome&quot; &quot;to&quot;      &quot;R&quot;       &quot;!&quot;</code></pre>
+<p>If both numbers and text are combined with the <code>c()</code>
+function, then all the numeric values are transformed into text:</p>
+<pre class="r"><code>c(&quot;LSHTM&quot;, 20.22)</code></pre>
+<pre><code>## [1] &quot;LSHTM&quot; &quot;20.22&quot;</code></pre>
 </div>
 </div>
-<div id="working-directory" class="section level2" number="2.3">
-<h2><span class="header-section-number">2.3</span> Working
+<div id="r-packages" class="section level2" number="2.3">
+<h2><span class="header-section-number">2.3</span> R packages</h2>
+<p>Coming soon!</p>
+</div>
+<div id="working-directory" class="section level2" number="2.4">
+<h2><span class="header-section-number">2.4</span> Working
 directory</h2>
 <p>The working directory is the root folder used by R, and will be the
 default location where R will start to look for data or saves files. You
@@ -2922,11 +2956,14 @@ can find out your current working directory with the function
 <code>getwd()</code>:</p>
 <pre class="r"><code>getwd()</code></pre>
 <pre><code>## [1] &quot;/Users/sophiemeakin/Documents/LSHTM/intro_to_R_2022/exercises&quot;</code></pre>
-<p>A common and easy way to manage your working directory is with R
-projects and the <strong>here</strong> package. Let’s go through the
-steps to set up an R project in R studio.</p>
-<div id="r-projects" class="section level3" number="2.3.1">
-<h3><span class="header-section-number">2.3.1</span> R projects</h3>
+<p>❓ Use <code>getwd()</code> to find out your working directory. How
+is it different to the one above?</p>
+<div id="r-projects" class="section level3" number="2.4.1">
+<h3><span class="header-section-number">2.4.1</span> R projects</h3>
+<p>⭐ A common and easy way to manage your working directory is with
+<strong>R projects</strong> and the <strong>here</strong> package (which
+we will introduce shortly). Let’s go through the steps to set up an R
+project in R studio.</p>
 <p>TO DO: steps to set up an R project.</p>
 </div>
 </div>
@@ -2934,20 +2971,26 @@ steps to set up an R project in R studio.</p>
 <div id="working-with-data" class="section level1" number="3">
 <h1><span class="header-section-number">3</span> Working with data</h1>
 <p>We can import (i.e. ‘read in’) and export (i.e. save) data in common
-formats (e.g. .csv, .xlsx, .txt) with the <code>rio</code> package. We
-are going to load some data on the life expectancy for countries in
-2015.</p>
+formats (e.g. .csv, .xlsx, .txt) with the <strong>rio</strong> package.
+In this section, we are going to import some data on life expectancy at
+birth and health expenditure per capita in USD for countries in 2015.
+This data is from Our World in Data: <a href="https://ourworldindata.org/grapher/life-expectancy-vs-health-expenditure">ourworldindata.org/life-expectancy-vs-health-expenditure</a>.</p>
 <div id="importing-data" class="section level2" number="3.1">
 <h2><span class="header-section-number">3.1</span> Importing data</h2>
 <p>⭐ We import a data file (e.g. .csv) using the <code>import()</code>
-function from the <code>rio</code> library, and tell R where to look for
-the file using the <code>here()</code> function from the
-<code>here</code> library.</p>
-<p>💻 The line of code below imports the data
+function from the <strong>rio</strong> library, and tell R where to look
+for the file using the <code>here()</code> function from the
+<strong>here</strong> library.</p>
+<p>First we need to load these two libraries in our current R Studio
+session.</p>
+<p>💻 Copy and paste the code below.</p>
+<pre class="r"><code>library(rio)
+library(here)</code></pre>
+<p>💻 Copy and paste the code below. This code imports the data
 <code>life_expectancy.csv</code> from the folder <code>data</code>, and
 assigns it to an object called <code>life_expectancy</code>:</p>
 <pre class="r"><code>life_expectancy &lt;- import(file = here(&quot;data&quot;,
-                                      &quot;life_expectancy_vs_health_expenditure.csv&quot;))</code></pre>
+                                      &quot;life_expectancy.csv&quot;))</code></pre>
 <p>Let’s look more closely at how <code>import()</code> and
 <code>here()</code> work.</p>
 <div id="the-here-function" class="section level3" number="3.1.1">
@@ -2955,7 +2998,7 @@ assigns it to an object called <code>life_expectancy</code>:</p>
 <code>here()</code> function</h3>
 <p>To import data, we have to tell R where to look for it! An easy way
 to do this is using the <code>here()</code> function in the
-<code>here</code> library.</p>
+<strong>here</strong> library.</p>
 <p>When using the <code>here()</code> function, R will always start its
 search in the root folder i.e. where the Rproj file is. You then specify
 the folder(s) and/or file name, and <code>here()</code> will build the
@@ -2967,7 +3010,7 @@ inside a folder <code>data</code> and then a sub-folder
 file path on my computer:</p>
 <pre class="r"><code>here(&quot;data&quot;, &quot;raw&quot;, &quot;my_data.csv&quot;)</code></pre>
 <pre><code>## [1] &quot;/Users/sophiemeakin/Documents/LSHTM/intro_to_R_2022/data/raw/my_data.csv&quot;</code></pre>
-<p>❓ Run this command in your R Studio console. How is the output
+<p>❓ Run this above command in your R Studio console. How is the output
 different to above, or to your neighbours output?</p>
 </div>
 <div id="the-import-function" class="section level3" number="3.1.2">
@@ -2990,17 +3033,17 @@ only have to remember that!</p>
 <p>Now we have imported some data, we can look at it in one of two
 ways:</p>
 <ol style="list-style-type: decimal">
-<li>Click on the <code>life_expectancy</code> object in the
+<li>💻 Click on the <code>life_expectancy</code> object in the
 ‘Environment’ pane (top-right). A new window will open in front of your
-script pane showing the data.</li>
-<li>Run the command <code>life_expectancy</code>. The data will print in
-the console. Alternatively, the command
-<code>head(life_expectancy)</code> will print the top 6 lines only.</li>
+script pane showing the data. Have a look!</li>
+<li>💻 Run the command <code>life_expectancy</code> in your Rstudio
+console. The data will print in the console. Alternatively, the command
+<code>head(life_expectancy)</code> will print the top 6 lines only:</li>
 </ol>
 <pre class="r"><code>head(life_expectancy)</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["region"],"name":[1],"type":["chr"],"align":["left"]},{"label":["country"],"name":[2],"type":["chr"],"align":["left"]},{"label":["year"],"name":[3],"type":["int"],"align":["right"]},{"label":["life_expectancy_years"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["health_expenditure_usd"],"name":[5],"type":["dbl"],"align":["right"]}],"data":[{"1":"South Asia","2":"Afghanistan","3":"2015","4":"63.377","5":"NA","_rn_":"1"},{"1":"Europe and Central Asia","2":"Albania","3":"2015","4":"78.025","5":"NA","_rn_":"2"},{"1":"Middle East and North Africa","2":"Algeria","3":"2015","4":"76.090","5":"NA","_rn_":"3"},{"1":"East Asia and Pacific","2":"American Samoa","3":"2015","4":"NA","5":"NA","_rn_":"4"},{"1":"Europe and Central Asia","2":"Andorra","3":"2015","4":"NA","5":"NA","_rn_":"5"},{"1":"Sub-Saharan Africa","2":"Angola","3":"2015","4":"59.398","5":"NA","_rn_":"6"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["region"],"name":[1],"type":["chr"],"align":["left"]},{"label":["country"],"name":[2],"type":["chr"],"align":["left"]},{"label":["pop_100k"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["life_expectancy_years"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["health_expenditure_usd"],"name":[5],"type":["dbl"],"align":["right"]}],"data":[{"1":"South Asia","2":"Afghanistan","3":"337.53500","4":"63.377","5":"NA","_rn_":"1"},{"1":"Europe and Central Asia","2":"Albania","3":"28.82482","4":"78.025","5":"NA","_rn_":"2"},{"1":"Middle East and North Africa","2":"Algeria","3":"395.43148","4":"76.090","5":"NA","_rn_":"3"},{"1":"East Asia and Pacific","2":"American Samoa","3":"0.51391","4":"NA","5":"NA","_rn_":"4"},{"1":"Europe and Central Asia","2":"Andorra","3":"0.71766","4":"NA","5":"NA","_rn_":"5"},{"1":"Sub-Saharan Africa","2":"Angola","3":"281.27724","4":"59.398","5":"NA","_rn_":"6"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 <p>Notice that there are lots of <code>NA</code> values in the
@@ -3010,18 +3053,18 @@ values, where no data is available.</p>
 set with <code>ncol()</code> and <code>nrow()</code>, respectively:</p>
 <pre class="r"><code>ncol(life_expectancy)</code></pre>
 <pre><code>## [1] 5</code></pre>
-<pre class="r"><code>nrow(life_expectancy)</code></pre>
-<pre><code>## [1] 217</code></pre>
-<p>Sometimes we might just be interested in the values of a single
-column. You can check the column names either by looking at the full
-data frame using one of the two methods we just saw, or by using the
-function <code>colnames()</code>:</p>
+<p>💻 Use <code>nrow()</code> to find the number of the rows in the data
+<code>life_expectancy</code>.</p>
+<p>You can check the column names either by looking at the full data
+frame using one of the two methods we just saw, or by using the function
+<code>colnames()</code>:</p>
 <pre class="r"><code>colnames(life_expectancy)</code></pre>
-<pre><code>## [1] &quot;region&quot;                 &quot;country&quot;                &quot;year&quot;                  
+<pre><code>## [1] &quot;region&quot;                 &quot;country&quot;                &quot;pop_100k&quot;              
 ## [4] &quot;life_expectancy_years&quot;  &quot;health_expenditure_usd&quot;</code></pre>
-<p>To extract the values in a single column, we use the <code>$</code>
-operator, e.g. <code>life_expectancy$country</code> will return all the
-values in the column called <code>country</code>.</p>
+<p>Sometimes we might just be interested in the values of a single
+column. To extract the values in a single column, we use the
+<code>$</code> operator, e.g. <code>life_expectancy$country</code> will
+return all the values in the column called <code>country</code>.</p>
 <p>💻 Run the commands <code>life_expectancy$country</code> and
 <code>life_expectancy$life_expectancy_years</code> in your R console to
 see what outputs you get.</p>
@@ -3043,9 +3086,9 @@ the object.</p>
 <pre class="r"><code># What is the data type of the &quot;country&quot; column in the life_expectancy data?
 class(life_expectancy$country)</code></pre>
 <pre><code>## [1] &quot;character&quot;</code></pre>
-<pre class="r"><code># What is the data type of the &quot;year&quot; column in the life_expectancy data?
-class(life_expectancy$year)</code></pre>
-<pre><code>## [1] &quot;integer&quot;</code></pre>
+<pre class="r"><code># What is the data type of the &quot;pop_100k&quot; column in the life_expectancy data?
+class(life_expectancy$pop_100k)</code></pre>
+<pre><code>## [1] &quot;numeric&quot;</code></pre>
 <p>❓ What data type is the column “life_expectancy_years” in the
 <code>life_expectancy</code> data?</p>
 <p>There are other, more complex, data types that can be used to combine
@@ -3063,6 +3106,9 @@ numeric data</h2>
 <p>With numeric data, we can calculate different summary statistics,
 such as the maximum and minimum values, the mean value,and the median
 value.</p>
+<div id="mean-and-median" class="section level3" number="3.3.1">
+<h3><span class="header-section-number">3.3.1</span> Mean and
+median</h3>
 <p>We can calculate the mean value with the function
 <code>mean()</code>.</p>
 <p>💻 Try running the below command to calculate the mean life
@@ -3079,7 +3125,7 @@ your data again. If there are any missing values in your data,
 the mean, we include the argument <code>na.rm = TRUE</code>:</p>
 <pre class="r"><code># Calculate the mean life expectancy
 mean(life_expectancy$life_expectancy_years, na.rm = TRUE)</code></pre>
-<p>💻 What happens if you change this so that
+<p>❓ What happens if you change this so that
 <code>na.rm = FALSE</code>?</p>
 <p>We can calculate other statistics, too. We can calculate the median
 value with the function <code>median()</code>:</p>
@@ -3089,6 +3135,14 @@ median(life_expectancy$life_expectancy_years, na.rm = TRUE)</code></pre>
 <p>Note that we also have to include the <code>na.rm = TRUE</code>
 argument so that missing (<code>NA</code>) values are removed before the
 median is calculated.</p>
+<p>💻 Calculate the mean and median health expenditure per capita in USD
+for the countries in <code>life_expectancy</code>. You can remind
+yourself of the other column names by looking at the data, or checking
+with the function we introduced earlier.</p>
+</div>
+<div id="minimum-and-maximum" class="section level3" number="3.3.2">
+<h3><span class="header-section-number">3.3.2</span> Minimum and
+maximum</h3>
 <p>We can calculate the minimum and maximum values with the functions
 <code>min()</code> and <code>max()</code>, respectively:</p>
 <pre class="r"><code># Calculate the minimum life expectancy
@@ -3097,6 +3151,12 @@ min(life_expectancy$life_expectancy_years, na.rm = TRUE)</code></pre>
 <pre class="r"><code># Calculate the maximum life expectancy
 max(life_expectancy$life_expectancy_years, na.rm = TRUE)</code></pre>
 <pre><code>## [1] 84.27805</code></pre>
+<p>💻 Calculate the minimum and maximum population size for the
+countries in <code>life_expectancy</code>.</p>
+</div>
+<div id="standard-deviation-and-inter-quartile-range" class="section level3" number="3.3.3">
+<h3><span class="header-section-number">3.3.3</span> Standard deviation
+and inter-quartile range</h3>
 <p>We can calculate the standard deviation with <code>sd()</code> and
 the inter-quartile range (IQR) with <code>IQR()</code>:</p>
 <pre class="r"><code># Calculate the standard deviation of life expectancy
@@ -3105,13 +3165,15 @@ sd(life_expectancy$life_expectancy_years, na.rm = TRUE)</code></pre>
 <pre class="r"><code># Calculate the IQR of life expectancy
 IQR(life_expectancy$life_expectancy_years, na.rm = TRUE)</code></pre>
 <pre><code>## [1] 10.60143</code></pre>
-<p>💻 Calculate the above summary statistics for health expenditure per
-capita USD in the <code>life_expectancy</code> data.</p>
+<p>💻 Calculate the standard deviation and inter-quartile range for one
+of the other numeric columns in the <code>life_expectancy</code>
+data.</p>
+</div>
 </div>
 <div id="exporting-data" class="section level2" number="3.4">
 <h2><span class="header-section-number">3.4</span> Exporting data</h2>
 <p>⭐ We export data using the <code>export()</code> function from the
-<code>rio</code> library.</p>
+<strong>rio</strong> library.</p>
 <p>The argument <code>x</code> specified the name of the data (e.g. the
 data frame) that we want to export. The argument <code>file</code> tells
 R where to save the data and what to call it. Again, we use the
@@ -3121,6 +3183,90 @@ and saves it as a .csv file called “test_data_export.csv” in the data
 folder:</p>
 <pre class="r"><code>export(x = life_expectancy,
        file = here(&quot;data&quot;, &quot;test_data_export.csv&quot;))</code></pre>
+</div>
+</div>
+<div id="bonus-the-dplyr-package" class="section level1" number="4">
+<h1><span class="header-section-number">4</span> Bonus: The dplyr
+package</h1>
+<pre class="r"><code>library(dplyr)</code></pre>
+<pre><code>## Warning: package &#39;dplyr&#39; was built under R version 4.1.2</code></pre>
+<pre><code>## 
+## Attaching package: &#39;dplyr&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:stats&#39;:
+## 
+##     filter, lag</code></pre>
+<pre><code>## The following objects are masked from &#39;package:base&#39;:
+## 
+##     intersect, setdiff, setequal, union</code></pre>
+<div id="filtering-rows" class="section level2" number="4.1">
+<h2><span class="header-section-number">4.1</span> Filtering rows</h2>
+<pre class="r"><code>filter(life_expectancy,
+       region == &quot;North America&quot;)</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["region"],"name":[1],"type":["chr"],"align":["left"]},{"label":["country"],"name":[2],"type":["chr"],"align":["left"]},{"label":["pop_100k"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["life_expectancy_years"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["health_expenditure_usd"],"name":[5],"type":["dbl"],"align":["right"]}],"data":[{"1":"North America","2":"Bermuda","3":"0.63165","4":"81.01219","5":"NA"},{"1":"North America","2":"Canada","3":"357.32120","4":"81.90000","5":"4288.992"},{"1":"North America","2":"United States","3":"3246.07776","4":"78.69025","5":"8714.897"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<pre class="r"><code>filter(life_expectancy,
+       life_expectancy_years &lt; 55)</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["region"],"name":[1],"type":["chr"],"align":["left"]},{"label":["country"],"name":[2],"type":["chr"],"align":["left"]},{"label":["pop_100k"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["life_expectancy_years"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["health_expenditure_usd"],"name":[5],"type":["dbl"],"align":["right"]}],"data":[{"1":"Sub-Saharan Africa","2":"Central African Republic","3":"48.19341","4":"50.881","5":"NA"},{"1":"Sub-Saharan Africa","2":"Chad","3":"141.40277","4":"53.137","5":"NA"},{"1":"Sub-Saharan Africa","2":"Lesotho","3":"21.18532","4":"51.038","5":"NA"},{"1":"Sub-Saharan Africa","2":"Nigeria","3":"1839.95776","4":"53.112","5":"NA"},{"1":"Sub-Saharan Africa","2":"Sierra Leone","3":"73.14779","4":"52.941","5":"NA"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+<div id="renaming-columns" class="section level2" number="4.2">
+<h2><span class="header-section-number">4.2</span> Renaming columns</h2>
+<pre class="r"><code>rename(life_expectancy,
+       le_years = life_expectancy_years,
+       he_usd = health_expenditure_usd)</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["region"],"name":[1],"type":["chr"],"align":["left"]},{"label":["country"],"name":[2],"type":["chr"],"align":["left"]},{"label":["pop_100k"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["le_years"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["he_usd"],"name":[5],"type":["dbl"],"align":["right"]}],"data":[{"1":"South Asia","2":"Afghanistan","3":"337.53500","4":"63.37700","5":"NA","_rn_":"1"},{"1":"Europe and Central Asia","2":"Albania","3":"28.82482","4":"78.02500","5":"NA","_rn_":"2"},{"1":"Middle East and North Africa","2":"Algeria","3":"395.43148","4":"76.09000","5":"NA","_rn_":"3"},{"1":"East Asia and Pacific","2":"American Samoa","3":"0.51391","4":"NA","5":"NA","_rn_":"4"},{"1":"Europe and Central Asia","2":"Andorra","3":"0.71766","4":"NA","5":"NA","_rn_":"5"},{"1":"Sub-Saharan Africa","2":"Angola","3":"281.27724","4":"59.39800","5":"NA","_rn_":"6"},{"1":"Latin America and Caribbean","2":"Antigua and Barbuda","3":"0.89958","4":"76.48300","5":"NA","_rn_":"7"},{"1":"Latin America and Caribbean","2":"Argentina","3":"432.57064","4":"76.06800","5":"NA","_rn_":"8"},{"1":"Europe and Central Asia","2":"Armenia","3":"28.78598","4":"74.46700","5":"NA","_rn_":"9"},{"1":"Latin America and Caribbean","2":"Aruba","3":"1.04269","4":"75.72500","5":"NA","_rn_":"10"},{"1":"East Asia and Pacific","2":"Australia","3":"238.20240","4":"82.40000","5":"4164.2213","_rn_":"11"},{"1":"Europe and Central Asia","2":"Austria","3":"86.42422","4":"81.19025","5":"4451.1826","_rn_":"12"},{"1":"Europe and Central Asia","2":"Azerbaijan","3":"98.63485","4":"72.26600","5":"NA","_rn_":"13"},{"1":"Latin America and Caribbean","2":"Bahamas","3":"3.92707","4":"73.08800","5":"NA","_rn_":"14"},{"1":"Middle East and North Africa","2":"Bahrain","3":"13.62157","4":"76.76200","5":"NA","_rn_":"15"},{"1":"South Asia","2":"Bangladesh","3":"1578.30000","4":"71.51400","5":"NA","_rn_":"16"},{"1":"Latin America and Caribbean","2":"Barbados","3":"2.78095","4":"78.80100","5":"NA","_rn_":"17"},{"1":"Europe and Central Asia","2":"Belarus","3":"97.00609","4":"73.62439","5":"NA","_rn_":"18"},{"1":"Europe and Central Asia","2":"Belgium","3":"112.48306","4":"80.99268","5":"4120.0479","_rn_":"19"},{"1":"Latin America and Caribbean","2":"Belize","3":"3.59884","4":"74.03400","5":"NA","_rn_":"20"},{"1":"Sub-Saharan Africa","2":"Benin","3":"109.32791","4":"60.60800","5":"NA","_rn_":"21"},{"1":"North America","2":"Bermuda","3":"0.63165","4":"81.01219","5":"NA","_rn_":"22"},{"1":"South Asia","2":"Bhutan","3":"7.43284","4":"70.41900","5":"NA","_rn_":"23"},{"1":"Latin America and Caribbean","2":"Bolivia","3":"110.90090","4":"70.27700","5":"NA","_rn_":"24"},{"1":"Europe and Central Asia","2":"Bosnia and Herzegovina","3":"35.24328","4":"76.86500","5":"NA","_rn_":"25"},{"1":"Sub-Saharan Africa","2":"Botswana","3":"23.05177","4":"67.33800","5":"NA","_rn_":"26"},{"1":"Latin America and Caribbean","2":"Brazil","3":"2051.88208","4":"74.99400","5":"NA","_rn_":"27"},{"1":"Latin America and Caribbean","2":"British Virgin Islands","3":"0.29394","4":"NA","5":"NA","_rn_":"28"},{"1":"East Asia and Pacific","2":"Brunei","3":"4.21449","4":"75.31800","5":"NA","_rn_":"29"},{"1":"Europe and Central Asia","2":"Bulgaria","3":"73.09255","4":"74.61463","5":"NA","_rn_":"30"},{"1":"Sub-Saharan Africa","2":"Burkina Faso","3":"187.18022","4":"59.91900","5":"NA","_rn_":"31"},{"1":"Sub-Saharan Africa","2":"Burundi","3":"107.27153","4":"60.12300","5":"NA","_rn_":"32"},{"1":"East Asia and Pacific","2":"Cambodia","3":"154.17527","4":"68.63700","5":"NA","_rn_":"33"},{"1":"Sub-Saharan Africa","2":"Cameroon","3":"230.12650","4":"57.58300","5":"NA","_rn_":"34"},{"1":"North America","2":"Canada","3":"357.32120","4":"81.90000","5":"4288.9920","_rn_":"35"},{"1":"Sub-Saharan Africa","2":"Cape Verde","3":"5.52169","4":"72.11700","5":"NA","_rn_":"36"},{"1":"Latin America and Caribbean","2":"Cayman Islands","3":"0.60935","4":"NA","5":"NA","_rn_":"37"},{"1":"Sub-Saharan Africa","2":"Central African Republic","3":"48.19341","4":"50.88100","5":"NA","_rn_":"38"},{"1":"Sub-Saharan Africa","2":"Chad","3":"141.40277","4":"53.13700","5":"NA","_rn_":"39"},{"1":"Europe and Central Asia","2":"Channel Islands","3":"NA","4":"82.42900","5":"NA","_rn_":"40"},{"1":"Latin America and Caribbean","2":"Chile","3":"178.70122","4":"79.64600","5":"1595.5279","_rn_":"41"},{"1":"East Asia and Pacific","2":"China","3":"13937.15456","4":"75.92800","5":"NA","_rn_":"42"},{"1":"Latin America and Caribbean","2":"Colombia","3":"471.19728","4":"76.53100","5":"NA","_rn_":"43"},{"1":"Sub-Saharan Africa","2":"Comoros","3":"7.30221","4":"63.47100","5":"NA","_rn_":"44"},{"1":"Sub-Saharan Africa","2":"Congo","3":"50.64390","4":"63.09700","5":"NA","_rn_":"45"},{"1":"Latin America and Caribbean","2":"Costa Rica","3":"48.95241","4":"79.56500","5":"NA","_rn_":"46"},{"1":"Sub-Saharan Africa","2":"Cote d'Ivoire","3":"235.96738","4":"56.06500","5":"NA","_rn_":"47"},{"1":"Europe and Central Asia","2":"Croatia","3":"42.54821","4":"77.27561","5":"NA","_rn_":"48"},{"1":"Latin America and Caribbean","2":"Cuba","3":"113.39888","4":"78.56100","5":"NA","_rn_":"49"},{"1":"Latin America and Caribbean","2":"Curacao","3":"1.69588","4":"78.07561","5":"NA","_rn_":"50"},{"1":"Europe and Central Asia","2":"Cyprus","3":"11.87286","4":"80.35000","5":"NA","_rn_":"51"},{"1":"Europe and Central Asia","2":"Czechia","3":"105.23801","4":"78.57805","5":"2166.4171","_rn_":"52"},{"1":"Sub-Saharan Africa","2":"Democratic Republic of Congo","3":"786.56904","4":"59.25400","5":"NA","_rn_":"53"},{"1":"Europe and Central Asia","2":"Denmark","3":"56.77795","4":"80.70244","5":"4484.5356","_rn_":"54"},{"1":"Middle East and North Africa","2":"Djibouti","3":"10.06266","4":"64.13600","5":"NA","_rn_":"55"},{"1":"Latin America and Caribbean","2":"Dominica","3":"0.70027","4":"NA","5":"NA","_rn_":"56"},{"1":"Latin America and Caribbean","2":"Dominican Republic","3":"104.05832","4":"73.24100","5":"NA","_rn_":"57"},{"1":"Latin America and Caribbean","2":"Ecuador","3":"161.95904","4":"76.14300","5":"NA","_rn_":"58"},{"1":"Middle East and North Africa","2":"Egypt","3":"977.23792","4":"71.30200","5":"NA","_rn_":"59"},{"1":"Latin America and Caribbean","2":"El Salvador","3":"62.31072","4":"72.41200","5":"NA","_rn_":"60"},{"1":"Sub-Saharan Africa","2":"Equatorial Guinea","3":"13.46974","4":"57.35900","5":"NA","_rn_":"61"},{"1":"Sub-Saharan Africa","2":"Eritrea","3":"33.40005","4":"64.66400","5":"NA","_rn_":"62"},{"1":"Europe and Central Asia","2":"Estonia","3":"13.14658","4":"77.59024","5":"1613.1031","_rn_":"63"},{"1":"Sub-Saharan Africa","2":"Eswatini","3":"11.33941","4":"55.35900","5":"NA","_rn_":"64"},{"1":"Sub-Saharan Africa","2":"Ethiopia","3":"1024.71896","4":"65.04800","5":"NA","_rn_":"65"},{"1":"Europe and Central Asia","2":"Faeroe Islands","3":"0.48848","4":"81.79269","5":"NA","_rn_":"66"},{"1":"East Asia and Pacific","2":"Fiji","3":"9.17209","4":"67.10300","5":"NA","_rn_":"67"},{"1":"Europe and Central Asia","2":"Finland","3":"54.79457","4":"81.48048","5":"3627.9559","_rn_":"68"},{"1":"Europe and Central Asia","2":"France","3":"638.09768","4":"82.32195","5":"4027.9490","_rn_":"69"},{"1":"East Asia and Pacific","2":"French Polynesia","3":"2.91796","4":"76.78700","5":"NA","_rn_":"70"},{"1":"Sub-Saharan Africa","2":"Gabon","3":"20.28524","4":"64.91300","5":"NA","_rn_":"71"},{"1":"Sub-Saharan Africa","2":"Gambia","3":"22.53137","4":"60.91000","5":"NA","_rn_":"72"},{"1":"Europe and Central Asia","2":"Georgia","3":"37.71135","4":"72.97300","5":"NA","_rn_":"73"},{"1":"Europe and Central Asia","2":"Germany","3":"820.73232","4":"80.64146","5":"4772.3280","_rn_":"74"},{"1":"Sub-Saharan Africa","2":"Ghana","3":"288.70946","4":"62.77200","5":"NA","_rn_":"75"},{"1":"Europe and Central Asia","2":"Gibraltar","3":"0.32546","4":"NA","5":"NA","_rn_":"76"},{"1":"Europe and Central Asia","2":"Greece","3":"108.06644","4":"81.03658","5":"1994.1161","_rn_":"77"},{"1":"Europe and Central Asia","2":"Greenland","3":"0.55916","4":"71.97732","5":"NA","_rn_":"78"},{"1":"Latin America and Caribbean","2":"Grenada","3":"1.18994","4":"72.44500","5":"NA","_rn_":"79"},{"1":"East Asia and Pacific","2":"Guam","3":"1.67996","4":"79.14400","5":"NA","_rn_":"80"},{"1":"Latin America and Caribbean","2":"Guatemala","3":"160.01105","4":"73.25000","5":"NA","_rn_":"81"},{"1":"Sub-Saharan Africa","2":"Guinea","3":"116.26003","4":"59.59800","5":"NA","_rn_":"82"},{"1":"Sub-Saharan Africa","2":"Guinea-Bissau","3":"17.88931","4":"56.95900","5":"NA","_rn_":"83"},{"1":"Latin America and Caribbean","2":"Guyana","3":"7.55043","4":"69.26200","5":"NA","_rn_":"84"},{"1":"Latin America and Caribbean","2":"Haiti","3":"105.63762","4":"62.48500","5":"NA","_rn_":"85"},{"1":"Latin America and Caribbean","2":"Honduras","3":"92.94510","4":"74.49500","5":"NA","_rn_":"86"},{"1":"East Asia and Pacific","2":"Hong Kong","3":"73.99845","4":"84.27805","5":"NA","_rn_":"87"},{"1":"Europe and Central Asia","2":"Hungary","3":"98.44250","4":"75.56829","5":"1676.6019","_rn_":"88"},{"1":"Europe and Central Asia","2":"Iceland","3":"3.31068","4":"82.46829","5":"3712.7076","_rn_":"89"},{"1":"South Asia","2":"India","3":"13228.66560","4":"68.60700","5":"NA","_rn_":"90"},{"1":"East Asia and Pacific","2":"Indonesia","3":"2590.91968","4":"70.76800","5":"NA","_rn_":"91"},{"1":"Middle East and North Africa","2":"Iran","3":"817.90848","4":"75.79600","5":"NA","_rn_":"92"},{"1":"Middle East and North Africa","2":"Iraq","3":"377.57812","4":"69.92900","5":"NA","_rn_":"93"},{"1":"Europe and Central Asia","2":"Ireland","3":"46.65764","4":"81.45366","5":"4730.3324","_rn_":"94"},{"1":"Europe and Central Asia","2":"Isle of Man","3":"0.83614","4":"NA","5":"NA","_rn_":"95"},{"1":"Middle East and North Africa","2":"Israel","3":"80.07777","4":"82.05122","5":"2292.3219","_rn_":"96"},{"1":"Europe and Central Asia","2":"Italy","3":"602.32908","4":"82.54390","5":"2954.1373","_rn_":"97"},{"1":"Latin America and Caribbean","2":"Jamaica","3":"27.94455","4":"74.09800","5":"NA","_rn_":"98"},{"1":"East Asia and Pacific","2":"Japan","3":"1272.50936","4":"83.79390","5":"3930.7353","_rn_":"99"},{"1":"Middle East and North Africa","2":"Jordan","3":"94.94250","4":"74.07800","5":"NA","_rn_":"100"},{"1":"Europe and Central Asia","2":"Kazakhstan","3":"178.35908","4":"71.97000","5":"NA","_rn_":"101"},{"1":"Sub-Saharan Africa","2":"Kenya","3":"468.51496","4":"64.79800","5":"NA","_rn_":"102"},{"1":"East Asia and Pacific","2":"Kiribati","3":"1.16717","4":"67.29100","5":"NA","_rn_":"103"},{"1":"Europe and Central Asia","2":"Kosovo","3":"17.59122","4":"71.34634","5":"NA","_rn_":"104"},{"1":"Middle East and North Africa","2":"Kuwait","3":"39.08745","4":"75.13000","5":"NA","_rn_":"105"},{"1":"Europe and Central Asia","2":"Kyrgyzstan","3":"59.14985","4":"70.65122","5":"NA","_rn_":"106"},{"1":"East Asia and Pacific","2":"Laos","3":"67.87420","4":"66.54600","5":"NA","_rn_":"107"},{"1":"Europe and Central Asia","2":"Latvia","3":"19.91951","4":"74.48048","5":"1229.7855","_rn_":"108"},{"1":"Middle East and North Africa","2":"Lebanon","3":"63.98941","4":"78.76800","5":"NA","_rn_":"109"},{"1":"Sub-Saharan Africa","2":"Lesotho","3":"21.18532","4":"51.03800","5":"NA","_rn_":"110"},{"1":"Sub-Saharan Africa","2":"Liberia","3":"46.12330","4":"62.26900","5":"NA","_rn_":"111"},{"1":"Middle East and North Africa","2":"Libya","3":"61.92241","4":"72.12100","5":"NA","_rn_":"112"},{"1":"Europe and Central Asia","2":"Liechtenstein","3":"0.37378","4":"82.65610","5":"NA","_rn_":"113"},{"1":"Europe and Central Asia","2":"Lithuania","3":"29.63764","4":"74.32195","5":"NA","_rn_":"114"},{"1":"Europe and Central Asia","2":"Luxembourg","3":"5.69415","4":"82.29269","5":"6758.7884","_rn_":"115"},{"1":"East Asia and Pacific","2":"Macao","3":"6.15243","4":"83.70700","5":"NA","_rn_":"116"},{"1":"Sub-Saharan Africa","2":"Madagascar","3":"248.50912","4":"65.53900","5":"NA","_rn_":"117"},{"1":"Sub-Saharan Africa","2":"Malawi","3":"169.38944","4":"61.95300","5":"NA","_rn_":"118"},{"1":"East Asia and Pacific","2":"Malaysia","3":"310.68834","4":"75.46100","5":"NA","_rn_":"119"},{"1":"South Asia","2":"Maldives","3":"4.35590","4":"77.69100","5":"NA","_rn_":"120"},{"1":"Sub-Saharan Africa","2":"Mali","3":"181.12910","4":"57.50900","5":"NA","_rn_":"121"},{"1":"Middle East and North Africa","2":"Malta","3":"4.56585","4":"81.89756","5":"NA","_rn_":"122"},{"1":"East Asia and Pacific","2":"Marshall Islands","3":"0.49426","4":"NA","5":"NA","_rn_":"123"},{"1":"Sub-Saharan Africa","2":"Mauritania","3":"39.46225","4":"63.93600","5":"NA","_rn_":"124"},{"1":"Sub-Saharan Africa","2":"Mauritius","3":"12.93159","4":"74.35317","5":"NA","_rn_":"125"},{"1":"Latin America and Caribbean","2":"Mexico","3":"1201.49896","4":"74.90400","5":"956.2196","_rn_":"126"},{"1":"Europe and Central Asia","2":"Moldova","3":"32.77390","4":"71.47800","5":"NA","_rn_":"127"},{"1":"Europe and Central Asia","2":"Monaco","3":"0.36781","4":"NA","5":"NA","_rn_":"128"},{"1":"East Asia and Pacific","2":"Mongolia","3":"29.64756","4":"69.11100","5":"NA","_rn_":"129"},{"1":"Europe and Central Asia","2":"Montenegro","3":"6.33969","4":"76.44878","5":"NA","_rn_":"130"},{"1":"Middle East and North Africa","2":"Morocco","3":"346.80456","4":"75.72600","5":"NA","_rn_":"131"},{"1":"Sub-Saharan Africa","2":"Mozambique","3":"268.43252","4":"57.20600","5":"NA","_rn_":"132"},{"1":"East Asia and Pacific","2":"Myanmar","3":"514.83956","4":"65.81000","5":"NA","_rn_":"133"},{"1":"Sub-Saharan Africa","2":"Namibia","3":"22.82709","4":"62.11900","5":"NA","_rn_":"134"},{"1":"East Asia and Pacific","2":"Nauru","3":"0.11207","4":"NA","5":"NA","_rn_":"135"},{"1":"South Asia","2":"Nepal","3":"276.10328","4":"69.51500","5":"NA","_rn_":"136"},{"1":"Europe and Central Asia","2":"Netherlands","3":"170.41110","4":"81.50976","5":"4885.5541","_rn_":"137"},{"1":"East Asia and Pacific","2":"New Caledonia","3":"2.83041","4":"77.28049","5":"NA","_rn_":"138"},{"1":"East Asia and Pacific","2":"New Zealand","3":"45.90591","4":"81.45683","5":"3183.9663","_rn_":"139"},{"1":"Latin America and Caribbean","2":"Nicaragua","3":"62.98610","4":"73.64900","5":"NA","_rn_":"140"},{"1":"Sub-Saharan Africa","2":"Niger","3":"201.28132","4":"60.63100","5":"NA","_rn_":"141"},{"1":"Sub-Saharan Africa","2":"Nigeria","3":"1839.95776","4":"53.11200","5":"NA","_rn_":"142"},{"1":"East Asia and Pacific","2":"North Korea","3":"252.58012","4":"71.48100","5":"NA","_rn_":"143"},{"1":"Europe and Central Asia","2":"North Macedonia","3":"21.07965","4":"75.40244","5":"NA","_rn_":"144"},{"1":"East Asia and Pacific","2":"Northern Mariana Islands","3":"0.51538","4":"NA","5":"NA","_rn_":"145"},{"1":"Europe and Central Asia","2":"Norway","3":"51.90357","4":"82.30488","5":"5926.4438","_rn_":"146"},{"1":"Middle East and North Africa","2":"Oman","3":"41.91784","4":"76.88700","5":"NA","_rn_":"147"},{"1":"South Asia","2":"Pakistan","3":"2109.69296","4":"66.57700","5":"NA","_rn_":"148"},{"1":"East Asia and Pacific","2":"Palau","3":"0.17822","4":"NA","5":"NA","_rn_":"149"},{"1":"Middle East and North Africa","2":"Palestine","3":"44.84615","4":"73.44200","5":"NA","_rn_":"150"},{"1":"Latin America and Caribbean","2":"Panama","3":"39.57102","4":"77.77600","5":"NA","_rn_":"151"},{"1":"East Asia and Pacific","2":"Papua New Guinea","3":"86.82172","4":"63.46600","5":"NA","_rn_":"152"},{"1":"Latin America and Caribbean","2":"Paraguay","3":"61.77954","4":"73.66200","5":"NA","_rn_":"153"},{"1":"Latin America and Caribbean","2":"Peru","3":"307.11864","4":"75.79200","5":"NA","_rn_":"154"},{"1":"East Asia and Pacific","2":"Philippines","3":"1030.31360","4":"70.64400","5":"NA","_rn_":"155"},{"1":"Europe and Central Asia","2":"Poland","3":"385.53148","4":"77.45122","5":"1527.8929","_rn_":"156"},{"1":"Europe and Central Asia","2":"Portugal","3":"103.65436","4":"81.12439","5":"2319.3756","_rn_":"157"},{"1":"Latin America and Caribbean","2":"Puerto Rico","3":"34.97335","4":"79.35349","5":"NA","_rn_":"158"},{"1":"Middle East and North Africa","2":"Qatar","3":"24.14580","4":"79.75800","5":"NA","_rn_":"159"},{"1":"Europe and Central Asia","2":"Romania","3":"199.06078","4":"74.91219","5":"NA","_rn_":"160"},{"1":"Europe and Central Asia","2":"Russia","3":"1446.68384","4":"71.18342","5":"NA","_rn_":"161"},{"1":"Sub-Saharan Africa","2":"Rwanda","3":"116.42963","4":"67.45000","5":"NA","_rn_":"162"},{"1":"Latin America and Caribbean","2":"Saint Kitts and Nevis","3":"0.47814","4":"NA","5":"NA","_rn_":"163"},{"1":"Latin America and Caribbean","2":"Saint Lucia","3":"1.75638","4":"75.59600","5":"NA","_rn_":"164"},{"1":"Latin America and Caribbean","2":"Saint Martin (French part)","3":"NA","4":"79.32195","5":"NA","_rn_":"165"},{"1":"Latin America and Caribbean","2":"Saint Martin (French part)","3":"0.35042","4":"NA","5":"NA","_rn_":"166"},{"1":"Latin America and Caribbean","2":"Saint Vincent and the Grenadines","3":"1.06493","4":"72.09500","5":"NA","_rn_":"167"},{"1":"East Asia and Pacific","2":"Samoa","3":"2.03586","4":"72.73000","5":"NA","_rn_":"168"},{"1":"Europe and Central Asia","2":"San Marino","3":"0.33593","4":"NA","5":"NA","_rn_":"169"},{"1":"Sub-Saharan Africa","2":"Sao Tome and Principe","3":"2.01142","4":"69.37700","5":"NA","_rn_":"170"},{"1":"Middle East and North Africa","2":"Saudi Arabia","3":"327.49838","4":"74.65100","5":"NA","_rn_":"171"},{"1":"Sub-Saharan Africa","2":"Senegal","3":"143.56191","4":"66.74700","5":"NA","_rn_":"172"},{"1":"Europe and Central Asia","2":"Serbia","3":"75.19501","4":"75.28780","5":"NA","_rn_":"173"},{"1":"Sub-Saharan Africa","2":"Seychelles","3":"0.99260","4":"74.29512","5":"NA","_rn_":"174"},{"1":"Sub-Saharan Africa","2":"Sierra Leone","3":"73.14779","4":"52.94100","5":"NA","_rn_":"175"},{"1":"East Asia and Pacific","2":"Singapore","3":"56.50020","4":"82.74390","5":"NA","_rn_":"176"},{"1":"Latin America and Caribbean","2":"Sint Maarten (Dutch part)","3":"0.40228","4":"77.21951","5":"NA","_rn_":"177"},{"1":"Europe and Central Asia","2":"Slovakia","3":"54.24449","4":"76.56342","5":"NA","_rn_":"178"},{"1":"Europe and Central Asia","2":"Slovenia","3":"20.80865","4":"80.77561","5":"2353.3210","_rn_":"179"},{"1":"East Asia and Pacific","2":"Solomon Islands","3":"6.12670","4":"72.17300","5":"NA","_rn_":"180"},{"1":"Sub-Saharan Africa","2":"Somalia","3":"137.63909","4":"55.92000","5":"NA","_rn_":"181"},{"1":"Sub-Saharan Africa","2":"South Africa","3":"558.76504","4":"62.64900","5":"NA","_rn_":"182"},{"1":"East Asia and Pacific","2":"South Korea","3":"509.94396","4":"82.02439","5":"NA","_rn_":"183"},{"1":"Sub-Saharan Africa","2":"South Sudan","3":"111.94300","4":"56.85500","5":"NA","_rn_":"184"},{"1":"Europe and Central Asia","2":"Spain","3":"464.31344","4":"82.83171","5":"2896.8668","_rn_":"185"},{"1":"South Asia","2":"Sri Lanka","3":"213.36692","4":"76.31600","5":"NA","_rn_":"186"},{"1":"Sub-Saharan Africa","2":"Sudan","3":"381.71172","4":"64.42900","5":"NA","_rn_":"187"},{"1":"Latin America and Caribbean","2":"Suriname","3":"5.75478","4":"71.24900","5":"NA","_rn_":"188"},{"1":"Europe and Central Asia","2":"Sweden","3":"98.49344","4":"82.20488","5":"4906.8583","_rn_":"189"},{"1":"Europe and Central Asia","2":"Switzerland","3":"82.81735","4":"82.89756","5":"6062.2568","_rn_":"190"},{"1":"Middle East and North Africa","2":"Syria","3":"192.05178","4":"69.90800","5":"NA","_rn_":"191"},{"1":"Europe and Central Asia","2":"Tajikistan","3":"85.24066","4":"70.13700","5":"NA","_rn_":"192"},{"1":"Sub-Saharan Africa","2":"Tanzania","3":"525.42824","4":"63.11100","5":"NA","_rn_":"193"},{"1":"East Asia and Pacific","2":"Thailand","3":"702.94408","4":"76.09100","5":"NA","_rn_":"194"},{"1":"East Asia and Pacific","2":"Timor","3":"12.05822","4":"68.45900","5":"NA","_rn_":"195"},{"1":"Sub-Saharan Africa","2":"Togo","3":"74.73232","4":"59.92700","5":"NA","_rn_":"196"},{"1":"East Asia and Pacific","2":"Tonga","3":"1.06140","4":"70.51700","5":"NA","_rn_":"197"},{"1":"Latin America and Caribbean","2":"Trinidad and Tobago","3":"14.60180","4":"72.94100","5":"NA","_rn_":"198"},{"1":"Middle East and North Africa","2":"Tunisia","3":"115.57779","4":"75.92200","5":"NA","_rn_":"199"},{"1":"Europe and Central Asia","2":"Turkey","3":"796.46176","4":"76.53200","5":"974.8436","_rn_":"200"},{"1":"Europe and Central Asia","2":"Turkmenistan","3":"57.66427","4":"67.70400","5":"NA","_rn_":"201"},{"1":"Latin America and Caribbean","2":"Turks and Caicos Islands","3":"0.36556","4":"NA","5":"NA","_rn_":"202"},{"1":"East Asia and Pacific","2":"Tuvalu","3":"0.10896","4":"NA","5":"NA","_rn_":"203"},{"1":"Sub-Saharan Africa","2":"Uganda","3":"374.77356","4":"61.37300","5":"NA","_rn_":"204"},{"1":"Europe and Central Asia","2":"Ukraine","3":"449.82568","4":"71.18951","5":"NA","_rn_":"205"},{"1":"Middle East and North Africa","2":"United Arab Emirates","3":"89.16909","4":"77.28500","5":"NA","_rn_":"206"},{"1":"Europe and Central Asia","2":"United Kingdom","3":"652.24368","4":"80.95610","5":"3755.9433","_rn_":"207"},{"1":"North America","2":"United States","3":"3246.07776","4":"78.69025","5":"8714.8975","_rn_":"208"},{"1":"Latin America and Caribbean","2":"United States Virgin Islands","3":"1.02808","4":"79.01707","5":"NA","_rn_":"209"},{"1":"Latin America and Caribbean","2":"Uruguay","3":"34.02820","4":"77.36900","5":"NA","_rn_":"210"},{"1":"Europe and Central Asia","2":"Uzbekistan","3":"309.49416","4":"70.92800","5":"NA","_rn_":"211"},{"1":"East Asia and Pacific","2":"Vanuatu","3":"2.76450","4":"69.86900","5":"NA","_rn_":"212"},{"1":"Latin America and Caribbean","2":"Venezuela","3":"305.29722","4":"72.58400","5":"NA","_rn_":"213"},{"1":"East Asia and Pacific","2":"Vietnam","3":"921.91400","4":"75.11000","5":"NA","_rn_":"214"},{"1":"Middle East and North Africa","2":"Yemen","3":"285.16552","4":"66.08500","5":"NA","_rn_":"215"},{"1":"Sub-Saharan Africa","2":"Zambia","3":"162.48231","4":"61.73700","5":"NA","_rn_":"216"},{"1":"Sub-Saharan Africa","2":"Zimbabwe","3":"141.54937","4":"59.53400","5":"NA","_rn_":"217"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+<div id="selecting-columns" class="section level2" number="4.3">
+<h2><span class="header-section-number">4.3</span> Selecting
+columns</h2>
+<pre class="r"><code>select(life_expectancy,
+       country, life_expectancy_years)</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["country"],"name":[1],"type":["chr"],"align":["left"]},{"label":["life_expectancy_years"],"name":[2],"type":["dbl"],"align":["right"]}],"data":[{"1":"Afghanistan","2":"63.37700","_rn_":"1"},{"1":"Albania","2":"78.02500","_rn_":"2"},{"1":"Algeria","2":"76.09000","_rn_":"3"},{"1":"American Samoa","2":"NA","_rn_":"4"},{"1":"Andorra","2":"NA","_rn_":"5"},{"1":"Angola","2":"59.39800","_rn_":"6"},{"1":"Antigua and Barbuda","2":"76.48300","_rn_":"7"},{"1":"Argentina","2":"76.06800","_rn_":"8"},{"1":"Armenia","2":"74.46700","_rn_":"9"},{"1":"Aruba","2":"75.72500","_rn_":"10"},{"1":"Australia","2":"82.40000","_rn_":"11"},{"1":"Austria","2":"81.19025","_rn_":"12"},{"1":"Azerbaijan","2":"72.26600","_rn_":"13"},{"1":"Bahamas","2":"73.08800","_rn_":"14"},{"1":"Bahrain","2":"76.76200","_rn_":"15"},{"1":"Bangladesh","2":"71.51400","_rn_":"16"},{"1":"Barbados","2":"78.80100","_rn_":"17"},{"1":"Belarus","2":"73.62439","_rn_":"18"},{"1":"Belgium","2":"80.99268","_rn_":"19"},{"1":"Belize","2":"74.03400","_rn_":"20"},{"1":"Benin","2":"60.60800","_rn_":"21"},{"1":"Bermuda","2":"81.01219","_rn_":"22"},{"1":"Bhutan","2":"70.41900","_rn_":"23"},{"1":"Bolivia","2":"70.27700","_rn_":"24"},{"1":"Bosnia and Herzegovina","2":"76.86500","_rn_":"25"},{"1":"Botswana","2":"67.33800","_rn_":"26"},{"1":"Brazil","2":"74.99400","_rn_":"27"},{"1":"British Virgin Islands","2":"NA","_rn_":"28"},{"1":"Brunei","2":"75.31800","_rn_":"29"},{"1":"Bulgaria","2":"74.61463","_rn_":"30"},{"1":"Burkina Faso","2":"59.91900","_rn_":"31"},{"1":"Burundi","2":"60.12300","_rn_":"32"},{"1":"Cambodia","2":"68.63700","_rn_":"33"},{"1":"Cameroon","2":"57.58300","_rn_":"34"},{"1":"Canada","2":"81.90000","_rn_":"35"},{"1":"Cape Verde","2":"72.11700","_rn_":"36"},{"1":"Cayman Islands","2":"NA","_rn_":"37"},{"1":"Central African Republic","2":"50.88100","_rn_":"38"},{"1":"Chad","2":"53.13700","_rn_":"39"},{"1":"Channel Islands","2":"82.42900","_rn_":"40"},{"1":"Chile","2":"79.64600","_rn_":"41"},{"1":"China","2":"75.92800","_rn_":"42"},{"1":"Colombia","2":"76.53100","_rn_":"43"},{"1":"Comoros","2":"63.47100","_rn_":"44"},{"1":"Congo","2":"63.09700","_rn_":"45"},{"1":"Costa Rica","2":"79.56500","_rn_":"46"},{"1":"Cote d'Ivoire","2":"56.06500","_rn_":"47"},{"1":"Croatia","2":"77.27561","_rn_":"48"},{"1":"Cuba","2":"78.56100","_rn_":"49"},{"1":"Curacao","2":"78.07561","_rn_":"50"},{"1":"Cyprus","2":"80.35000","_rn_":"51"},{"1":"Czechia","2":"78.57805","_rn_":"52"},{"1":"Democratic Republic of Congo","2":"59.25400","_rn_":"53"},{"1":"Denmark","2":"80.70244","_rn_":"54"},{"1":"Djibouti","2":"64.13600","_rn_":"55"},{"1":"Dominica","2":"NA","_rn_":"56"},{"1":"Dominican Republic","2":"73.24100","_rn_":"57"},{"1":"Ecuador","2":"76.14300","_rn_":"58"},{"1":"Egypt","2":"71.30200","_rn_":"59"},{"1":"El Salvador","2":"72.41200","_rn_":"60"},{"1":"Equatorial Guinea","2":"57.35900","_rn_":"61"},{"1":"Eritrea","2":"64.66400","_rn_":"62"},{"1":"Estonia","2":"77.59024","_rn_":"63"},{"1":"Eswatini","2":"55.35900","_rn_":"64"},{"1":"Ethiopia","2":"65.04800","_rn_":"65"},{"1":"Faeroe Islands","2":"81.79269","_rn_":"66"},{"1":"Fiji","2":"67.10300","_rn_":"67"},{"1":"Finland","2":"81.48048","_rn_":"68"},{"1":"France","2":"82.32195","_rn_":"69"},{"1":"French Polynesia","2":"76.78700","_rn_":"70"},{"1":"Gabon","2":"64.91300","_rn_":"71"},{"1":"Gambia","2":"60.91000","_rn_":"72"},{"1":"Georgia","2":"72.97300","_rn_":"73"},{"1":"Germany","2":"80.64146","_rn_":"74"},{"1":"Ghana","2":"62.77200","_rn_":"75"},{"1":"Gibraltar","2":"NA","_rn_":"76"},{"1":"Greece","2":"81.03658","_rn_":"77"},{"1":"Greenland","2":"71.97732","_rn_":"78"},{"1":"Grenada","2":"72.44500","_rn_":"79"},{"1":"Guam","2":"79.14400","_rn_":"80"},{"1":"Guatemala","2":"73.25000","_rn_":"81"},{"1":"Guinea","2":"59.59800","_rn_":"82"},{"1":"Guinea-Bissau","2":"56.95900","_rn_":"83"},{"1":"Guyana","2":"69.26200","_rn_":"84"},{"1":"Haiti","2":"62.48500","_rn_":"85"},{"1":"Honduras","2":"74.49500","_rn_":"86"},{"1":"Hong Kong","2":"84.27805","_rn_":"87"},{"1":"Hungary","2":"75.56829","_rn_":"88"},{"1":"Iceland","2":"82.46829","_rn_":"89"},{"1":"India","2":"68.60700","_rn_":"90"},{"1":"Indonesia","2":"70.76800","_rn_":"91"},{"1":"Iran","2":"75.79600","_rn_":"92"},{"1":"Iraq","2":"69.92900","_rn_":"93"},{"1":"Ireland","2":"81.45366","_rn_":"94"},{"1":"Isle of Man","2":"NA","_rn_":"95"},{"1":"Israel","2":"82.05122","_rn_":"96"},{"1":"Italy","2":"82.54390","_rn_":"97"},{"1":"Jamaica","2":"74.09800","_rn_":"98"},{"1":"Japan","2":"83.79390","_rn_":"99"},{"1":"Jordan","2":"74.07800","_rn_":"100"},{"1":"Kazakhstan","2":"71.97000","_rn_":"101"},{"1":"Kenya","2":"64.79800","_rn_":"102"},{"1":"Kiribati","2":"67.29100","_rn_":"103"},{"1":"Kosovo","2":"71.34634","_rn_":"104"},{"1":"Kuwait","2":"75.13000","_rn_":"105"},{"1":"Kyrgyzstan","2":"70.65122","_rn_":"106"},{"1":"Laos","2":"66.54600","_rn_":"107"},{"1":"Latvia","2":"74.48048","_rn_":"108"},{"1":"Lebanon","2":"78.76800","_rn_":"109"},{"1":"Lesotho","2":"51.03800","_rn_":"110"},{"1":"Liberia","2":"62.26900","_rn_":"111"},{"1":"Libya","2":"72.12100","_rn_":"112"},{"1":"Liechtenstein","2":"82.65610","_rn_":"113"},{"1":"Lithuania","2":"74.32195","_rn_":"114"},{"1":"Luxembourg","2":"82.29269","_rn_":"115"},{"1":"Macao","2":"83.70700","_rn_":"116"},{"1":"Madagascar","2":"65.53900","_rn_":"117"},{"1":"Malawi","2":"61.95300","_rn_":"118"},{"1":"Malaysia","2":"75.46100","_rn_":"119"},{"1":"Maldives","2":"77.69100","_rn_":"120"},{"1":"Mali","2":"57.50900","_rn_":"121"},{"1":"Malta","2":"81.89756","_rn_":"122"},{"1":"Marshall Islands","2":"NA","_rn_":"123"},{"1":"Mauritania","2":"63.93600","_rn_":"124"},{"1":"Mauritius","2":"74.35317","_rn_":"125"},{"1":"Mexico","2":"74.90400","_rn_":"126"},{"1":"Moldova","2":"71.47800","_rn_":"127"},{"1":"Monaco","2":"NA","_rn_":"128"},{"1":"Mongolia","2":"69.11100","_rn_":"129"},{"1":"Montenegro","2":"76.44878","_rn_":"130"},{"1":"Morocco","2":"75.72600","_rn_":"131"},{"1":"Mozambique","2":"57.20600","_rn_":"132"},{"1":"Myanmar","2":"65.81000","_rn_":"133"},{"1":"Namibia","2":"62.11900","_rn_":"134"},{"1":"Nauru","2":"NA","_rn_":"135"},{"1":"Nepal","2":"69.51500","_rn_":"136"},{"1":"Netherlands","2":"81.50976","_rn_":"137"},{"1":"New Caledonia","2":"77.28049","_rn_":"138"},{"1":"New Zealand","2":"81.45683","_rn_":"139"},{"1":"Nicaragua","2":"73.64900","_rn_":"140"},{"1":"Niger","2":"60.63100","_rn_":"141"},{"1":"Nigeria","2":"53.11200","_rn_":"142"},{"1":"North Korea","2":"71.48100","_rn_":"143"},{"1":"North Macedonia","2":"75.40244","_rn_":"144"},{"1":"Northern Mariana Islands","2":"NA","_rn_":"145"},{"1":"Norway","2":"82.30488","_rn_":"146"},{"1":"Oman","2":"76.88700","_rn_":"147"},{"1":"Pakistan","2":"66.57700","_rn_":"148"},{"1":"Palau","2":"NA","_rn_":"149"},{"1":"Palestine","2":"73.44200","_rn_":"150"},{"1":"Panama","2":"77.77600","_rn_":"151"},{"1":"Papua New Guinea","2":"63.46600","_rn_":"152"},{"1":"Paraguay","2":"73.66200","_rn_":"153"},{"1":"Peru","2":"75.79200","_rn_":"154"},{"1":"Philippines","2":"70.64400","_rn_":"155"},{"1":"Poland","2":"77.45122","_rn_":"156"},{"1":"Portugal","2":"81.12439","_rn_":"157"},{"1":"Puerto Rico","2":"79.35349","_rn_":"158"},{"1":"Qatar","2":"79.75800","_rn_":"159"},{"1":"Romania","2":"74.91219","_rn_":"160"},{"1":"Russia","2":"71.18342","_rn_":"161"},{"1":"Rwanda","2":"67.45000","_rn_":"162"},{"1":"Saint Kitts and Nevis","2":"NA","_rn_":"163"},{"1":"Saint Lucia","2":"75.59600","_rn_":"164"},{"1":"Saint Martin (French part)","2":"79.32195","_rn_":"165"},{"1":"Saint Martin (French part)","2":"NA","_rn_":"166"},{"1":"Saint Vincent and the Grenadines","2":"72.09500","_rn_":"167"},{"1":"Samoa","2":"72.73000","_rn_":"168"},{"1":"San Marino","2":"NA","_rn_":"169"},{"1":"Sao Tome and Principe","2":"69.37700","_rn_":"170"},{"1":"Saudi Arabia","2":"74.65100","_rn_":"171"},{"1":"Senegal","2":"66.74700","_rn_":"172"},{"1":"Serbia","2":"75.28780","_rn_":"173"},{"1":"Seychelles","2":"74.29512","_rn_":"174"},{"1":"Sierra Leone","2":"52.94100","_rn_":"175"},{"1":"Singapore","2":"82.74390","_rn_":"176"},{"1":"Sint Maarten (Dutch part)","2":"77.21951","_rn_":"177"},{"1":"Slovakia","2":"76.56342","_rn_":"178"},{"1":"Slovenia","2":"80.77561","_rn_":"179"},{"1":"Solomon Islands","2":"72.17300","_rn_":"180"},{"1":"Somalia","2":"55.92000","_rn_":"181"},{"1":"South Africa","2":"62.64900","_rn_":"182"},{"1":"South Korea","2":"82.02439","_rn_":"183"},{"1":"South Sudan","2":"56.85500","_rn_":"184"},{"1":"Spain","2":"82.83171","_rn_":"185"},{"1":"Sri Lanka","2":"76.31600","_rn_":"186"},{"1":"Sudan","2":"64.42900","_rn_":"187"},{"1":"Suriname","2":"71.24900","_rn_":"188"},{"1":"Sweden","2":"82.20488","_rn_":"189"},{"1":"Switzerland","2":"82.89756","_rn_":"190"},{"1":"Syria","2":"69.90800","_rn_":"191"},{"1":"Tajikistan","2":"70.13700","_rn_":"192"},{"1":"Tanzania","2":"63.11100","_rn_":"193"},{"1":"Thailand","2":"76.09100","_rn_":"194"},{"1":"Timor","2":"68.45900","_rn_":"195"},{"1":"Togo","2":"59.92700","_rn_":"196"},{"1":"Tonga","2":"70.51700","_rn_":"197"},{"1":"Trinidad and Tobago","2":"72.94100","_rn_":"198"},{"1":"Tunisia","2":"75.92200","_rn_":"199"},{"1":"Turkey","2":"76.53200","_rn_":"200"},{"1":"Turkmenistan","2":"67.70400","_rn_":"201"},{"1":"Turks and Caicos Islands","2":"NA","_rn_":"202"},{"1":"Tuvalu","2":"NA","_rn_":"203"},{"1":"Uganda","2":"61.37300","_rn_":"204"},{"1":"Ukraine","2":"71.18951","_rn_":"205"},{"1":"United Arab Emirates","2":"77.28500","_rn_":"206"},{"1":"United Kingdom","2":"80.95610","_rn_":"207"},{"1":"United States","2":"78.69025","_rn_":"208"},{"1":"United States Virgin Islands","2":"79.01707","_rn_":"209"},{"1":"Uruguay","2":"77.36900","_rn_":"210"},{"1":"Uzbekistan","2":"70.92800","_rn_":"211"},{"1":"Vanuatu","2":"69.86900","_rn_":"212"},{"1":"Venezuela","2":"72.58400","_rn_":"213"},{"1":"Vietnam","2":"75.11000","_rn_":"214"},{"1":"Yemen","2":"66.08500","_rn_":"215"},{"1":"Zambia","2":"61.73700","_rn_":"216"},{"1":"Zimbabwe","2":"59.53400","_rn_":"217"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+<div id="mutating-columns" class="section level2" number="4.4">
+<h2><span class="header-section-number">4.4</span> Mutating columns</h2>
+<pre class="r"><code>mutate(life_expectancy,
+       health_expenditure_usd = round(health_expenditure_usd, 1))</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["region"],"name":[1],"type":["chr"],"align":["left"]},{"label":["country"],"name":[2],"type":["chr"],"align":["left"]},{"label":["pop_100k"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["life_expectancy_years"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["health_expenditure_usd"],"name":[5],"type":["dbl"],"align":["right"]}],"data":[{"1":"South Asia","2":"Afghanistan","3":"337.53500","4":"63.37700","5":"NA","_rn_":"1"},{"1":"Europe and Central Asia","2":"Albania","3":"28.82482","4":"78.02500","5":"NA","_rn_":"2"},{"1":"Middle East and North Africa","2":"Algeria","3":"395.43148","4":"76.09000","5":"NA","_rn_":"3"},{"1":"East Asia and Pacific","2":"American Samoa","3":"0.51391","4":"NA","5":"NA","_rn_":"4"},{"1":"Europe and Central Asia","2":"Andorra","3":"0.71766","4":"NA","5":"NA","_rn_":"5"},{"1":"Sub-Saharan Africa","2":"Angola","3":"281.27724","4":"59.39800","5":"NA","_rn_":"6"},{"1":"Latin America and Caribbean","2":"Antigua and Barbuda","3":"0.89958","4":"76.48300","5":"NA","_rn_":"7"},{"1":"Latin America and Caribbean","2":"Argentina","3":"432.57064","4":"76.06800","5":"NA","_rn_":"8"},{"1":"Europe and Central Asia","2":"Armenia","3":"28.78598","4":"74.46700","5":"NA","_rn_":"9"},{"1":"Latin America and Caribbean","2":"Aruba","3":"1.04269","4":"75.72500","5":"NA","_rn_":"10"},{"1":"East Asia and Pacific","2":"Australia","3":"238.20240","4":"82.40000","5":"4164.2","_rn_":"11"},{"1":"Europe and Central Asia","2":"Austria","3":"86.42422","4":"81.19025","5":"4451.2","_rn_":"12"},{"1":"Europe and Central Asia","2":"Azerbaijan","3":"98.63485","4":"72.26600","5":"NA","_rn_":"13"},{"1":"Latin America and Caribbean","2":"Bahamas","3":"3.92707","4":"73.08800","5":"NA","_rn_":"14"},{"1":"Middle East and North Africa","2":"Bahrain","3":"13.62157","4":"76.76200","5":"NA","_rn_":"15"},{"1":"South Asia","2":"Bangladesh","3":"1578.30000","4":"71.51400","5":"NA","_rn_":"16"},{"1":"Latin America and Caribbean","2":"Barbados","3":"2.78095","4":"78.80100","5":"NA","_rn_":"17"},{"1":"Europe and Central Asia","2":"Belarus","3":"97.00609","4":"73.62439","5":"NA","_rn_":"18"},{"1":"Europe and Central Asia","2":"Belgium","3":"112.48306","4":"80.99268","5":"4120.0","_rn_":"19"},{"1":"Latin America and Caribbean","2":"Belize","3":"3.59884","4":"74.03400","5":"NA","_rn_":"20"},{"1":"Sub-Saharan Africa","2":"Benin","3":"109.32791","4":"60.60800","5":"NA","_rn_":"21"},{"1":"North America","2":"Bermuda","3":"0.63165","4":"81.01219","5":"NA","_rn_":"22"},{"1":"South Asia","2":"Bhutan","3":"7.43284","4":"70.41900","5":"NA","_rn_":"23"},{"1":"Latin America and Caribbean","2":"Bolivia","3":"110.90090","4":"70.27700","5":"NA","_rn_":"24"},{"1":"Europe and Central Asia","2":"Bosnia and Herzegovina","3":"35.24328","4":"76.86500","5":"NA","_rn_":"25"},{"1":"Sub-Saharan Africa","2":"Botswana","3":"23.05177","4":"67.33800","5":"NA","_rn_":"26"},{"1":"Latin America and Caribbean","2":"Brazil","3":"2051.88208","4":"74.99400","5":"NA","_rn_":"27"},{"1":"Latin America and Caribbean","2":"British Virgin Islands","3":"0.29394","4":"NA","5":"NA","_rn_":"28"},{"1":"East Asia and Pacific","2":"Brunei","3":"4.21449","4":"75.31800","5":"NA","_rn_":"29"},{"1":"Europe and Central Asia","2":"Bulgaria","3":"73.09255","4":"74.61463","5":"NA","_rn_":"30"},{"1":"Sub-Saharan Africa","2":"Burkina Faso","3":"187.18022","4":"59.91900","5":"NA","_rn_":"31"},{"1":"Sub-Saharan Africa","2":"Burundi","3":"107.27153","4":"60.12300","5":"NA","_rn_":"32"},{"1":"East Asia and Pacific","2":"Cambodia","3":"154.17527","4":"68.63700","5":"NA","_rn_":"33"},{"1":"Sub-Saharan Africa","2":"Cameroon","3":"230.12650","4":"57.58300","5":"NA","_rn_":"34"},{"1":"North America","2":"Canada","3":"357.32120","4":"81.90000","5":"4289.0","_rn_":"35"},{"1":"Sub-Saharan Africa","2":"Cape Verde","3":"5.52169","4":"72.11700","5":"NA","_rn_":"36"},{"1":"Latin America and Caribbean","2":"Cayman Islands","3":"0.60935","4":"NA","5":"NA","_rn_":"37"},{"1":"Sub-Saharan Africa","2":"Central African Republic","3":"48.19341","4":"50.88100","5":"NA","_rn_":"38"},{"1":"Sub-Saharan Africa","2":"Chad","3":"141.40277","4":"53.13700","5":"NA","_rn_":"39"},{"1":"Europe and Central Asia","2":"Channel Islands","3":"NA","4":"82.42900","5":"NA","_rn_":"40"},{"1":"Latin America and Caribbean","2":"Chile","3":"178.70122","4":"79.64600","5":"1595.5","_rn_":"41"},{"1":"East Asia and Pacific","2":"China","3":"13937.15456","4":"75.92800","5":"NA","_rn_":"42"},{"1":"Latin America and Caribbean","2":"Colombia","3":"471.19728","4":"76.53100","5":"NA","_rn_":"43"},{"1":"Sub-Saharan Africa","2":"Comoros","3":"7.30221","4":"63.47100","5":"NA","_rn_":"44"},{"1":"Sub-Saharan Africa","2":"Congo","3":"50.64390","4":"63.09700","5":"NA","_rn_":"45"},{"1":"Latin America and Caribbean","2":"Costa Rica","3":"48.95241","4":"79.56500","5":"NA","_rn_":"46"},{"1":"Sub-Saharan Africa","2":"Cote d'Ivoire","3":"235.96738","4":"56.06500","5":"NA","_rn_":"47"},{"1":"Europe and Central Asia","2":"Croatia","3":"42.54821","4":"77.27561","5":"NA","_rn_":"48"},{"1":"Latin America and Caribbean","2":"Cuba","3":"113.39888","4":"78.56100","5":"NA","_rn_":"49"},{"1":"Latin America and Caribbean","2":"Curacao","3":"1.69588","4":"78.07561","5":"NA","_rn_":"50"},{"1":"Europe and Central Asia","2":"Cyprus","3":"11.87286","4":"80.35000","5":"NA","_rn_":"51"},{"1":"Europe and Central Asia","2":"Czechia","3":"105.23801","4":"78.57805","5":"2166.4","_rn_":"52"},{"1":"Sub-Saharan Africa","2":"Democratic Republic of Congo","3":"786.56904","4":"59.25400","5":"NA","_rn_":"53"},{"1":"Europe and Central Asia","2":"Denmark","3":"56.77795","4":"80.70244","5":"4484.5","_rn_":"54"},{"1":"Middle East and North Africa","2":"Djibouti","3":"10.06266","4":"64.13600","5":"NA","_rn_":"55"},{"1":"Latin America and Caribbean","2":"Dominica","3":"0.70027","4":"NA","5":"NA","_rn_":"56"},{"1":"Latin America and Caribbean","2":"Dominican Republic","3":"104.05832","4":"73.24100","5":"NA","_rn_":"57"},{"1":"Latin America and Caribbean","2":"Ecuador","3":"161.95904","4":"76.14300","5":"NA","_rn_":"58"},{"1":"Middle East and North Africa","2":"Egypt","3":"977.23792","4":"71.30200","5":"NA","_rn_":"59"},{"1":"Latin America and Caribbean","2":"El Salvador","3":"62.31072","4":"72.41200","5":"NA","_rn_":"60"},{"1":"Sub-Saharan Africa","2":"Equatorial Guinea","3":"13.46974","4":"57.35900","5":"NA","_rn_":"61"},{"1":"Sub-Saharan Africa","2":"Eritrea","3":"33.40005","4":"64.66400","5":"NA","_rn_":"62"},{"1":"Europe and Central Asia","2":"Estonia","3":"13.14658","4":"77.59024","5":"1613.1","_rn_":"63"},{"1":"Sub-Saharan Africa","2":"Eswatini","3":"11.33941","4":"55.35900","5":"NA","_rn_":"64"},{"1":"Sub-Saharan Africa","2":"Ethiopia","3":"1024.71896","4":"65.04800","5":"NA","_rn_":"65"},{"1":"Europe and Central Asia","2":"Faeroe Islands","3":"0.48848","4":"81.79269","5":"NA","_rn_":"66"},{"1":"East Asia and Pacific","2":"Fiji","3":"9.17209","4":"67.10300","5":"NA","_rn_":"67"},{"1":"Europe and Central Asia","2":"Finland","3":"54.79457","4":"81.48048","5":"3628.0","_rn_":"68"},{"1":"Europe and Central Asia","2":"France","3":"638.09768","4":"82.32195","5":"4027.9","_rn_":"69"},{"1":"East Asia and Pacific","2":"French Polynesia","3":"2.91796","4":"76.78700","5":"NA","_rn_":"70"},{"1":"Sub-Saharan Africa","2":"Gabon","3":"20.28524","4":"64.91300","5":"NA","_rn_":"71"},{"1":"Sub-Saharan Africa","2":"Gambia","3":"22.53137","4":"60.91000","5":"NA","_rn_":"72"},{"1":"Europe and Central Asia","2":"Georgia","3":"37.71135","4":"72.97300","5":"NA","_rn_":"73"},{"1":"Europe and Central Asia","2":"Germany","3":"820.73232","4":"80.64146","5":"4772.3","_rn_":"74"},{"1":"Sub-Saharan Africa","2":"Ghana","3":"288.70946","4":"62.77200","5":"NA","_rn_":"75"},{"1":"Europe and Central Asia","2":"Gibraltar","3":"0.32546","4":"NA","5":"NA","_rn_":"76"},{"1":"Europe and Central Asia","2":"Greece","3":"108.06644","4":"81.03658","5":"1994.1","_rn_":"77"},{"1":"Europe and Central Asia","2":"Greenland","3":"0.55916","4":"71.97732","5":"NA","_rn_":"78"},{"1":"Latin America and Caribbean","2":"Grenada","3":"1.18994","4":"72.44500","5":"NA","_rn_":"79"},{"1":"East Asia and Pacific","2":"Guam","3":"1.67996","4":"79.14400","5":"NA","_rn_":"80"},{"1":"Latin America and Caribbean","2":"Guatemala","3":"160.01105","4":"73.25000","5":"NA","_rn_":"81"},{"1":"Sub-Saharan Africa","2":"Guinea","3":"116.26003","4":"59.59800","5":"NA","_rn_":"82"},{"1":"Sub-Saharan Africa","2":"Guinea-Bissau","3":"17.88931","4":"56.95900","5":"NA","_rn_":"83"},{"1":"Latin America and Caribbean","2":"Guyana","3":"7.55043","4":"69.26200","5":"NA","_rn_":"84"},{"1":"Latin America and Caribbean","2":"Haiti","3":"105.63762","4":"62.48500","5":"NA","_rn_":"85"},{"1":"Latin America and Caribbean","2":"Honduras","3":"92.94510","4":"74.49500","5":"NA","_rn_":"86"},{"1":"East Asia and Pacific","2":"Hong Kong","3":"73.99845","4":"84.27805","5":"NA","_rn_":"87"},{"1":"Europe and Central Asia","2":"Hungary","3":"98.44250","4":"75.56829","5":"1676.6","_rn_":"88"},{"1":"Europe and Central Asia","2":"Iceland","3":"3.31068","4":"82.46829","5":"3712.7","_rn_":"89"},{"1":"South Asia","2":"India","3":"13228.66560","4":"68.60700","5":"NA","_rn_":"90"},{"1":"East Asia and Pacific","2":"Indonesia","3":"2590.91968","4":"70.76800","5":"NA","_rn_":"91"},{"1":"Middle East and North Africa","2":"Iran","3":"817.90848","4":"75.79600","5":"NA","_rn_":"92"},{"1":"Middle East and North Africa","2":"Iraq","3":"377.57812","4":"69.92900","5":"NA","_rn_":"93"},{"1":"Europe and Central Asia","2":"Ireland","3":"46.65764","4":"81.45366","5":"4730.3","_rn_":"94"},{"1":"Europe and Central Asia","2":"Isle of Man","3":"0.83614","4":"NA","5":"NA","_rn_":"95"},{"1":"Middle East and North Africa","2":"Israel","3":"80.07777","4":"82.05122","5":"2292.3","_rn_":"96"},{"1":"Europe and Central Asia","2":"Italy","3":"602.32908","4":"82.54390","5":"2954.1","_rn_":"97"},{"1":"Latin America and Caribbean","2":"Jamaica","3":"27.94455","4":"74.09800","5":"NA","_rn_":"98"},{"1":"East Asia and Pacific","2":"Japan","3":"1272.50936","4":"83.79390","5":"3930.7","_rn_":"99"},{"1":"Middle East and North Africa","2":"Jordan","3":"94.94250","4":"74.07800","5":"NA","_rn_":"100"},{"1":"Europe and Central Asia","2":"Kazakhstan","3":"178.35908","4":"71.97000","5":"NA","_rn_":"101"},{"1":"Sub-Saharan Africa","2":"Kenya","3":"468.51496","4":"64.79800","5":"NA","_rn_":"102"},{"1":"East Asia and Pacific","2":"Kiribati","3":"1.16717","4":"67.29100","5":"NA","_rn_":"103"},{"1":"Europe and Central Asia","2":"Kosovo","3":"17.59122","4":"71.34634","5":"NA","_rn_":"104"},{"1":"Middle East and North Africa","2":"Kuwait","3":"39.08745","4":"75.13000","5":"NA","_rn_":"105"},{"1":"Europe and Central Asia","2":"Kyrgyzstan","3":"59.14985","4":"70.65122","5":"NA","_rn_":"106"},{"1":"East Asia and Pacific","2":"Laos","3":"67.87420","4":"66.54600","5":"NA","_rn_":"107"},{"1":"Europe and Central Asia","2":"Latvia","3":"19.91951","4":"74.48048","5":"1229.8","_rn_":"108"},{"1":"Middle East and North Africa","2":"Lebanon","3":"63.98941","4":"78.76800","5":"NA","_rn_":"109"},{"1":"Sub-Saharan Africa","2":"Lesotho","3":"21.18532","4":"51.03800","5":"NA","_rn_":"110"},{"1":"Sub-Saharan Africa","2":"Liberia","3":"46.12330","4":"62.26900","5":"NA","_rn_":"111"},{"1":"Middle East and North Africa","2":"Libya","3":"61.92241","4":"72.12100","5":"NA","_rn_":"112"},{"1":"Europe and Central Asia","2":"Liechtenstein","3":"0.37378","4":"82.65610","5":"NA","_rn_":"113"},{"1":"Europe and Central Asia","2":"Lithuania","3":"29.63764","4":"74.32195","5":"NA","_rn_":"114"},{"1":"Europe and Central Asia","2":"Luxembourg","3":"5.69415","4":"82.29269","5":"6758.8","_rn_":"115"},{"1":"East Asia and Pacific","2":"Macao","3":"6.15243","4":"83.70700","5":"NA","_rn_":"116"},{"1":"Sub-Saharan Africa","2":"Madagascar","3":"248.50912","4":"65.53900","5":"NA","_rn_":"117"},{"1":"Sub-Saharan Africa","2":"Malawi","3":"169.38944","4":"61.95300","5":"NA","_rn_":"118"},{"1":"East Asia and Pacific","2":"Malaysia","3":"310.68834","4":"75.46100","5":"NA","_rn_":"119"},{"1":"South Asia","2":"Maldives","3":"4.35590","4":"77.69100","5":"NA","_rn_":"120"},{"1":"Sub-Saharan Africa","2":"Mali","3":"181.12910","4":"57.50900","5":"NA","_rn_":"121"},{"1":"Middle East and North Africa","2":"Malta","3":"4.56585","4":"81.89756","5":"NA","_rn_":"122"},{"1":"East Asia and Pacific","2":"Marshall Islands","3":"0.49426","4":"NA","5":"NA","_rn_":"123"},{"1":"Sub-Saharan Africa","2":"Mauritania","3":"39.46225","4":"63.93600","5":"NA","_rn_":"124"},{"1":"Sub-Saharan Africa","2":"Mauritius","3":"12.93159","4":"74.35317","5":"NA","_rn_":"125"},{"1":"Latin America and Caribbean","2":"Mexico","3":"1201.49896","4":"74.90400","5":"956.2","_rn_":"126"},{"1":"Europe and Central Asia","2":"Moldova","3":"32.77390","4":"71.47800","5":"NA","_rn_":"127"},{"1":"Europe and Central Asia","2":"Monaco","3":"0.36781","4":"NA","5":"NA","_rn_":"128"},{"1":"East Asia and Pacific","2":"Mongolia","3":"29.64756","4":"69.11100","5":"NA","_rn_":"129"},{"1":"Europe and Central Asia","2":"Montenegro","3":"6.33969","4":"76.44878","5":"NA","_rn_":"130"},{"1":"Middle East and North Africa","2":"Morocco","3":"346.80456","4":"75.72600","5":"NA","_rn_":"131"},{"1":"Sub-Saharan Africa","2":"Mozambique","3":"268.43252","4":"57.20600","5":"NA","_rn_":"132"},{"1":"East Asia and Pacific","2":"Myanmar","3":"514.83956","4":"65.81000","5":"NA","_rn_":"133"},{"1":"Sub-Saharan Africa","2":"Namibia","3":"22.82709","4":"62.11900","5":"NA","_rn_":"134"},{"1":"East Asia and Pacific","2":"Nauru","3":"0.11207","4":"NA","5":"NA","_rn_":"135"},{"1":"South Asia","2":"Nepal","3":"276.10328","4":"69.51500","5":"NA","_rn_":"136"},{"1":"Europe and Central Asia","2":"Netherlands","3":"170.41110","4":"81.50976","5":"4885.6","_rn_":"137"},{"1":"East Asia and Pacific","2":"New Caledonia","3":"2.83041","4":"77.28049","5":"NA","_rn_":"138"},{"1":"East Asia and Pacific","2":"New Zealand","3":"45.90591","4":"81.45683","5":"3184.0","_rn_":"139"},{"1":"Latin America and Caribbean","2":"Nicaragua","3":"62.98610","4":"73.64900","5":"NA","_rn_":"140"},{"1":"Sub-Saharan Africa","2":"Niger","3":"201.28132","4":"60.63100","5":"NA","_rn_":"141"},{"1":"Sub-Saharan Africa","2":"Nigeria","3":"1839.95776","4":"53.11200","5":"NA","_rn_":"142"},{"1":"East Asia and Pacific","2":"North Korea","3":"252.58012","4":"71.48100","5":"NA","_rn_":"143"},{"1":"Europe and Central Asia","2":"North Macedonia","3":"21.07965","4":"75.40244","5":"NA","_rn_":"144"},{"1":"East Asia and Pacific","2":"Northern Mariana Islands","3":"0.51538","4":"NA","5":"NA","_rn_":"145"},{"1":"Europe and Central Asia","2":"Norway","3":"51.90357","4":"82.30488","5":"5926.4","_rn_":"146"},{"1":"Middle East and North Africa","2":"Oman","3":"41.91784","4":"76.88700","5":"NA","_rn_":"147"},{"1":"South Asia","2":"Pakistan","3":"2109.69296","4":"66.57700","5":"NA","_rn_":"148"},{"1":"East Asia and Pacific","2":"Palau","3":"0.17822","4":"NA","5":"NA","_rn_":"149"},{"1":"Middle East and North Africa","2":"Palestine","3":"44.84615","4":"73.44200","5":"NA","_rn_":"150"},{"1":"Latin America and Caribbean","2":"Panama","3":"39.57102","4":"77.77600","5":"NA","_rn_":"151"},{"1":"East Asia and Pacific","2":"Papua New Guinea","3":"86.82172","4":"63.46600","5":"NA","_rn_":"152"},{"1":"Latin America and Caribbean","2":"Paraguay","3":"61.77954","4":"73.66200","5":"NA","_rn_":"153"},{"1":"Latin America and Caribbean","2":"Peru","3":"307.11864","4":"75.79200","5":"NA","_rn_":"154"},{"1":"East Asia and Pacific","2":"Philippines","3":"1030.31360","4":"70.64400","5":"NA","_rn_":"155"},{"1":"Europe and Central Asia","2":"Poland","3":"385.53148","4":"77.45122","5":"1527.9","_rn_":"156"},{"1":"Europe and Central Asia","2":"Portugal","3":"103.65436","4":"81.12439","5":"2319.4","_rn_":"157"},{"1":"Latin America and Caribbean","2":"Puerto Rico","3":"34.97335","4":"79.35349","5":"NA","_rn_":"158"},{"1":"Middle East and North Africa","2":"Qatar","3":"24.14580","4":"79.75800","5":"NA","_rn_":"159"},{"1":"Europe and Central Asia","2":"Romania","3":"199.06078","4":"74.91219","5":"NA","_rn_":"160"},{"1":"Europe and Central Asia","2":"Russia","3":"1446.68384","4":"71.18342","5":"NA","_rn_":"161"},{"1":"Sub-Saharan Africa","2":"Rwanda","3":"116.42963","4":"67.45000","5":"NA","_rn_":"162"},{"1":"Latin America and Caribbean","2":"Saint Kitts and Nevis","3":"0.47814","4":"NA","5":"NA","_rn_":"163"},{"1":"Latin America and Caribbean","2":"Saint Lucia","3":"1.75638","4":"75.59600","5":"NA","_rn_":"164"},{"1":"Latin America and Caribbean","2":"Saint Martin (French part)","3":"NA","4":"79.32195","5":"NA","_rn_":"165"},{"1":"Latin America and Caribbean","2":"Saint Martin (French part)","3":"0.35042","4":"NA","5":"NA","_rn_":"166"},{"1":"Latin America and Caribbean","2":"Saint Vincent and the Grenadines","3":"1.06493","4":"72.09500","5":"NA","_rn_":"167"},{"1":"East Asia and Pacific","2":"Samoa","3":"2.03586","4":"72.73000","5":"NA","_rn_":"168"},{"1":"Europe and Central Asia","2":"San Marino","3":"0.33593","4":"NA","5":"NA","_rn_":"169"},{"1":"Sub-Saharan Africa","2":"Sao Tome and Principe","3":"2.01142","4":"69.37700","5":"NA","_rn_":"170"},{"1":"Middle East and North Africa","2":"Saudi Arabia","3":"327.49838","4":"74.65100","5":"NA","_rn_":"171"},{"1":"Sub-Saharan Africa","2":"Senegal","3":"143.56191","4":"66.74700","5":"NA","_rn_":"172"},{"1":"Europe and Central Asia","2":"Serbia","3":"75.19501","4":"75.28780","5":"NA","_rn_":"173"},{"1":"Sub-Saharan Africa","2":"Seychelles","3":"0.99260","4":"74.29512","5":"NA","_rn_":"174"},{"1":"Sub-Saharan Africa","2":"Sierra Leone","3":"73.14779","4":"52.94100","5":"NA","_rn_":"175"},{"1":"East Asia and Pacific","2":"Singapore","3":"56.50020","4":"82.74390","5":"NA","_rn_":"176"},{"1":"Latin America and Caribbean","2":"Sint Maarten (Dutch part)","3":"0.40228","4":"77.21951","5":"NA","_rn_":"177"},{"1":"Europe and Central Asia","2":"Slovakia","3":"54.24449","4":"76.56342","5":"NA","_rn_":"178"},{"1":"Europe and Central Asia","2":"Slovenia","3":"20.80865","4":"80.77561","5":"2353.3","_rn_":"179"},{"1":"East Asia and Pacific","2":"Solomon Islands","3":"6.12670","4":"72.17300","5":"NA","_rn_":"180"},{"1":"Sub-Saharan Africa","2":"Somalia","3":"137.63909","4":"55.92000","5":"NA","_rn_":"181"},{"1":"Sub-Saharan Africa","2":"South Africa","3":"558.76504","4":"62.64900","5":"NA","_rn_":"182"},{"1":"East Asia and Pacific","2":"South Korea","3":"509.94396","4":"82.02439","5":"NA","_rn_":"183"},{"1":"Sub-Saharan Africa","2":"South Sudan","3":"111.94300","4":"56.85500","5":"NA","_rn_":"184"},{"1":"Europe and Central Asia","2":"Spain","3":"464.31344","4":"82.83171","5":"2896.9","_rn_":"185"},{"1":"South Asia","2":"Sri Lanka","3":"213.36692","4":"76.31600","5":"NA","_rn_":"186"},{"1":"Sub-Saharan Africa","2":"Sudan","3":"381.71172","4":"64.42900","5":"NA","_rn_":"187"},{"1":"Latin America and Caribbean","2":"Suriname","3":"5.75478","4":"71.24900","5":"NA","_rn_":"188"},{"1":"Europe and Central Asia","2":"Sweden","3":"98.49344","4":"82.20488","5":"4906.9","_rn_":"189"},{"1":"Europe and Central Asia","2":"Switzerland","3":"82.81735","4":"82.89756","5":"6062.3","_rn_":"190"},{"1":"Middle East and North Africa","2":"Syria","3":"192.05178","4":"69.90800","5":"NA","_rn_":"191"},{"1":"Europe and Central Asia","2":"Tajikistan","3":"85.24066","4":"70.13700","5":"NA","_rn_":"192"},{"1":"Sub-Saharan Africa","2":"Tanzania","3":"525.42824","4":"63.11100","5":"NA","_rn_":"193"},{"1":"East Asia and Pacific","2":"Thailand","3":"702.94408","4":"76.09100","5":"NA","_rn_":"194"},{"1":"East Asia and Pacific","2":"Timor","3":"12.05822","4":"68.45900","5":"NA","_rn_":"195"},{"1":"Sub-Saharan Africa","2":"Togo","3":"74.73232","4":"59.92700","5":"NA","_rn_":"196"},{"1":"East Asia and Pacific","2":"Tonga","3":"1.06140","4":"70.51700","5":"NA","_rn_":"197"},{"1":"Latin America and Caribbean","2":"Trinidad and Tobago","3":"14.60180","4":"72.94100","5":"NA","_rn_":"198"},{"1":"Middle East and North Africa","2":"Tunisia","3":"115.57779","4":"75.92200","5":"NA","_rn_":"199"},{"1":"Europe and Central Asia","2":"Turkey","3":"796.46176","4":"76.53200","5":"974.8","_rn_":"200"},{"1":"Europe and Central Asia","2":"Turkmenistan","3":"57.66427","4":"67.70400","5":"NA","_rn_":"201"},{"1":"Latin America and Caribbean","2":"Turks and Caicos Islands","3":"0.36556","4":"NA","5":"NA","_rn_":"202"},{"1":"East Asia and Pacific","2":"Tuvalu","3":"0.10896","4":"NA","5":"NA","_rn_":"203"},{"1":"Sub-Saharan Africa","2":"Uganda","3":"374.77356","4":"61.37300","5":"NA","_rn_":"204"},{"1":"Europe and Central Asia","2":"Ukraine","3":"449.82568","4":"71.18951","5":"NA","_rn_":"205"},{"1":"Middle East and North Africa","2":"United Arab Emirates","3":"89.16909","4":"77.28500","5":"NA","_rn_":"206"},{"1":"Europe and Central Asia","2":"United Kingdom","3":"652.24368","4":"80.95610","5":"3755.9","_rn_":"207"},{"1":"North America","2":"United States","3":"3246.07776","4":"78.69025","5":"8714.9","_rn_":"208"},{"1":"Latin America and Caribbean","2":"United States Virgin Islands","3":"1.02808","4":"79.01707","5":"NA","_rn_":"209"},{"1":"Latin America and Caribbean","2":"Uruguay","3":"34.02820","4":"77.36900","5":"NA","_rn_":"210"},{"1":"Europe and Central Asia","2":"Uzbekistan","3":"309.49416","4":"70.92800","5":"NA","_rn_":"211"},{"1":"East Asia and Pacific","2":"Vanuatu","3":"2.76450","4":"69.86900","5":"NA","_rn_":"212"},{"1":"Latin America and Caribbean","2":"Venezuela","3":"305.29722","4":"72.58400","5":"NA","_rn_":"213"},{"1":"East Asia and Pacific","2":"Vietnam","3":"921.91400","4":"75.11000","5":"NA","_rn_":"214"},{"1":"Middle East and North Africa","2":"Yemen","3":"285.16552","4":"66.08500","5":"NA","_rn_":"215"},{"1":"Sub-Saharan Africa","2":"Zambia","3":"162.48231","4":"61.73700","5":"NA","_rn_":"216"},{"1":"Sub-Saharan Africa","2":"Zimbabwe","3":"141.54937","4":"59.53400","5":"NA","_rn_":"217"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+<div id="grouping-and-summarising-data" class="section level2" number="4.5">
+<h2><span class="header-section-number">4.5</span> Grouping and
+summarising data</h2>
+<pre class="r"><code>life_expectancy %&gt;%
+  group_by(region) %&gt;%
+  summarise(n = n())</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["region"],"name":[1],"type":["chr"],"align":["left"]},{"label":["n"],"name":[2],"type":["int"],"align":["right"]}],"data":[{"1":"East Asia and Pacific","2":"36"},{"1":"Europe and Central Asia","2":"58"},{"1":"Latin America and Caribbean","2":"43"},{"1":"Middle East and North Africa","2":"21"},{"1":"North America","2":"3"},{"1":"South Asia","2":"8"},{"1":"Sub-Saharan Africa","2":"48"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<pre class="r"><code>life_expectancy %&gt;%
+  group_by(region) %&gt;%
+  summarise(n = n(),
+            mean_le = mean(life_expectancy_years, na.rm = TRUE))</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["region"],"name":[1],"type":["chr"],"align":["left"]},{"label":["n"],"name":[2],"type":["int"],"align":["right"]},{"label":["mean_le"],"name":[3],"type":["dbl"],"align":["right"]}],"data":[{"1":"East Asia and Pacific","2":"36","3":"74.20429"},{"1":"Europe and Central Asia","2":"58","3":"77.37301"},{"1":"Latin America and Caribbean","2":"43","3":"74.92456"},{"1":"Middle East and North Africa","2":"21","3":"74.65356"},{"1":"North America","2":"3","3":"80.53415"},{"1":"South Asia","2":"8","3":"70.50200"},{"1":"Sub-Saharan Africa","2":"48","3":"61.27878"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
 </div>
 </div>
 

@@ -34,36 +34,30 @@ regions <- regions_raw %>%
 health_clean <- health_raw %>%
   clean_names() %>%
   rename(life_expectancy = life_expectancy_at_birth_total_years,
-         health_expenditure = health_expenditure_and_financing_per_capita_oec_dstat_2017) %>%
-  mutate(health_expenditure = as.numeric(health_expenditure)) %>%
+         health_expenditure = health_expenditure_and_financing_per_capita_oec_dstat_2017,
+         pop = population_historical_estimates) %>%
+  mutate(health_expenditure = as.numeric(health_expenditure),
+         pop_100k = as.numeric(pop/1e5)) %>%
   filter(year == 2015) %>%
   left_join(regions, by = "entity") %>%
   select(region,
          country = entity,
          year,
-         life_expectancy, health_expenditure)
+         pop_100k, life_expectancy, health_expenditure)
   
 
 # Reshape data for exporting ----------------------------------------------
 
-# Life expectancy by country
-life_exp <- data_clean %>%
-  filter(!is.na(region)) %>%
-  select(region, country, year,
-         life_expectancy_years = life_expectancy)
-
-export(x = life_exp,
-       file = here("data", "life_expectancy.csv"))
-
 # Life expectancy and health expenditure by country
-life_exp_health <- data_clean %>%
+life_exp_health <- health_clean %>%
   filter(!is.na(region)) %>%
-  select(region, country, year,
+  select(region, country,
+         pop_100k,
          life_expectancy_years = life_expectancy,
          health_expenditure_usd = health_expenditure)
 
 export(x = life_exp_health,
-       file = here("data", "life_expectancy_vs_health_expenditure.csv"))
+       file = here("data", "life_expectancy.csv"))
 
 
 
