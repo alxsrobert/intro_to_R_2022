@@ -10,7 +10,7 @@
 
 
 
-<meta name="date" content="2022-11-10" />
+<meta name="date" content="2022-11-11" />
 
 <title>Introduction to R: Session 1</title>
 
@@ -2781,7 +2781,7 @@ div.tocify {
 
 
 <h1 class="title toc-ignore">Introduction to R: Session 1</h1>
-<h4 class="date">10 November 2022</h4>
+<h4 class="date">11 November 2022</h4>
 
 </div>
 
@@ -2955,7 +2955,7 @@ default location where R will start to look for data or saves files. You
 can find out your current working directory with the function
 <code>getwd()</code>:</p>
 <pre class="r"><code>getwd()</code></pre>
-<pre><code>## [1] &quot;/Users/sophiemeakin/Documents/LSHTM/intro_to_R_2022/exercises&quot;</code></pre>
+<pre><code>## [1] &quot;C:/Users/eidearob/Documents/Work/Teaching/Intro to R_ MScEpi/intro_to_R_2022/exercises&quot;</code></pre>
 <p>❓ Use <code>getwd()</code> to find out your working directory. How
 is it different to the one above?</p>
 <div id="r-projects" class="section level3" number="2.4.1">
@@ -3009,7 +3009,7 @@ inside a folder <code>data</code> and then a sub-folder
 <code>here(&quot;data&quot;, &quot;raw&quot;, &quot;my_data.csv&quot;)</code> will construct the full
 file path on my computer:</p>
 <pre class="r"><code>here(&quot;data&quot;, &quot;raw&quot;, &quot;my_data.csv&quot;)</code></pre>
-<pre><code>## [1] &quot;/Users/sophiemeakin/Documents/LSHTM/intro_to_R_2022/data/raw/my_data.csv&quot;</code></pre>
+<pre><code>## [1] &quot;C:/Users/eidearob/Documents/Work/Teaching/Intro to R_ MScEpi/intro_to_R_2022/data/raw/my_data.csv&quot;</code></pre>
 <p>❓ Run this above command in your R Studio console. How is the output
 different to above, or to your neighbours output?</p>
 </div>
@@ -3092,12 +3092,22 @@ class(life_expectancy$pop_100k)</code></pre>
 <p>❓ What data type is the column “life_expectancy_years” in the
 <code>life_expectancy</code> data?</p>
 <p>There are other, more complex, data types that can be used to combine
-multiple bits of data, such as <em>matrix</em>, <em>data.frame</em>,
-<em>factor</em>, <em>list</em>. When importing data into R with the
-<code>import()</code> function, the data type will be a
-<em>data.frame</em> by default:</p>
+multiple bits of data. For instance, data structures are objects that
+can contain several elements. We will use three types of data structure
+during this practical: - <em>vectors</em>: containing one variable per
+element. - <em>matrices</em>: containing several variables per element
+(all variables have the same type). - <em>data frames</em>: containing
+several variables per element (variables can have different types). When
+importing data into R with the <code>import()</code> function, the data
+type will be a <em>data.frame</em> by default:</p>
 <pre class="r"><code>class(life_expectancy)</code></pre>
 <pre><code>## [1] &quot;data.frame&quot;</code></pre>
+<p>Columns of data frames are vectors, and can be of different types
+(unlike columns of matrices, which must all be of the same type):</p>
+<p>❓ What would happen if <code>life_expectancy</code> was a matrix?
+(hint: try running <code>head(as.matrix(life_expectancy))</code>)</p>
+<p>Other data types, such as <em>factor</em> and <em>list</em>, can be
+used and are not covered in this practical.</p>
 </div>
 </div>
 <div id="basic-operations-with-numeric-data" class="section level2" number="3.3">
@@ -3113,7 +3123,7 @@ median</h3>
 <code>mean()</code>.</p>
 <p>💻 Try running the below command to calculate the mean life
 expectancy:</p>
-<pre class="r"><code># Calculate the mean life expectancy
+<pre class="r"><code># Calculate the mean life_expectancy
 mean(life_expectancy$life_expectancy_years)</code></pre>
 <p>This will return <code>NA</code> - not very helpful! This happens
 because there are missing values (<code>NA</code> values) in
@@ -3123,13 +3133,26 @@ your data again. If there are any missing values in your data,
 <code>NA</code>.</p>
 <p>To remove these missing (<code>NA</code>) values before calculating
 the mean, we include the argument <code>na.rm = TRUE</code>:</p>
-<pre class="r"><code># Calculate the mean life expectancy
+<pre class="r"><code># Calculate the mean life_expectancy
 mean(life_expectancy$life_expectancy_years, na.rm = TRUE)</code></pre>
 <p>❓ What happens if you change this so that
 <code>na.rm = FALSE</code>?</p>
+<p>By default, the value of the argument <code>na.rm</code> in
+<code>mean()</code> is set to <code>FALSE</code>, so running
+<code>mean(life_expectancy$life_expectancy_years, na.rm = FALSE)</code>
+is equivalent to
+<code>mean(life_expectancy$life_expectancy_years)</code>.</p>
+<p>Functions can have many arguments to tackle specific situations
+(e.g. how to deal with unreported entries). In order to read the
+description of the expected arguments and outputs of a function, you can
+use the operator <code>?</code>: e.g. <code>?mean</code>. It will open a
+helpfile, which will contain the list of all compatible arguments, and
+their default value (if any).</p>
+<p>❓ What arguments are compatible with the function <code>mean</code>
+?</p>
 <p>We can calculate other statistics, too. We can calculate the median
 value with the function <code>median()</code>:</p>
-<pre class="r"><code># Calculate the median life expectancy
+<pre class="r"><code># Calculate the median life_expectancy
 median(life_expectancy$life_expectancy_years, na.rm = TRUE)</code></pre>
 <pre><code>## [1] 73.6555</code></pre>
 <p>Note that we also have to include the <code>na.rm = TRUE</code>
@@ -3145,10 +3168,10 @@ with the function we introduced earlier.</p>
 maximum</h3>
 <p>We can calculate the minimum and maximum values with the functions
 <code>min()</code> and <code>max()</code>, respectively:</p>
-<pre class="r"><code># Calculate the minimum life expectancy
+<pre class="r"><code># Calculate the minimum life_expectancy
 min(life_expectancy$life_expectancy_years, na.rm = TRUE)</code></pre>
 <pre><code>## [1] 50.881</code></pre>
-<pre class="r"><code># Calculate the maximum life expectancy
+<pre class="r"><code># Calculate the maximum life_expectancy
 max(life_expectancy$life_expectancy_years, na.rm = TRUE)</code></pre>
 <pre><code>## [1] 84.27805</code></pre>
 <p>💻 Calculate the minimum and maximum population size for the
@@ -3159,15 +3182,35 @@ countries in <code>life_expectancy</code>.</p>
 and inter-quartile range</h3>
 <p>We can calculate the standard deviation with <code>sd()</code> and
 the inter-quartile range (IQR) with <code>IQR()</code>:</p>
-<pre class="r"><code># Calculate the standard deviation of life expectancy
+<pre class="r"><code># Calculate the standard deviation of life_expectancy
 sd(life_expectancy$life_expectancy_years, na.rm = TRUE)</code></pre>
 <pre><code>## [1] 7.879188</code></pre>
-<pre class="r"><code># Calculate the IQR of life expectancy
+<pre class="r"><code># Calculate the IQR of life_expectancy
 IQR(life_expectancy$life_expectancy_years, na.rm = TRUE)</code></pre>
 <pre><code>## [1] 10.60143</code></pre>
 <p>💻 Calculate the standard deviation and inter-quartile range for one
 of the other numeric columns in the <code>life_expectancy</code>
 data.</p>
+<p>A quick way to generate summary statistics for all columns in a data
+frame is to use the function <code>summary</code>:</p>
+<pre class="r"><code># Show the summary of each column in life_expectancy
+summary(life_expectancy)</code></pre>
+<pre><code>##     region            country             pop_100k        
+##  Length:217         Length:217         Min.   :    0.109  
+##  Class :character   Class :character   1st Qu.:    8.361  
+##  Mode  :character   Mode  :character   Median :   62.311  
+##                                        Mean   :  344.187  
+##                                        3rd Qu.:  233.047  
+##                                        Max.   :13937.155  
+##                                        NA&#39;s   :2          
+##  life_expectancy_years health_expenditure_usd
+##  Min.   :50.88         Min.   : 956.2        
+##  1st Qu.:67.01         1st Qu.:2166.4        
+##  Median :73.66         Median :3712.7        
+##  Mean   :72.07         Mean   :3547.2        
+##  3rd Qu.:77.62         3rd Qu.:4484.5        
+##  Max.   :84.28         Max.   :8714.9        
+##  NA&#39;s   :17            NA&#39;s   :184</code></pre>
 </div>
 </div>
 <div id="exporting-data" class="section level2" number="3.4">
@@ -3189,7 +3232,6 @@ folder:</p>
 <h1><span class="header-section-number">4</span> Bonus: The dplyr
 package</h1>
 <pre class="r"><code>library(dplyr)</code></pre>
-<pre><code>## Warning: package &#39;dplyr&#39; was built under R version 4.1.2</code></pre>
 <pre><code>## 
 ## Attaching package: &#39;dplyr&#39;</code></pre>
 <pre><code>## The following objects are masked from &#39;package:stats&#39;:

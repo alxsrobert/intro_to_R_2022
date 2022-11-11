@@ -309,11 +309,20 @@ class(life_expectancy$pop_100k)
 
 `r emoji::emoji("question")` What data type is the column "life_expectancy_years" in the `life_expectancy` data?
 
-There are other, more complex, data types that can be used to combine multiple bits of data, such as *matrix*, *data.frame*, *factor*, *list*. When importing data into R with the `import()` function, the data type will be a *data.frame* by default:
+There are other, more complex, data types that can be used to combine multiple bits of data. For instance, data structures are objects that can contain several elements. We will use three types of data structure during this practical: 
+-   *vectors*: containing one variable per element.
+-   *matrices*: containing several variables per element (all variables have the same type).
+-   *data frames*: containing several variables per element (variables can have different types). When importing data into R with the `import()` function, the data type will be a *data.frame* by default:
 
 ```{r}
 class(life_expectancy)
 ```
+
+Columns of data frames are vectors, and can be of different types (unlike columns of matrices, which must all be of the same type):
+
+`r emoji::emoji("question")` What would happen if `life_expectancy` was a matrix? (hint: try running `head(as.matrix(life_expectancy))`)
+
+Other data types, such as *factor* and *list*, can be used and are not covered in this practical.
 
 
 ## Basic operations with numeric data
@@ -327,7 +336,7 @@ We can calculate the mean value with the function `mean()`.
 `r emoji::emoji("computer")` Try running the below command to calculate the mean life expectancy:
 
 ```{r, eval = FALSE}
-# Calculate the mean life expectancy
+# Calculate the mean life_expectancy
 mean(life_expectancy$life_expectancy_years)
 ```
 
@@ -336,16 +345,22 @@ This will return `NA` - not very helpful! This happens because there are missing
 To remove these missing (`NA`) values before calculating the mean, we include the argument `na.rm = TRUE`:
 
 ```{r, eval = FALSE}
-# Calculate the mean life expectancy
+# Calculate the mean life_expectancy
 mean(life_expectancy$life_expectancy_years, na.rm = TRUE)
 ```
 
 `r emoji::emoji("question")` What happens if you change this so that `na.rm = FALSE`?
 
+By default, the value of the argument `na.rm` in `mean()` is set to `FALSE`, so running `mean(life_expectancy$life_expectancy_years, na.rm = FALSE)` is equivalent to `mean(life_expectancy$life_expectancy_years)`.
+
+Functions can have many arguments to tackle specific situations (e.g. how to deal with unreported entries). In order to read the description of the expected arguments and outputs of a function, you can use the operator `?`: e.g. `?mean`. It will open a helpfile, which will contain the list of all compatible arguments, and their default value (if any).
+
+`r emoji::emoji("question")` What arguments are compatible with the function `mean` ?
+
 We can calculate other statistics, too. We can calculate the median value with the function `median()`:
 
 ```{r}
-# Calculate the median life expectancy
+# Calculate the median life_expectancy
 median(life_expectancy$life_expectancy_years, na.rm = TRUE)
 ```
 
@@ -358,10 +373,10 @@ Note that we also have to include the `na.rm = TRUE` argument so that missing (`
 We can calculate the minimum and maximum values with the functions `min()` and `max()`, respectively:
 
 ```{r}
-# Calculate the minimum life expectancy
+# Calculate the minimum life_expectancy
 min(life_expectancy$life_expectancy_years, na.rm = TRUE)
 
-# Calculate the maximum life expectancy
+# Calculate the maximum life_expectancy
 max(life_expectancy$life_expectancy_years, na.rm = TRUE)
 ```
 
@@ -372,14 +387,21 @@ max(life_expectancy$life_expectancy_years, na.rm = TRUE)
 We can calculate the standard deviation with `sd()` and the inter-quartile range (IQR) with `IQR()`:
 
 ```{r}
-# Calculate the standard deviation of life expectancy
+# Calculate the standard deviation of life_expectancy
 sd(life_expectancy$life_expectancy_years, na.rm = TRUE)
 
-# Calculate the IQR of life expectancy
+# Calculate the IQR of life_expectancy
 IQR(life_expectancy$life_expectancy_years, na.rm = TRUE)
 ```
 
 `r emoji::emoji("computer")` Calculate the standard deviation and inter-quartile range for one of the other numeric columns in the `life_expectancy` data.
+
+A quick way to generate summary statistics for all columns in a data frame is to use the function `summary`:
+
+```{r}
+# Show the summary of each column in life_expectancy
+summary(life_expectancy)
+```
 
 
 ## Exporting data
