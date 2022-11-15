@@ -12,7 +12,9 @@ output:
 
 ```{r, include = FALSE}
 
-knitr::opts_chunk$set(eval = TRUE)
+knitr::opts_chunk$set(eval = TRUE,
+                      message = FALSE,
+                      warning = FALSE)
 
 library(rio)
 library(here)
@@ -39,17 +41,15 @@ This exercise will contain examples of code and its output, as well as instructi
 -   `r emoji::emoji("computer")` An instruction to copy-and-run code from the exercise, or write your own code, in your R Studio session.
 -   `r emoji::emoji("question")` A question, related to the material or code output.
 
-
 ## Resources
 
-Coming soon!
-
-
+-   [The Epidemiologist R Handbook](https://www.epirhandbook.com/en/) - a comprehensive reference guide to using R for applied epidemiology and public health.
+-   [R for Data Science](https://r4ds.had.co.nz/index.html) - a general guide to using R for data science.
+-   [Stack Overflow](https://stackoverflow.com/questions/tagged/r) - general R questions answered by the community.
 
 # R basics
 
 One of the most important uses of any statistical software, including R, is to analyse data that you may have collected yourself or that have been given to you. You will learn a lot more about data analysis during your MSc. In this section, I will introduce how to use R to access data that you already have on your computer, and how to store the results of your analysis or save an updated version of the data, on your computer.
-
 
 ## R Studio
 
@@ -59,7 +59,6 @@ Your R studio session will have four main panels:
 2.  **Environment** (top-right)
 3.  **Console** (bottom-left)
 4.  **Files, plots, etc** (bottom-right)
-
 
 ## Basic R expressions
 
@@ -179,11 +178,9 @@ c("LSHTM", 20.22)
 
 ```
 
-
 ## R packages
 
 Coming soon!
-
 
 ## Working directory
 
@@ -203,12 +200,9 @@ getwd()
 
 TO DO: steps to set up an R project.
 
-
-
 # Working with data
 
 We can import (i.e. 'read in') and export (i.e. save) data in common formats (e.g. .csv, .xlsx, .txt) with the **rio** package. In this section, we are going to import some data on life expectancy at birth and health expenditure per capita in USD for countries in 2015. This data is from Our World in Data: [ourworldindata.org/life-expectancy-vs-health-expenditure](https://ourworldindata.org/grapher/life-expectancy-vs-health-expenditure).
-
 
 ## Importing data
 
@@ -253,7 +247,6 @@ here("data", "raw", "my_data.csv")
 The `import()` function has one main argument: `file`. This argument is where we tell R where to find the file we want to import using the `here()` function.
 
 If you use R a lot, you might see people using other functions or libraries, such as the function `read.csv()` for .csv files only, or the library [`readxl`](https://readxl.tidyverse.org/) for .xls or .xlsx files only. But one of the great things about `import()` is that you can use it for all common data formats e.g. `.csv`, `.txt`, `.xlsx`, so you only have to remember that!
-
 
 ## Inspecting data
 
@@ -309,10 +302,7 @@ class(life_expectancy$pop_100k)
 
 `r emoji::emoji("question")` What data type is the column "life_expectancy_years" in the `life_expectancy` data?
 
-There are other, more complex, data types that can be used to combine multiple bits of data. For instance, data structures are objects that can contain several elements. We will use three types of data structure during this practical: 
--   *vectors*: containing one variable per element.
--   *matrices*: containing several variables per element (all variables have the same type).
--   *data frames*: containing several variables per element (variables can have different types). When importing data into R with the `import()` function, the data type will be a *data.frame* by default:
+There are other, more complex, data types that can be used to combine multiple bits of data. For instance, data structures are objects that can contain several elements. We will use three types of data structure during this practical: - *vectors*: containing one variable per element. - *matrices*: containing several variables per element (all variables have the same type). - *data frames*: containing several variables per element (variables can have different types). When importing data into R with the `import()` function, the data type will be a *data.frame* by default:
 
 ```{r}
 class(life_expectancy)
@@ -323,7 +313,6 @@ Columns of data frames are vectors, and can be of different types (unlike column
 `r emoji::emoji("question")` What would happen if `life_expectancy` was a matrix? (hint: try running `head(as.matrix(life_expectancy))`)
 
 Other data types, such as *factor* and *list*, can be used and are not covered in this practical.
-
 
 ## Basic operations with numeric data
 
@@ -403,7 +392,6 @@ A quick way to generate summary statistics for all columns in a data frame is to
 summary(life_expectancy)
 ```
 
-
 ## Exporting data
 
 `r emoji::emoji("star")` We export data using the `export()` function from the **rio** library.
@@ -416,8 +404,6 @@ The code below exports the data frame `life_expectancy` and saves it as a .csv f
 export(x = life_expectancy,
        file = here("data", "test_data_export.csv"))
 ```
-
-
 
 # Bonus: The dplyr package
 
@@ -479,5 +465,3 @@ life_expectancy %>%
             mean_le = mean(life_expectancy_years, na.rm = TRUE))
 
 ```
-
-
