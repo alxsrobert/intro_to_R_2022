@@ -55,10 +55,10 @@ One of the most important uses of any statistical software, including R, is to a
 
 Your R studio session will have four main panels:
 
-1.  **Script** (top-left)
-2.  **Environment** (top-right)
-3.  **Console** (bottom-left)
-4.  **Files, plots, etc** (bottom-right)
+1.  **Script** (top-left) - this is where you can write, save and run longer bits of code.
+2.  **Environment** (top-right) - this is where you can which objects that you have created in your current R session.
+3.  **Console** (bottom-left) - this is where you can write and run very short bits of code.
+4.  **Files, plots, etc** (bottom-right) - this is where you can see your files, or where plots will appear.
 
 ## Basic R expressions
 
@@ -102,6 +102,8 @@ z <- "hello"  # The object called z is assigned the text "hello"
 z             # Print the object z
 
 ```
+
+`r emoji::emoji("computer")` Look at your Environment panel (top-right) of your R Studio session, then run the above code in your console. Look in the environment panel again: what has changed?
 
 Note that the names of objects are case sensitive (i.e. `Y` and `y` are distinct names) and must not start with numbers or contain spaces. The best approach is to use meaningful object names and stick to using all lower case; if you need to use spaces, then you can use an underscore (`_`).
 
@@ -196,9 +198,9 @@ getwd()
 
 ### R projects
 
-`r emoji::emoji("star")` A common and easy way to manage your working directory is with **R projects** and the **here** package (which we will introduce shortly). Let's go through the steps to set up an R project in R studio.
+`r emoji::emoji("star")` A common and easy way to manage your working directory is with **R projects** and the **here** package (which we will introduce shortly).
 
-TO DO: steps to set up an R project.
+`r emoji::emoji("star")` Follow the steps below to set up an R project in your R studio session.
 
 # Working with data
 
