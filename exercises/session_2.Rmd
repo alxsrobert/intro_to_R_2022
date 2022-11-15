@@ -1,5 +1,5 @@
 ---
-title: "Introduction to R: Session 1"
+title: "Introduction to R: Session 2"
 date: "`r format.Date(Sys.Date(), format = '%d %B %Y')`"
 output:
   html_document:
@@ -28,7 +28,7 @@ Welcome to *Introduction to R* for MSc Epidemiology 2022-23!
 
 ## Contents
 
-This session introduces the basics of R and how to import, work with, and export data.
+This session introduces the data visualisation with ggplot2.
 
 ## Notation
 
@@ -40,17 +40,28 @@ This exercise will contain examples of code and its output, as well as instructi
 
 ## Resources
 
-Coming soon!
+* [The Epidemiologist R Handbook](https://www.epirhandbook.com/en/) - a comprehensive reference guide to using R for applied epidemiology and public health.
+* [R for Data Science](https://r4ds.had.co.nz/index.html) - a general guide to using R for data science.
+* [Stack Overflow](https://stackoverflow.com/questions/tagged/r) - general R questions answered by the community.
+
+**For ggplot2**
+
+* [Cheatsheet - ggplot2](https://posit.co/wp-content/uploads/2022/10/data-visualization-1.pdf) - a two-page summary of the key features and functions of ggplot2.
+* [The R graph gallery](https://r-graph-gallery.com/) - a collection of charts made with R. Great for inspiration!
+* [The Epidemiologist R Handbook: chapters 30-31](https://www.epirhandbook.com/en/ggplot-basics.html) - introduction to the basics ggplot2. Later chapters (32-39) cover also more complex topics.
+
+
 
 # Recap: importing data
 
 ```{r}
+# Load rio and here libraries for importing data
 library(rio)
 library(here)
 ```
 
 ```{r}
-
+# Import life_expectancy.csv
 life_expectancy <- import(file = here("data",
                                       "life_expectancy.csv"))
 
@@ -59,6 +70,7 @@ life_expectancy <- import(file = here("data",
 # Data visualisation with ggplot2
 
 ```{r}
+# Load ggplot2 library for plotting
 library(ggplot2)
 ```
 
@@ -116,7 +128,7 @@ There are lots of different ways to visualise data.
 
 ## Example 1: scatter plot
 
-We are going to walk you through the steps to make this scatter plot of life expectancy at birth vs. health expenditure per capita, using the data in `life_expectancy`:
+We are going to walk you through the steps to make this scatter plot of life expectancy at birth vs. health expenditure per capita in 2015, using the data in `life_expectancy`:
 
 ```{r, echo = FALSE, fig.width = 9, fig.height = 7}
 
