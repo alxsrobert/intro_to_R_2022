@@ -76,7 +76,7 @@ These operators are used to carry out mathematical operations, like addition or 
 
 Examples:
 
-```{r}
+```{r, eval = FALSE}
 
 46 + 3
 13 / 8
@@ -90,7 +90,7 @@ Examples:
 
 `r emoji::emoji("star")` The assignment operator in R is `<-` and is used to assign values to named objects.
 
-```{r}
+```{r, eval = FALSE}
 
 x <- 10       # The object called x is assigned the value 10
 x             # Print the object x
@@ -129,14 +129,14 @@ Expressions using relational operators will return `TRUE` or `FALSE`.
 
 `r emoji::emoji("computer")` Copy the below code into the console of your R Studio terminal.
 
-```{r}
+```{r, eval = FALSE}
 x <- 3      # Assign the value 3 to the object called x
 y <- 11     # Assign the value 11 to the object called y
 ```
 
 Examples of using relational operators:
 
-```{r}
+```{r, eval = FALSE}
 
 # Test: is x less than 4?
 x < 4
@@ -158,7 +158,7 @@ y != 22
 
 The `c()` function is used to combine multiple values into a *vector* or a *list*. For example, multiple numeric values can be combined into a vector:
 
-```{r}
+```{r, eval = FALSE}
 
 c(3, 1, 10.5)
 
@@ -166,7 +166,7 @@ c(3, 1, 10.5)
 
 Multiple text strings can also be combined:
 
-```{r}
+```{r, eval = FALSE}
 
 c("Welcome", "to", "R", "!")
 
@@ -179,10 +179,6 @@ If both numbers and text are combined with the `c()` function, then all the nume
 c("LSHTM", 20.22)
 
 ```
-
-## R packages
-
-Coming soon!
 
 ## Working directory
 
@@ -202,6 +198,12 @@ getwd()
 
 `r emoji::emoji("computer")` Follow the steps below to set up an R project in your R studio session.
 
+Step 1: ![](fig_rproject1.png){width=500}
+
+Step 2: ![](fig_rproject2.png){width=500}
+
+Step 3: ![](fig_rproject3.png){width=500}
+
 # Working with data
 
 We can import (i.e. 'read in') and export (i.e. save) data in common formats (e.g. .csv, .xlsx, .txt) with the **rio** package. In this section, we are going to import some data on life expectancy at birth and health expenditure per capita in USD for countries in 2015. This data is from Our World in Data: [ourworldindata.org/life-expectancy-vs-health-expenditure](https://ourworldindata.org/grapher/life-expectancy-vs-health-expenditure).
@@ -214,8 +216,15 @@ First we need to load these two libraries in our current R Studio session.
 
 `r emoji::emoji("computer")` Copy and paste the code below.
 
-```{r}
+```{r, eval = FALSE}
+# Check if the package rio is already installed, if not then install it
+if(!require("rio")) install.packages("rio")
+# Import rio
 library(rio)
+
+# Check if the package here is already installed, if not then install it
+if(!require("here")) install.packages("here")
+# Import here
 library(here)
 ```
 
@@ -265,7 +274,7 @@ Notice that there are lots of `NA` values in the `health_expenditure_usd` column
 
 You can also get the number of columns and number of rows in the data set with `ncol()` and `nrow()`, respectively:
 
-```{r}
+```{r, eval = FALSE}
 ncol(life_expectancy)
 ```
 
@@ -273,7 +282,7 @@ ncol(life_expectancy)
 
 You can check the column names either by looking at the full data frame using one of the two methods we just saw, or by using the function `colnames()`:
 
-```{r}
+```{r, eval = FALSE}
 colnames(life_expectancy)
 ```
 
@@ -294,7 +303,7 @@ The simplest data types that you will commonly come across are:
 
 To check what data type an object is, use the function `class()`.
 
-```{r}
+```{r, eval = FALSE}
 # What is the data type of the "country" column in the life_expectancy data?
 class(life_expectancy$country)
 
@@ -350,7 +359,7 @@ Functions can have many arguments to tackle specific situations (e.g. how to dea
 
 We can calculate other statistics, too. We can calculate the median value with the function `median()`:
 
-```{r}
+```{r, eval = FALSE}
 # Calculate the median life_expectancy
 median(life_expectancy$life_expectancy_years, na.rm = TRUE)
 ```
@@ -363,7 +372,7 @@ Note that we also have to include the `na.rm = TRUE` argument so that missing (`
 
 We can calculate the minimum and maximum values with the functions `min()` and `max()`, respectively:
 
-```{r}
+```{r, eval = FALSE}
 # Calculate the minimum life_expectancy
 min(life_expectancy$life_expectancy_years, na.rm = TRUE)
 
@@ -377,7 +386,7 @@ max(life_expectancy$life_expectancy_years, na.rm = TRUE)
 
 We can calculate the standard deviation with `sd()` and the inter-quartile range (IQR) with `IQR()`:
 
-```{r}
+```{r, eval = FALSE}
 # Calculate the standard deviation of life_expectancy
 sd(life_expectancy$life_expectancy_years, na.rm = TRUE)
 
@@ -389,7 +398,7 @@ IQR(life_expectancy$life_expectancy_years, na.rm = TRUE)
 
 A quick way to generate summary statistics for all columns in a data frame is to use the function `summary`:
 
-```{r}
+```{r, eval = FALSE}
 # Show the summary of each column in life_expectancy
 summary(life_expectancy)
 ```
@@ -405,65 +414,4 @@ The code below exports the data frame `life_expectancy` and saves it as a .csv f
 ```{r, eval = FALSE}
 export(x = life_expectancy,
        file = here("data", "test_data_export.csv"))
-```
-
-# Bonus: The dplyr package
-
-```{r}
-library(dplyr)
-```
-
-## Filtering rows
-
-```{r}
-
-filter(life_expectancy,
-       region == "North America")
-
-filter(life_expectancy,
-       life_expectancy_years < 55)
-
-```
-
-## Renaming columns
-
-```{r}
-
-rename(life_expectancy,
-       le_years = life_expectancy_years,
-       he_usd = health_expenditure_usd)
-
-```
-
-## Selecting columns
-
-```{r}
-
-select(life_expectancy,
-       country, life_expectancy_years)
-
-```
-
-## Mutating columns
-
-```{r}
-
-mutate(life_expectancy,
-       health_expenditure_usd = round(health_expenditure_usd, 1))
-
-```
-
-## Grouping and summarising data
-
-```{r}
-
-life_expectancy %>%
-  group_by(region) %>%
-  summarise(n = n())
-
-life_expectancy %>%
-  group_by(region) %>%
-  summarise(n = n(),
-            mean_le = mean(life_expectancy_years, na.rm = TRUE))
-
 ```
