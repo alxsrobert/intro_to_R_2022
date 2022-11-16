@@ -198,9 +198,9 @@ getwd()
 
 ### R projects
 
-`r emoji::emoji("star")` A common and easy way to manage your working directory is with **R projects** and the **here** package (which we will introduce shortly).
+`r emoji::emoji("star")` A common and easy way to manage your working directory is with **R projects** and the **here** package.
 
-`r emoji::emoji("star")` Follow the steps below to set up an R project in your R studio session.
+`r emoji::emoji("computer")` Follow the steps below to set up an R project in your R studio session.
 
 # Working with data
 
