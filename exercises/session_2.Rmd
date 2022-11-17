@@ -28,7 +28,7 @@ Welcome to *Introduction to R* for MSc Epidemiology 2022-23!
 
 ## Contents
 
-This session introduces the data visualisation with ggplot2.
+This session introduces functions, data visualisation with ggplot2, and data manipulation with dplyr.
 
 ## Notation
 
@@ -73,9 +73,26 @@ life_expectancy <- import(file = here("data",
 
 ```
 
-# R packages
+# R functions
 
-Coming soon!
+R functions contain a set of commands grouped together in order to perform a specific task that could not be run using built-in functions. In the example below, the function `sum_pow` takes two arguments, and sum their squared value. 
+
+```{r, eval = FALSE}
+sum_pow <- function(a, b){
+  ## compute a squared
+  a_2 <- a^2
+  ## compute b squared
+  b_2 <- b^2
+  
+  ## return the sum of a squared and b squared
+  return(a_2 + b_2)
+}
+sum_pow(3, 7)
+sum_pow(10, 17)
+```
+`r emoji::emoji("computer")` Copy and paste the code above into your R Studio console and run it.
+
+`r emoji::emoji("question")` Can you create a function that takes 3 arguments and return the sum of their squared values?
 
 
 # Data visualisation with ggplot2
@@ -83,6 +100,7 @@ Coming soon!
 We are going to use the ggplot2 library for data visualisation.
 
 ```{r}
+if(!require(ggplot2)) install.packages("ggplot2")
 # Load ggplot2 library
 library(ggplot2)
 ```

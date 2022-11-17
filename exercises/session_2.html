@@ -10,7 +10,7 @@
 
 
 
-<meta name="date" content="2022-11-16" />
+<meta name="date" content="2022-11-17" />
 
 <title>Introduction to R: Session 2</title>
 
@@ -2781,7 +2781,7 @@ div.tocify {
 
 
 <h1 class="title toc-ignore">Introduction to R: Session 2</h1>
-<h4 class="date">16 November 2022</h4>
+<h4 class="date">17 November 2022</h4>
 
 </div>
 
@@ -2796,7 +2796,8 @@ Meakin.</strong></p>
 2022-23!</p>
 <div id="contents" class="section level2" number="1.1">
 <h2><span class="header-section-number">1.1</span> Contents</h2>
-<p>This session introduces the data visualisation with ggplot2.</p>
+<p>This session introduces functions, data visualisation with ggplot2,
+and data manipulation with dplyr.</p>
 </div>
 <div id="notation" class="section level2" number="1.2">
 <h2><span class="header-section-number">1.2</span> Notation</h2>
@@ -2856,15 +2857,34 @@ library(here)</code></pre>
 life_expectancy &lt;- import(file = here(&quot;data&quot;,
                                       &quot;life_expectancy.csv&quot;))</code></pre>
 </div>
-<div id="r-packages" class="section level1" number="3">
-<h1><span class="header-section-number">3</span> R packages</h1>
-<p>Coming soon!</p>
+<div id="r-functions" class="section level1" number="3">
+<h1><span class="header-section-number">3</span> R functions</h1>
+<p>R functions contain a set of commands grouped together in order to
+perform a specific task that could not be run using built-in functions.
+In the example below, the function <code>sum_pow</code> takes two
+arguments, and sum their squared value.</p>
+<pre class="r"><code>sum_pow &lt;- function(a, b){
+  ## compute a squared
+  a_2 &lt;- a^2
+  ## compute b squared
+  b_2 &lt;- b^2
+  
+  ## return the sum of a squared and b squared
+  return(a_2 + b_2)
+}
+sum_pow(3, 7)
+sum_pow(10, 17)</code></pre>
+<p>💻 Copy and paste the code above into your R Studio console and run
+it.</p>
+<p>❓ Can you create a function that takes 3 arguments and return the
+sum of their squared values?</p>
 </div>
 <div id="data-visualisation-with-ggplot2" class="section level1" number="4">
 <h1><span class="header-section-number">4</span> Data visualisation with
 ggplot2</h1>
 <p>We are going to use the ggplot2 library for data visualisation.</p>
-<pre class="r"><code># Load ggplot2 library
+<pre class="r"><code>if(!require(ggplot2)) install.packages(&quot;ggplot2&quot;)
+# Load ggplot2 library
 library(ggplot2)</code></pre>
 <div id="the-basics-of-ggplot2" class="section level2" number="4.1">
 <h2><span class="header-section-number">4.1</span> The basics of
