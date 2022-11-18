@@ -75,7 +75,11 @@ life_expectancy <- import(file = here("data",
 
 # R functions
 
-R functions contain a set of commands grouped together in order to perform a specific task that could not be run using built-in functions. In the example below, the function `sum_pow` takes two arguments, and sum their squared value. 
+R functions contain a set of commands grouped together in order to perform a specific task. For example, the `mean()` function calculates the mean of some numbers, and the `import()` function imports data.
+
+Arguments are the bits of information that you have to give to a function in order for it to work. The `import()` function has one argument, `file`, which tells R where to look for the data we want to import.
+
+**Extra:** We can write our own functions, if we need them! In the example below, the function `sum_pow` takes two arguments, and sum their squared value. 
 
 ```{r, eval = FALSE}
 sum_pow <- function(a, b){
@@ -99,9 +103,13 @@ sum_pow(10, 17)
 
 We are going to use the ggplot2 library for data visualisation.
 
+```{r, eval = FALSE}
+# Install the ggplot2 library
+install.packages("ggplot2")
+```
+
 ```{r}
-if(!require(ggplot2)) install.packages("ggplot2")
-# Load ggplot2 library
+# Load the ggplot2 library
 library(ggplot2)
 ```
 
@@ -236,15 +244,15 @@ ggplot(data = life_expectancy,
 
 #### Dynamic colours {-}
 
-`r emoji::emoji("star")` We can change the colour of the points according to values in the data by mapping a column name to the `color` aesthetic inside the `aes()` function.
+`r emoji::emoji("star")` We can change the colour of the points according to values in the data by mapping a column name to the `colour` aesthetic inside the `aes()` function.
 
-In the following code, we map the column "region" to the `color` argument:
+In the following code, we map the column "region" to the `colour` argument:
 
 ```{r}
 ggplot(data = life_expectancy,
        mapping = aes(x = health_expenditure_usd,
                      y = life_expectancy_years,
-                     color = region)) +
+                     colour = region)) +
   geom_point()
 ```
 
@@ -340,7 +348,7 @@ In the code above, the legend is on the `"right"`.
 
 ## Example 2: histogram
 
-We are going to walk you through the steps to make this histogram of life expectancy at birth, using the data in `life_expectancy`:
+We are going to walk you through the steps to make this histogram of life expectancy at birth by region, using the data in `life_expectancy`:
 
 ```{r, echo = FALSE, fig.width = 9, fig.height = 7}
 
@@ -362,6 +370,8 @@ ggplot(data = life_expectancy,
 
 ### Change the bin width
 
+We can change the width of the histogram bins (bars) with the `binwidth` argument.
+
 ```{r}
 
 ggplot(data = life_expectancy,
@@ -370,17 +380,28 @@ ggplot(data = life_expectancy,
 
 ```
 
+`r emoji::emoji("computer")` What happens to the output of this code as you increase or decrease the value of `binwidth`?
+
+
 ### Change the color and fill of bars
 
-#### Static color and fill {-}
+#### Fixed color and fill {-}
+
+`r emoji::emoji("star")` We can change the fixed attribute of the bars by setting the arguments `colour` and `fill` inside the geom function.
+
+In the following code we set the colour (colour of the bar outline) to `"seagreen"` and the fill (colour of the bar inside) to `"tomato"`:
 
 ```{r}
 ggplot(data = life_expectancy,
        mapping = aes(x = life_expectancy_years)) +
-  geom_histogram(binwidth = 1, col = "seagreen", fill = "tomato")
+  geom_histogram(binwidth = 1, colour = "seagreen", fill = "tomato")
 ```
 
-### Dynamic fill {-}
+#### Dynamic fill {-}
+
+`r emoji::emoji("star")` We can change the fill of the bars according to values in the data by mapping a column name to the `fill` aesthetic inside the `aes()` function.
+
+In the following code, we map the column "region" to the `fill` argument:
 
 ```{r}
 ggplot(data = life_expectancy,
@@ -432,90 +453,26 @@ ggplot(data = life_expectancy,
 
 ```
 
-## Other plot types
+#### Break a plot into subplots {-}
 
-# Extras
+"Facets" are used to split one plot into a multi-panel figure, where each subplot represents a subgroup of the data.
 
-## Problem shooting
+`r emoji::emoji("star")` Use the `facet_wrap()` function to split the main plot into multiple subplots.
 
-It is really common to run a line of code and it does not work. Normally it is a misplaced character, or an unclosed bracket. Check that every ( has a ) and every " has a ".
+The command `facet_wrap(~ region)` splits the plot into a subplot for each region in the data.
 
-Capitals also matter in R - note that Sepal.Length will work but sepal.length will not!
 
-Sometimes you will run the code and nothing happens. Check the left-hand of your console: if its a +, it means that R does not think you have typed a complete expression and its waiting for you to finish it. In this case, its usually easy to start from scratch again by pressing ESCAPE to abort processing the current command.
+#### Change the colour palette {-}
 
-One common problem when creating ggplot2 graphics is to put the + in the wrong place: it has to come at the end of the line, not the start.
+Use the `scale_fill_brewer()` function to change the colour palette used for a dynamic fill aesthetic. This is very similar to the `scale_color_brewer()` function you saw in the first example. Again, we can choose an appropriate palette by defining the `palette` argument.
 
-If you are still stuck, try the help. You can get help about any R function by running ?function_name in the console, or selecting the function name and pressing F1 in RStudio. If the help does not seem that helpful, skip down to the examples and look for code that matches what you are trying to do.
+#### Change the legend position {-}
 
-If that does not help, carefully read the error message. Sometimes the answer will be buried there! But when you are new to R, the answer might be in the error message but you do not yet know how to understand it. Another great tool is Google: try googling the error message, as it is likely someone else has had the same problem, and has gotten help online.
+`r emoji::emoji("star")` We saw in the first example that we can move the legend position with `legend.position` argument. To remove the legend completely, we set `legend.position = "none"`.
 
-## Resources
 
-<https://www.rstudio.com/resources/cheatsheets/> - cheatsheet for ggplot2
+## Make your own plot!
 
-<https://r4ds.had.co.nz/data-visualisation.html> - R for Data Science
+Look again at the `life_expectancy` data and try making your own plot. You could use a plot type we've already seen, or look at how to make a new one in the [The R graph gallery](https://r-graph-gallery.com/).
 
-<http://www.cookbook-r.com/Graphs/> - Cookbook for R Graphics
-
-# Bonus: The dplyr package
-
-```{r}
-library(dplyr)
-```
-
-## Filtering rows
-
-```{r}
-
-filter(life_expectancy,
-       region == "North America")
-
-filter(life_expectancy,
-       life_expectancy_years < 55)
-
-```
-
-## Renaming columns
-
-```{r}
-
-rename(life_expectancy,
-       le_years = life_expectancy_years,
-       he_usd = health_expenditure_usd)
-
-```
-
-## Selecting columns
-
-```{r}
-
-select(life_expectancy,
-       country, life_expectancy_years)
-
-```
-
-## Mutating columns
-
-```{r}
-
-mutate(life_expectancy,
-       health_expenditure_usd = round(health_expenditure_usd, 1))
-
-```
-
-## Grouping and summarising data
-
-```{r}
-
-life_expectancy %>%
-  group_by(region) %>%
-  summarise(n = n())
-
-life_expectancy %>%
-  group_by(region) %>%
-  summarise(n = n(),
-            mean_le = mean(life_expectancy_years, na.rm = TRUE))
-
-```
 
