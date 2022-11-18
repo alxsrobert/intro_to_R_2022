@@ -476,3 +476,79 @@ Use the `scale_fill_brewer()` function to change the colour palette used for a d
 Look again at the `life_expectancy` data and try making your own plot. You could use a plot type we've already seen, or look at how to make a new one in the [The R graph gallery](https://r-graph-gallery.com/).
 
 
+# Bonus: Data manipulation with the dplyr package
+
+In the same way that `ggplot` is an extremely useful extension to generate figures, `dplyr` is designed to facilitate cleaning and manipulating data. It contains different functions that can select, rename and add columns, filter observations of interest, or summarise the data imported in R, without changing the source data file. 
+
+In this bonus section, we will run present a few of these functions by applying them to our data `life_expectancy`. But first, let's install and import `dplyr`.
+
+```{r, eval = FALSE}
+## Install the dplyr package
+install.packages("dplyr")
+```
+
+```{r}
+## Import dplyr
+library(dplyr)
+```
+
+## Filtering rows
+
+Firstly, when doing data analysis, or data cleaning, you may want to focus only on certain observations (e.g. observations collected in a  setting of interest, or extreme observations). To do so, the function `filter` will return rows than fulfill a certain condition. For instance, if we were only interested in certain entries of our life expectancy dataset:
+
+```{r}
+filter(life_expectancy,
+       region == "North America")
+
+filter(life_expectancy,
+       life_expectancy_years < 55)
+
+```
+
+`r emoji::emoji("star")` The first argument of the `dplyr` functions indicates the dataset we are using (`life_expectancy`). 
+
+In the first command, we select only entries where the column `region` is `North America`, whereas in the second example, we selected entries where `life_expectancy_years` was below 55.
+
+`r emoji::emoji("question")` Check the entries selected when running the second command, can you see any entry where the life expectancy is `NA` (i.e. not reported)? How does `dplyr` deal with missing entries when selecting rows?
+
+## Renaming columns
+
+The function `rename` can be use to edit the column names of your dataset. This can be especially useful when the names are too long (and make the code cluttered), or unclear.
+
+```{r}
+
+life_expectancy <- rename(life_expectancy,
+                          le_years = life_expectancy_years,
+                          he_usd = health_expenditure_usd)
+
+```
+
+In this example, we changed the name of the columns `life_expectancy_years` to `le_years`, and `health_expenditure_usd` to `he_usd`. That will make future lines of code a bit shorter, without affecting the clarity of the column names.
+
+## Mutating columns
+
+Some columns may not be in the format we expect, or may too much detail. For instance, we can round the column `le_years` (indicating the life expectancy per country) to only indicate the rounded number of years of life expectancy. 
+
+`r emoji::emoji("star")` To edit the value of certain columns in our data, we use the function `mutate`.
+
+```{r}
+life_expectancy <- mutate(life_expectancy,
+                          le_years = round(le_years, 0))
+```
+
+
+## Selecting columns
+
+In our current example, `life_expectancy` contains only five columns. However, when working with large-scale datasets, the number of columns in your data can be much bigger. 
+
+`r emoji::emoji("star")` The command `select` can be used to pick the columns of interest for our analysis, and drop the irrelevant ones.
+
+```{r}
+
+select(life_expectancy,
+       country, he_usd)
+
+```
+
+In this example, we only selected the columns `country`, and `he_usd`.
+
